@@ -1,1 +1,1 @@
-Teste para code review: README
+Teste para revisão de código: README
