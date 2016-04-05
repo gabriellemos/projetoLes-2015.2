@@ -41,7 +41,7 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     private Result home() {
-        return ok(views.html.index.render("Where Goes My Time?"));
+        return ok(views.html.index.render("GetCake"));
     }
 
 }
