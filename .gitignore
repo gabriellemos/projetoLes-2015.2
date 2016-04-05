@@ -1,0 +1,13 @@
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/.sbtserver
+*.orig
+/RUNNING_PID
+/app-2.10
+/test-2.10
+/web
