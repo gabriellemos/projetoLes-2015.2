@@ -3,7 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.dao.GenericDAOImpl;
 import org.apache.commons.lang.NullArgumentException;
-import org.pac4j.oauth.profile.google2.FacebookProfile;
+import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.play.ApplicationLogoutController;
 import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Classe principal que responde a requisições HTTP.
  */
-public class Application extends UserProfileController<FacebookProfile>{
+public class Application extends UserProfileController<CommonProfile>{
 
     private static GenericDAOImpl dao = new GenericDAOImpl();
 
