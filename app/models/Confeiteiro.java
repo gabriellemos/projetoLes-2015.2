@@ -1,4 +1,10 @@
+package models;
+
+import models.Anuncio;
+import org.apache.commons.lang.NullArgumentException;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.management.openmbean.KeyAlreadyExistsException;
@@ -14,18 +20,20 @@ public class Confeiteiro {
 	private String endereco;
 	private String email;
 	private String contato;
+
+	private final String STRING_VAZIA = "";
 	
 	private String id;
 	
-	private List<Anuncio> meusAnuncios;
+	private HashSet<Anuncio> meusAnuncios;
 	
 	/**
-	 * Construtor padrão
+	 * Construtor padrï¿½o
 	 * @param nome o nome do Confeiteiro
 	 */
 	public Confeiteiro(String nome) {
 		setNome(nome);
-		this.meusAnuncios = new ArrayList<>();
+		this.meusAnuncios = new HashSet<>();
 	}
 	
 	/**
@@ -37,22 +45,22 @@ public class Confeiteiro {
 	}
 
 	public void setNome(String nome) {
-		if(nome == null)
-        	throw new NullArgumentException("O nome setado para o Confeiteiro é nulo");
+		if (nome == null || nome.trim().equals(STRING_VAZIA))
+			throw new IllegalArgumentException("Argumento 'nome' recebendo valores invÃ¡lidos");
 		this.nome = nome;
 	}
 
 	/**
-	 * Recupera o endereço do confeiteiro
-	 * @return o endereço do confeiteiro
+	 * Recupera o endereï¿½o do confeiteiro
+	 * @return o endereï¿½o do confeiteiro
 	 */
 	public String getEndereco() {
 		return endereco;
 	}
 
 	public void setEndereco(String endereco) {
-		if(endereco == null)
-        	throw new NullArgumentException("O endereço setado para o Confeiteiro é nulo");
+		if(endereco == null || endereco.trim().equals(STRING_VAZIA))
+			throw new IllegalArgumentException("Argumento 'endereÃ§o' recebendo valores invÃ¡lidos");
 		this.endereco = endereco;
 	}
 
@@ -65,8 +73,8 @@ public class Confeiteiro {
 	}
 
 	public void setEmail(String email) {
-		if(email == null)
-        	throw new NullArgumentException("O email setado para o Confeiteiro é nulo");
+		if(email == null || email.trim().equals(STRING_VAZIA))
+			throw new IllegalArgumentException("Argumento 'email' recebendo valores invÃ¡lidos");
 		this.email = email;
 	}
 
@@ -79,8 +87,8 @@ public class Confeiteiro {
 	}
 
 	public void setContato(String contato) {
-		if(contato == null)
-        	throw new NullArgumentException("O contato setado para o Confeiteiro é nulo");
+		if(contato == null || contato.trim().equals(STRING_VAZIA))
+			throw new IllegalArgumentException("Argumento 'endereÃ§o' recebendo valores invÃ¡lidos");
 		this.contato = contato;
 	}
 	
@@ -93,15 +101,7 @@ public class Confeiteiro {
     }
 
     /**
-     * Modifica a id do confeiteiro
-     * @param id do confeiteiro
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * Adiciona um anúncio na lista de anúncios do confeiteiro, caso o mesmo ainda não exista
+     * Adiciona um anï¿½ncio na lista de anï¿½ncios do confeiteiro, caso o mesmo ainda nï¿½o exista
      * @param anuncio o anuncio a ser adicionado
      */
 	public void addAnuncio(Anuncio anuncio) {
@@ -110,18 +110,18 @@ public class Confeiteiro {
 		if(!(meusAnuncios.contains(anuncio))) {
             this.meusAnuncios.add(anuncio);
         } else {
-            throw new KeyAlreadyExistsException("O anúncio já existe.");
+            throw new KeyAlreadyExistsException("O anï¿½ncio jï¿½ existe.");
         }
 	}
 	
 	/**
-	 * Recupera um anúncio do confeiteiro
-	 * @param nomeAnuncio o nome do anúncio a ser pesquisado
+	 * Recupera um anï¿½ncio do confeiteiro
+	 * @param nomeAnuncio o nome do anï¿½ncio a ser pesquisado
 	 * @return o anuncio cujo nome coincide com a pesquisa, caso ele exista
 	 */
 	public Anuncio getAnuncio(String nomeAnuncio) {
-		if(name == null)
-			throw new NullArgumentException("O nome dado para procurar por uma Atividade é nulo.");
+		if(nomeAnuncio == null)
+			throw new NullArgumentException("O nome dado para procurar por uma Atividade ï¿½ nulo.");
 		for (Anuncio anuncio : this.meusAnuncios) {
 			// TODO descomentar isso quando implementar getName() em Anuncio.
             // if (nomeAnuncio.toLowerCase().equals(anuncio.getName().toLowerCase())) 
@@ -131,10 +131,10 @@ public class Confeiteiro {
 	}
 	
 	/**
-	 * Recupera todos os anúncios do confeiteiro
-	 * @return os anúncios do confeiteiro
+	 * Recupera todos os anï¿½ncios do confeiteiro
+	 * @return os anï¿½ncios do confeiteiro
 	 */
-	public List<Anuncio> getAnuncios() {
+	public HashSet<Anuncio> getAnuncios() {
 		return this.meusAnuncios;
 	}
 
