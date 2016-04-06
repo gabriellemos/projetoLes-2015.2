@@ -1,12 +1,7 @@
 package models;
 
-import models.Anuncio;
 import org.apache.commons.lang.NullArgumentException;
-
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-
 import javax.management.openmbean.KeyAlreadyExistsException;
 
 /**
@@ -44,6 +39,10 @@ public class Confeiteiro {
 		return nome;
 	}
 
+	/**
+	 * Modifica o nome do Confeiteiro, caso o mesmo seja válido
+	 * @param nome novo nome do Confeiteiro
+     */
 	public void setNome(String nome) {
 		if (nome == null || nome.trim().equals(STRING_VAZIA))
 			throw new IllegalArgumentException("Argumento 'nome' recebendo valores inválidos");
@@ -58,6 +57,10 @@ public class Confeiteiro {
 		return endereco;
 	}
 
+	/**
+	 * Modifica o endereço do Confeiteiro, caso o mesmo seja válido
+	 * @param endereco novo enderço do Confeiteiro
+     */
 	public void setEndereco(String endereco) {
 		if(endereco == null || endereco.trim().equals(STRING_VAZIA))
 			throw new IllegalArgumentException("Argumento 'endereço' recebendo valores inválidos");
@@ -72,6 +75,10 @@ public class Confeiteiro {
 		return email;
 	}
 
+	/**
+	 * Modifica o email do Confeiteiro, caso o mesmo seja válido
+	 * @param email novo email do Confeiteiro
+     */
 	public void setEmail(String email) {
 		if(email == null || email.trim().equals(STRING_VAZIA))
 			throw new IllegalArgumentException("Argumento 'email' recebendo valores inválidos");
@@ -86,6 +93,10 @@ public class Confeiteiro {
 		return contato;
 	}
 
+	/**
+	 * Modifica o contato do Confeiteiro, caso o mesmo seja válido
+	 * @param contato novo contato do Confeiteiro
+     */
 	public void setContato(String contato) {
 		if(contato == null || contato.trim().equals(STRING_VAZIA))
 			throw new IllegalArgumentException("Argumento 'endereço' recebendo valores inválidos");
