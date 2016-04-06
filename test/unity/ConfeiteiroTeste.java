@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import models.Anuncio;
 import models.Confeiteiro;
+
+import java.util.HashSet;
 
 /**
  * Teste de unidade para a classe de modelo Confeiteiro.
@@ -25,7 +28,7 @@ public class ConfeiteiroTeste {
 
         confeteiroDefault = new Confeiteiro();
         confeiteiroSemAnuncios = new Confeiteiro("Bolo");
-        confeiteiroComAnuncios = new COnfeiteiro("Master");
+        confeiteiroComAnuncios = new Confeiteiro("Master");
         confeiteiroComAnuncios.addAnuncio(anuncioDefault);
     }
 
@@ -45,7 +48,7 @@ public class ConfeiteiroTeste {
 
         Assert.assertNotNull(confeiteiroTeste.getAnuncios());
         Assert.assertTrue(confeiteiroTeste.getAnuncios().isEmpty());
-        Assert.assertEquals(new HashSet<Confeiteiro>(), confeiteiroTeste.getAnuncios());
+        Assert.assertEquals(new HashSet<Anuncio>(), confeiteiroTeste.getAnuncios());
     }
 
     @Test
@@ -74,7 +77,7 @@ public class ConfeiteiroTeste {
 
         for (String nomeInvalido : nomesInvalidos) {
            try {
-               confeiteiro = new ConfeiteiroTeste(nomeInvalido);
+               confeiteiro = new Confeiteiro(nomeInvalido);
                Assert.fail("Foi possível criar um confeiteiro com o nome: " + nomeInvalido);
            } catch (IllegalArgumentException exception) {
                 // Ok, continue o teste
@@ -94,7 +97,7 @@ public class ConfeiteiroTeste {
                 confeteiroDefault.setNome(nomeValido);
                 // Ok, continue o teste
             } catch (IllegalArgumentException exception) {
-                Assert.fail("Não foi possível setar o 'Nome' do confeiteiro para: : " + nomevalido);
+                Assert.fail("Não foi possível setar o 'Nome' do confeiteiro para: : " + nomeValido);
             }
         }
     }
@@ -250,7 +253,7 @@ public class ConfeiteiroTeste {
         for (String idInvalido : idInvalidos) {
             try {
                 confeiteiroTeste = new Confeiteiro();
-                confeiteiroTeste.idContato(idInvalido);
+                confeiteiroTeste.setId(idInvalido);
                 Assert.fail("Foi possível setar o 'ID' do confeiteiro para: " + idInvalido);
             } catch (IllegalArgumentException exception) {
                 // Ok, continue o teste
@@ -264,7 +267,7 @@ public class ConfeiteiroTeste {
     // Testa addAnuncio
     @Test
     public void TestaAddAnuncio() {
-        Assert.assetTrue(confeteiroDefault.getAnuncios().isEmpty());
+        Assert.assertTrue(confeteiroDefault.getAnuncios().isEmpty());
 
         // Nenhuma exceção é esperada.
         confeteiroDefault.addAnuncio(anuncioDefault);
@@ -276,7 +279,7 @@ public class ConfeiteiroTeste {
     // Testa getAnuncio
     @Test
     public void TestaGetAnuncio() {
-        Assert.assetTrue(confeteiroDefault.getAnuncios().isEmpty());
+        Assert.assertTrue(confeteiroDefault.getAnuncios().isEmpty());
         Assert.assertEquals(confeteiroDefault.getAnuncios(), confeiteiroSemAnuncios.getAnuncios());
         Assert.assertNotEquals(confeteiroDefault.getAnuncios(), confeiteiroComAnuncios.getAnuncios());
 
