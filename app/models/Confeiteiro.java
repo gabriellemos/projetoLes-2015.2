@@ -116,12 +116,13 @@ public class Confeiteiro {
      * @param anuncio o anuncio a ser adicionado
      */
 	public void addAnuncio(Anuncio anuncio) {
-		if(anuncio == null)
-        	throw new NullArgumentException("O anuncio a ser adicionado tem valor nulo.");
-		if(!(meusAnuncios.contains(anuncio))) {
-            this.meusAnuncios.add(anuncio);
-        } else {
-            throw new KeyAlreadyExistsException("O an�ncio j� existe.");
+		if(anuncio == null) {
+			throw new NullArgumentException("O anuncio a ser adicionado tem valor nulo.");
+		}
+
+		// HashSet.add retorna true se o elemento não tiver presente antes da inserção
+		if (!this.meusAnuncios.add(anuncio)) {
+			throw new KeyAlreadyExistsException("O an�ncio j� existe.");
         }
 	}
 	
