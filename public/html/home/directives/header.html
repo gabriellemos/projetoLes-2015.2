@@ -1,0 +1,25 @@
+<div class="intro-header" ng-style="item.hdstyle">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="intro-message">
+                  <h1 class="to-animate intro-animate-1 fadeInUp animated" ng-bind="item.maintitle"></h1>
+                    <p ng-bind="item.subtitle"></p>
+                    <hr>
+                    <ul class="list-inline intro-social-buttons">
+                        <li ng-repeat="element in item.social" class="ng-scope">
+                            <a ng-href="{{element.url}}" class="btn btn-default btn-lg">
+                                <i class="fa fa-{{element.icon}} fa-fw"></i>
+                                <span class="network-name" ng-bind="element.text"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+			</div>
+			<div class="col-lg-6 text-right to-animate intro-animate-4 fadeInUp animated">
+				<img id="img-cellphone" ng-src="{{item.cellphoneimg}}" alt="Outline Free HTML5 Responsive Bootstrap Template">
+			</div>
+
+        </div>
+    </div>
+</div>
