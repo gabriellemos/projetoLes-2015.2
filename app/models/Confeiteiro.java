@@ -21,9 +21,15 @@ public class Confeiteiro {
 	private String id;
 	
 	private HashSet<Anuncio> meusAnuncios;
-	
+
+
 	/**
-	 * Construtor padr�o
+	 * Construtor padrão
+	 */
+	public Confeiteiro() {}
+
+	/**
+	 * Construtor padrão
 	 * @param nome o nome do Confeiteiro
 	 */
 	public Confeiteiro(String nome) {
