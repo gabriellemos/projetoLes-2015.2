@@ -2,7 +2,7 @@
   "title": "Nosso time",
   "contacts": [
     {
-      "imglink": "https://lh3.googleusercontent.com/-ojS0uhWdx5E/VwGokBjmJDI/AAAAAAAA1rI/gk9PjjooBw8NYDRhWOyuy21l5MKHBHQOwCCo/s800-Ic42/Smiling.JPG",
+      "imglink": "/assets/image/profiles/dennis.jpg",
       "name": "Dênnis Dantas",
       "social": [
         { "url": "https://www.facebook.com/dennis.d.desousa",
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "imglink": "https://lh3.googleusercontent.com/-sWVja82B--I/VwGpFuZRWQI/AAAAAAAA1rc/59Qo8ztcNvUbhiIHJPIETuxK8pEQPPbwwCCo/s800-Ic42/30777734516_c1ef85b371b46a07bdf3_512.jpg",
+      "imglink": "/assets/image/profiles/aline.jpg",
       "name": "Aline Costa",
       "social": [
         { "url": "https://www.facebook.com/profile.php?id=100003611741254",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "imglink": "https://lh3.googleusercontent.com/-18xgUFPnnkA/VwGpSL3jwmI/AAAAAAAA1rk/podM5MSeG34xF9l-_UWjG3DriEbizyCZwCCo/s800-Ic42/10645236_717274615015547_6619002538199926766_n.jpg",
+      "imglink": "/assets/image/profiles/gabriel.jpg",
       "name": "Gabriel Lemos",
       "social": [
         { "url": "https://www.facebook.com/gabriel.brito.7165331",
