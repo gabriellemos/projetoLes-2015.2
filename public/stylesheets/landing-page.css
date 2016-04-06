@@ -1,0 +1,257 @@
+/* Bootstrap 3 Cosmo */
+@import url("https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css");
+/* Google Fonts: Yesteryear, Open Sans, Montserrat, Lato */
+@import url("https://fonts.googleapis.com/css?family=Yesteryear");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic");
+/* Icons: Font-awesome */
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+
+/*!
+ * Start Bootstrap - Landing Page Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Modification of Landing Page by Dennis Dantas (github.com/ddspog)
+ */
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+hr {
+    position: relative;
+    border: none;
+	margin-top: 0;
+}
+
+hr:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: #ccc;
+}
+
+.centered {
+    text-align: center;
+}
+
+.lead {
+	text-align: justify;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.intro-header h1 {
+    font-family: "Montserrat", arial, sans-serif;
+}
+
+.intro-header h3 {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: .05em;
+}
+
+.intro-header p {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: .05em;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.row .white {
+    margin-right: 0px;
+    margin-left: -15px;
+}
+
+    .row .white h1 {
+        font-family: "Montserrat", "Open Sans", "Lato", sans-serif;
+        padding-top: 35px;
+        font-weight: 300;
+        color: #333;
+    }
+
+    .row.white p {
+        font-family: "Montserrat", "Open Sans", "Lato", sans-serif;
+        padding-top: 25px;
+        line-height: 28px;
+        font-weight: 400;
+        margin-bottom: 25px;
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
+footer {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+.main-brand {
+  font-family: 'Yesteryear', cursive;
+  font-size: 80px;
+}
+
+.navbar-brand {
+  font-family: 'Yesteryear', cursive;
+  font-size: 40px;
+}
+
+.navbar-collapse ul .nav li a {
+  font-family: "Montserrat", arial, sans-serif;
+    letter-spacing: 2px;
+    font-size: 15px;
+}
+
+footer .container ul .list-inline li a {
+  font-family: "Montserrat", arial, sans-serif;
+    letter-spacing: 2px;
+    font-size: 15px;
+}
+
+.img-responsive {
+    margin: auto;
+}
+
+#img-cellphone{
+    max-width: 100%;
+}
