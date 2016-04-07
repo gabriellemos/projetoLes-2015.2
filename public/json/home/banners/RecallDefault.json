@@ -11,7 +11,7 @@
     }
   ],
   "bnstyle": {
-    "background": "url(https://lh3.googleusercontent.com/-XQXu-vhNG7k/VwGXeIr_6uI/AAAAAAAA1oE/lANjuh4vQKoacS1oGuI0kVALLpohupr9wCCo/s800-Ic42/photo-1458175049065-aefb15b1b58b.jpg) no-repeat center center",
+    "background": "url(/assets/image/background/holding-cake.jpg) no-repeat center center",
     "padding": "100px 0",
     "color": "#f8f8f8",
     "background-size": "cover"
