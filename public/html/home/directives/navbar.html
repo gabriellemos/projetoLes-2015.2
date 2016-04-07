@@ -6,13 +6,13 @@
 				<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
 				<span class="icon-bar"></span><span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" ui-sref="{{item.brand.url}}"><span ng-bind="item.brand.text"></span></a>
+			<a class="navbar-brand" href="#" ui-sref="{{item.brand.url}}"><span ng-bind="item.brand.text"></span></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li ng-repeat="btn in item.btns">
-					<a ui-sref="{{btn.url}}" ng-bind="btn.text"></a>
+					<a href="#" ui-sref="{{btn.url}}" ng-bind="btn.text"></a>
 				</li>
 			</ul>
 		</div>
