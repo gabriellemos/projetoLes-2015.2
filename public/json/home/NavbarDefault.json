@@ -1,0 +1,14 @@
+{
+  "brand": {
+    "text": "GetCake",
+    "url": "initial"
+  },
+  "btns": [
+    { "text": "Sobre",
+      "url": "about"     },
+    { "text": "Serviços",
+      "url": "services"  },
+    { "text": "Contato",
+      "url": "contact"   }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "message": "Use agora!",
+  "social": [
+    { "text": "Login via Facebook",
+      "icon": "facebook-official",
+      "url": "/login" },
+    {
+      "text": "Ver anúncios",
+      "icon": "birthday-cake",
+      "url": "/dashboard"
+    }
+  ],
+  "bnstyle": {
+    "background": "url(/assets/image/background/holding-cake.jpg) no-repeat center center",
+    "padding": "100px 0",
+    "color": "#f8f8f8",
+    "background-size": "cover"
+  }
+}

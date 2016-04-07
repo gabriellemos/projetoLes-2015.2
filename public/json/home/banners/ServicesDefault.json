@@ -1,0 +1,9 @@
+{
+  "message": "Serviços e Funcionalidades",
+  "bnstyle": {
+    "background": "url(/assets/image/background/white-cake.jpg) no-repeat center center",
+    "padding": "100px 0",
+    "color": "#f8f8f8",
+    "background-size": "cover"
+  }
+}

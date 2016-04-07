@@ -1,0 +1,11 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<html ng-app="HomepageApp">
+  <head>
+    @homepage.head(title)
+  </head>
+  <body ng-controller="HomeController" data-spy="scroll" data-target=".navbar">
+    @content
+    @homepage.scripts()
+  </body>
+</html>

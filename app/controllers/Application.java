@@ -1,30 +1,17 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.dao.GenericDAOImpl;
-import org.apache.commons.lang.NullArgumentException;
 import org.pac4j.core.profile.CommonProfile;
-import org.pac4j.play.ApplicationLogoutController;
-import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
-import play.Logger;
-import play.data.DynamicForm;
 import play.db.jpa.Transactional;
-import play.libs.Json;
-
 import play.mvc.Result;
-
-import javax.management.openmbean.KeyAlreadyExistsException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import java.util.List;
 
 /**
  * Classe principal que responde a requisições HTTP.
  */
 public class Application extends UserProfileController<CommonProfile>{
 
+    @SuppressWarnings("unused")
     private static GenericDAOImpl dao = new GenericDAOImpl();
 
     /**
@@ -41,7 +28,7 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     private Result home() {
-        return ok(views.html.index.render("GetCake"));
+        return ok(views.html.homepage.index.render("GetCake"));
     }
 
 }

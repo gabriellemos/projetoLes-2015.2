@@ -1,0 +1,23 @@
+@*********************************************************************************************************************
+* Scripts called at end of page (dynamic HTML)                                                                       *
+* @param pageId The id of the page (for switch blocks)                                                               *
+**********************************************************************************************************************@
+@()
+<!-- Scripts -->
+<div>
+  <!-- Placed at the end of the document so the pages load faster -->
+    <!-- AngularJS -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
+    <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Modules -->
+  <script src="@routes.Assets.at("javascripts/home/app.js")"></script>
+    <!-- Factory -->
+  <script src="@routes.Assets.at("javascripts/home/factory.js")"></script>
+    <!-- Controllers -->
+  <script src="@routes.Assets.at("javascripts/home/controllers.js")"></script>
+    <!-- Directives -->
+  <script src="@routes.Assets.at("javascripts/home/directives.js")"></script>
+</div>

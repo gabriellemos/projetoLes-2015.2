@@ -1,0 +1,21 @@
+{
+  "contacts": [
+    {
+      "imglink": "/assets/image/profiles/andrew.jpg",
+      "name": "Andrew Feliphe",
+      "social": [
+        { "url": "https://www.facebook.com/andrewfeliphe.nobregawanderley",
+          "icon": "facebook-official"							}
+      ]
+    },
+    {
+      "imglink": "/assets/image/profiles/jordan.jpg",
+      "name": "Jordan Ferreira",
+      "social": [
+        { "url": "https://www.facebook.com/jordan.ferreiranunes",
+          "icon": "facebook-official"							}
+      ]
+
+    }
+  ]
+}

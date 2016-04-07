@@ -1,0 +1,23 @@
+{
+  "maintitle": "O bolo dos seus sonhos.",
+  "subtitle": "Descubra confeiteiros em sua cidade. Faça encomendas faltando poucos dias para a festa. Compare preços. Avalie. Escolha os seus favoritos. Converse.",
+  "social": [
+    { "text": "Login via Facebook",
+      "icon": "facebook-official",
+      "url": "/login" },
+    {
+      "text": "Ver anúncios",
+      "icon": "birthday-cake",
+      "url": "/dashboard"
+    }
+  ],
+  "cellphoneimg": "https://lh3.googleusercontent.com/-H1x27H2vbdw/VwGXNNlxwkI/AAAAAAAA1n8/1PErJWUelWMdUYQe73bVhbMF4if-zGyVwCCo/s800-Ic42/mockup4version.png",
+  "hdstyle": {
+    "background": "url(/assets/image/background/holding-cake.jpg) no-repeat center center",
+    "padding-top": "50px",
+    "padding-bottom": "50px",
+    "text-align": "center",
+    "color": "#f8f8f8",
+    "background-size": "cover"
+  }
+}
