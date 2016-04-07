@@ -21,9 +21,15 @@ public class Confeiteiro {
 	private String id;
 	
 	private HashSet<Anuncio> meusAnuncios;
-	
+
+
 	/**
-	 * Construtor padr�o
+	 * Construtor padrão
+	 */
+	public Confeiteiro() {}
+
+	/**
+	 * Construtor padrão
 	 * @param nome o nome do Confeiteiro
 	 */
 	public Confeiteiro(String nome) {
@@ -45,7 +51,7 @@ public class Confeiteiro {
      */
 	public void setNome(String nome) {
 		if (nome == null || nome.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'nome' recebendo valores inválidos");
+			throw new IllegalArgumentException("Argumento 'Nome' recebendo valores inválidos");
 		this.nome = nome;
 	}
 
@@ -63,7 +69,7 @@ public class Confeiteiro {
      */
 	public void setEndereco(String endereco) {
 		if(endereco == null || endereco.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'endereço' recebendo valores inválidos");
+			throw new IllegalArgumentException("Argumento 'Endereço' recebendo valores inválidos");
 		this.endereco = endereco;
 	}
 
@@ -81,7 +87,7 @@ public class Confeiteiro {
      */
 	public void setEmail(String email) {
 		if(email == null || email.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'email' recebendo valores inválidos");
+			throw new IllegalArgumentException("Argumento 'Email' recebendo valores inválidos");
 		this.email = email;
 	}
 
@@ -99,7 +105,7 @@ public class Confeiteiro {
      */
 	public void setContato(String contato) {
 		if(contato == null || contato.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'endereço' recebendo valores inválidos");
+			throw new IllegalArgumentException("Argumento 'Contato' recebendo valores inválidos");
 		this.contato = contato;
 	}
 	
@@ -110,6 +116,16 @@ public class Confeiteiro {
     public String getId() {
         return id;
     }
+
+	public void setId(String id) {
+
+		if(this.id != null)
+			throw new IllegalArgumentException("Não é possível modificar valor do 'ID'");
+		else if(id == null || id.trim().equals(STRING_VAZIA))
+			throw new IllegalArgumentException("Argumento 'ID' recebendo valores inválidos");
+
+		this.id = id;
+	}
 
     /**
      * Adiciona um an�ncio na lista de an�ncios do confeiteiro, caso o mesmo ainda n�o exista
