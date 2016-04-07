@@ -7,6 +7,7 @@ import org.junit.Test;
 import models.Anuncio;
 import models.Confeiteiro;
 
+import javax.management.openmbean.KeyAlreadyExistsException;
 import java.util.HashSet;
 
 /**
@@ -48,7 +49,7 @@ public class ConfeiteiroTeste {
 
         Assert.assertNotNull(confeiteiroTeste.getAnuncios());
         Assert.assertTrue(confeiteiroTeste.getAnuncios().isEmpty());
-        Assert.assertEquals(new HashSet<Anuncio>(), confeiteiroTeste.getAnuncios());
+        Assert.assertEquals(HashSet.class, confeiteiroTeste.getAnuncios().getClass());
     }
 
     @Test
@@ -271,6 +272,16 @@ public class ConfeiteiroTeste {
 
         // Nenhuma exceção é esperada.
         confeteiroDefault.addAnuncio(anuncioDefault);
+
+        try {
+            confeteiroDefault.addAnuncio(anuncioDefault);
+            Assert.fail("É possível existir dois ou mais anúncios duplicados");
+        } catch (KeyAlreadyExistsException exception) {
+            // Ok, continue o teste
+        } catch (Exception exception) {
+            // Sempre irá falhar ao chegar aqui
+            Assert.assertEquals(KeyAlreadyExistsException.class, exception.getClass());
+        }
 
         // Nem mesmo se for adicionado um anúncio que já foi andicionado previamente.
         confeteiroDefault.addAnuncio(anuncioDefault);
