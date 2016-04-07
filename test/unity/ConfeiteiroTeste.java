@@ -291,8 +291,7 @@ public class ConfeiteiroTeste {
     @Test
     public void TestaGetAnuncio() {
         Assert.assertTrue(confeteiroDefault.getAnuncios().isEmpty());
-        Assert.assertEquals(confeteiroDefault.getAnuncios(), confeiteiroSemAnuncios.getAnuncios());
-        Assert.assertNotEquals(confeteiroDefault.getAnuncios(), confeiteiroComAnuncios.getAnuncios());
+        Assert.assertEquals(HashSet.class, confeteiroDefault.getAnuncios().getClass());
 
         Assert.assertTrue(confeiteiroComAnuncios.getAnuncios().contains(anuncioDefault));
     }
