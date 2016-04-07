@@ -1,5 +1,7 @@
 {
-  "header": [ "Nossa história" ],
-  "content": "Em Campina Grande, já perdemos muitas festas, porque ao encomendar um bolo em cima da hora, nosso contato preferido está cheio. Depois que a festa passa é que descobríamos outro contato. Para a disciplina de Laboratório de Engenharia de Software em 2016, atacamos esta problemática do nicho de mercado que só amplia na cidade.",
+  "header": [
+    "Nossa história"
+  ],
+  "content": "Somos amantes de bolos que já perderam muitas oportunidades de comer um bom bolo porque nosso 'boleiro' favorito estava indisponível para encomendas e nunca consegíamos encontrar outro a tempo da comemoração. Para evitar que esse problema se repita decidimos que nossa equipe, amante de bolos, irá atacar esse problema criando o GetCake para encomendas de bolos.",
   "imglink": "/assets/image/pictures/desperate.png"
 }
