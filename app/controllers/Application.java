@@ -1,9 +1,11 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.dao.GenericDAOImpl;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.play.java.UserProfileController;
 import play.db.jpa.Transactional;
+import play.libs.Json;
 import play.mvc.Result;
 
 /**
@@ -29,6 +31,27 @@ public class Application extends UserProfileController<CommonProfile>{
     @Transactional
     private Result home() {
         return ok(views.html.homepage.index.render("GetCake"));
+    }
+
+    /**
+     * Retorna a página inicial do Feed de Anúncios
+     * @return página inicial do Feed de Anúncios
+     */
+    @Transactional
+    public Result feed() {
+        return ok(views.html.feed.index.render("GetCake"));
+    }
+
+    /**
+     * Retorna um JSON contendo texto dos Anúncios do Feed
+     * @return texto dos Anúncios do Feed
+     */
+    @Transactional
+    public Result getFeedAds() {
+
+        ObjectNode result = Json.newObject();
+        result.set("ads", Text.getAds());
+        return ok(result);
     }
 
 }
