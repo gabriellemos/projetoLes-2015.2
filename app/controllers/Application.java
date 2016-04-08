@@ -1,6 +1,5 @@
 package controllers;
 
-import models.dao.GenericDAOImpl;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.play.java.UserProfileController;
 import play.db.jpa.Transactional;
@@ -12,7 +11,7 @@ import play.mvc.Result;
 public class Application extends UserProfileController<CommonProfile>{
 
     @SuppressWarnings("unused")
-    private static GenericDAOImpl dao = new GenericDAOImpl();
+   // private static GenericDAOImpl dao = new GenericDAOImpl();
 
     /**
      * Retorna a página inicial.
@@ -28,7 +27,7 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     private Result home() {
-        return ok(views.html.homepage.index.render("GetCake"));
+        return ok("");//views.html.homepage.index.render("GetCake"));
     }
 
 }
