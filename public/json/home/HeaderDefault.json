@@ -8,7 +8,7 @@
     {
       "text": "Ver anúncios",
       "icon": "birthday-cake",
-      "url": "/dashboard"
+      "url": "/feed"
     }
   ],
   "cellphoneimg": "/assets/image/pictures/responsivity.png",
