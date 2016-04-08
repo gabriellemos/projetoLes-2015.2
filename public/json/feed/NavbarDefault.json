@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "text": "GetCake",
+    "url": "ads"
+  },
+  "username": "Dennis Dantas",
+  "userbtn": {
+    "before": [
+      { "url": "/logout",
+        "icon": "sign-out",
+        "text": "Logout"   }
+    ],
+    "divided": false
+  },
+  "navbarbtn": [
+    { "url": "ads",
+      "icon": "sign-out",
+      "text": "Anúncios",
+      "hasChild": false   }
+  ]
+}
