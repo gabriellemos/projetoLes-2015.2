@@ -1,6 +1,7 @@
 package models;
 
 import org.apache.commons.lang.NullArgumentException;
+
 import java.util.HashSet;
 import javax.management.openmbean.KeyAlreadyExistsException;
 
@@ -16,9 +17,11 @@ public class Confeiteiro {
 	private String email;
 	private String contato;
 
+	private  String idFacebook;
+
 	private final String STRING_VAZIA = "";
 	
-	private String id;
+	private int id;
 	
 	private HashSet<Anuncio> meusAnuncios;
 
@@ -113,17 +116,11 @@ public class Confeiteiro {
      * Recupera o id do confeiteiro
      * @return id do confeiteiro
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-	public void setId(String id) {
-
-		if(this.id != null)
-			throw new IllegalArgumentException("Não é possível modificar valor do 'ID'");
-		else if(id == null || id.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'ID' recebendo valores inválidos");
-
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -166,4 +163,13 @@ public class Confeiteiro {
 		return this.meusAnuncios;
 	}
 
+	public String getIdFacebook() {
+		return idFacebook;
+	}
+
+	public void setIdFacebook(String idFacebook) {
+		if(idFacebook == null || idFacebook.trim().equals(STRING_VAZIA))
+			throw new IllegalArgumentException("Argumento 'IdFacebok' recebendo valores inválidos");
+		this.idFacebook = idFacebook;
+	}
 }
