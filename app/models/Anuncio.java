@@ -52,6 +52,8 @@ public class Anuncio {
         setDescricao(descricao);
         setTipoAnuncio(tipoAnuncio);
         setPreco(preco);
+        
+        setDataCriacao(Utils.getHoje());
     }
 
     public String getTitulo() {
@@ -65,7 +67,7 @@ public class Anuncio {
      * @param titulo novo titulo do Anúncio
      */
     public void setTitulo(String titulo) {
-        if (!Utils.ChecaStringValida(titulo)) {
+        if (!Utils.checaStringValida(titulo)) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Título"));
         }
         this.titulo = titulo;
@@ -82,7 +84,7 @@ public class Anuncio {
      * @param descricao nova descricao do Anúncio
      */
     public void setDescricao(String descricao) {
-        if (!Utils.ChecaStringValida(descricao)) {
+        if (!Utils.checaStringValida(descricao)) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Descrição"));
         }
         this.descricao = descricao;
@@ -98,7 +100,7 @@ public class Anuncio {
      * @param dataEdicao nova dataEdicao do Anúncio
      */
     public void setDataEdicao(GregorianCalendar dataEdicao) {
-        if (Utils.dataValida(dataEdicao)) {
+        if (!Utils.dataValida(dataEdicao)) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de edição"));
         }
         this.dataEdicao = dataEdicao;
@@ -113,8 +115,8 @@ public class Anuncio {
      *
      * @param dataCriacao nova dataCriacao do Anúncio
      */
-    public void setDataCriacao(GregorianCalendar dataCriacao) {
-        if (Utils.dataValida(dataEdicao)) {
+    private void setDataCriacao(GregorianCalendar dataCriacao) {
+        if (!Utils.dataValida(dataCriacao)) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
         }
         this.dataCriacao = dataCriacao;

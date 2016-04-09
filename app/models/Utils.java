@@ -13,7 +13,7 @@ public class Utils {
     /*
      * Verifica se a string recebida para validação é Null, vazia ou com contendo apenas espaços em branco.
      */
-    public static boolean ChecaStringValida(String strParaValidacao) {
+    public static boolean checaStringValida(String strParaValidacao) {
         if (strParaValidacao == null || STR_VAZIO.equals(strParaValidacao.trim())){
             return false;
         }
@@ -28,6 +28,7 @@ public class Utils {
         hoje.set(Calendar.HOUR_OF_DAY, 0);
         hoje.set(Calendar.MINUTE, 0);
         hoje.set(Calendar.SECOND, 0);
+        hoje.set(Calendar.MILLISECOND, 0);
 
         return hoje;
     }
@@ -41,14 +42,15 @@ public class Utils {
     }
 
     /*
-     * Verifica se a data é anterior ao dia de hoje.
+     * Aqui o método verifica se a data é anterior a uma 'dataLimite' passada como parâmetro.
      * @param   dataParaValidacao: Data para validação.
      * @param   dataLimite: Data pela qual será feita a validação.
      * @return: False se a data for anterior ao dia de hoje, true caso contrário.
      */
-    public static boolean dataValida(GregorianCalendar dataParaValidacao, GregorianCalendar dataLimite) {
-        if (dataLimite.compareTo(dataParaValidacao) < 0) {
-            return true;
+    public static boolean dataValida(GregorianCalendar dataParaValidacao,
+                                     GregorianCalendar dataLimite) {
+        if (dataParaValidacao != null && dataParaValidacao.compareTo(dataLimite) < 0) {
+            return false;
         }
         return true;
     }
