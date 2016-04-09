@@ -170,7 +170,7 @@ public class Confeiteiro {
 
 	public void setIdFacebook(String idFacebook) {
 		if(idFacebook == null || idFacebook.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'Contato' recebendo valores inválidos");
+			throw new IllegalArgumentException("Argumento 'IdFacebok' recebendo valores inválidos");
 		this.idFacebook = idFacebook;
 	}
 }

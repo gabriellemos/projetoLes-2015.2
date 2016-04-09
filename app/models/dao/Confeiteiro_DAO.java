@@ -2,8 +2,6 @@ package models.dao;
 
 import models.Confeiteiro;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
-import scala.Int;
-import scala.collection.Set$;
 
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -15,62 +13,56 @@ public class Confeiteiro_DAO {
 
     private  java.sql.Connection conexao= null;
     private  Statement declaracao = null;
-    private  String str;
+    private  String strSql;
 
-    public void cadastrar_Confeiteiro (String Nome, String Email, String Endereco, String Contanto, String ID_Facebook)  throws Exception {
+    public void cadastrar_Confeiteiro (String Nome, String Email, String Endereco, String Contanto,
+                                       String ID_Facebook)  throws Exception {
 
         try {
             conexao= models.dao.Connection.getConnection();
             declaracao= conexao.createStatement();
 
-            str="INSERT INTO Confeiteiro (Nome_Confeiteiro,Email_Confeiteiro ,Endereco_Confeiteiro,Contato_Confeiteiro,ID_Facebook  )"+
-            "VALUES('" + Nome + "','" + Email + "','" + Endereco + "','" + Contanto + "','" + ID_Facebook + "')";
+            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,Email_Confeiteiro ," +
+                    "Endereco_Confeiteiro, Contato_Confeiteiro,ID_Facebook  )" +
+                    "VALUES('" + Nome + "','" + Email + "','" + Endereco + "','" + Contanto +
+                    "','" + ID_Facebook + "')";
 
-            declaracao.executeLargeUpdate(str);
+            declaracao.executeLargeUpdate(strSql);
             declaracao.close();
             conexao.commit();
             conexao.close();
-
-
-        }catch(Exception e){
+        } catch(Exception e){
             throw new InvalidOperationException("Erro ao criar o Confeiteiro");
-
         }
-
     }
 
     /*
      * Retorna listagem de confeiteiros
      */
     public ResultSet GetConfeiteiros() throws Exception{
-
         try {
             ResultSet resultado;
             conexao = models.dao.Connection.getConnection();
             declaracao = conexao.createStatement();
-            str = "SELECT * FROM Confeiteiro;";
-            resultado = declaracao.executeQuery(str);
+            strSql = "SELECT * FROM Confeiteiro;";
+            resultado = declaracao.executeQuery(strSql);
             declaracao.close();
             conexao.close();
             return resultado;
             // Verifica a exceção do bd
-        }catch (Exception e){
+        } catch (Exception e){
             throw new InvalidOperationException("Tabela Inexistente");
         }
-
-
-
     }
 
     public Confeiteiro GetConfeiteiro(int ID) throws Exception{
-
         try {
             ResultSet resultado;
             Confeiteiro resposta= new Confeiteiro();
             conexao = models.dao.Connection.getConnection();
             declaracao = conexao.createStatement();
-            str = "SELECT * FROM Confeiteiro c WHERE c.ID_Confeiteiro='" + ID + "';";
-            resultado = declaracao.executeQuery(str);
+            strSql = "SELECT * FROM Confeiteiro c WHERE c.ID_Confeiteiro='" + ID + "';";
+            resultado = declaracao.executeQuery(strSql);
             // TODO: Verifica uma forma mais simples de resolver isso, utilizando o contutor da classe
             resposta.setNome(resultado.getString("Nome_Confeiteiro"));
             resposta.setEmail(resultado.getString("Email_Confeiteiro"));
@@ -86,12 +78,5 @@ public class Confeiteiro_DAO {
         }catch (Exception e){
             throw new InvalidOperationException("Confeiteiro Inexistente");
         }
-
-
-
     }
-
-
-
-
 }
