@@ -52,7 +52,7 @@ public class Anuncio {
         setDescricao(descricao);
         setTipoAnuncio(tipoAnuncio);
         setPreco(preco);
-        
+
         setDataCriacao(Utils.getHoje());
     }
 
@@ -147,7 +147,7 @@ public class Anuncio {
      *
      * @param criador novo criador do Anúncio
      */
-    public void setCriador(Confeiteiro criador) {
+    private void setCriador(Confeiteiro criador) {
         if (criador == null) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Criador"));
         }
