@@ -44,5 +44,24 @@ public class Anuncio_DAO {
         }
     }
 
+    /*
+     * Retorna Listagem de Anúncio do banco de dados.
+     */
+    public static ResultSet getAnuncios() throws Exception{
+        try {
+            ResultSet resultado;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Anuncio;";
+            resultado = declaracao.executeQuery(strSql);
+            declaracao.close();
+            conexao.close();
+            return resultado;
+            // Verifica a exceção do bd
+        } catch (Exception e) {
+            throw new InvalidOperationException("Tabela Inexistente");
+        }
+    }
+
 
 }
