@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
  */
 public class Anuncio {
 
+    private int id;
+
     private String titulo;
     private String descricao;
 
@@ -115,7 +117,7 @@ public class Anuncio {
      *
      * @param dataCriacao nova dataCriacao do Anúncio
      */
-    private void setDataCriacao(GregorianCalendar dataCriacao) {
+    public void setDataCriacao(GregorianCalendar dataCriacao) {
         if (!Utils.dataValida(dataCriacao)) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
         }
@@ -147,7 +149,7 @@ public class Anuncio {
      *
      * @param criador novo criador do Anúncio
      */
-    private void setCriador(Confeiteiro criador) {
+    public void setCriador(Confeiteiro criador) {
         if (criador == null) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Criador"));
         }
@@ -168,5 +170,13 @@ public class Anuncio {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Tipo de Anúncio"));
         }
         this.tipoAnuncio = tipoAnuncio;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
