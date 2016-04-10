@@ -11,11 +11,11 @@ import java.sql.ResultSet;
  */
 public class Confeiteiro_DAO {
 
-    private  java.sql.Connection conexao= null;
-    private  Statement declaracao = null;
-    private  String strSql;
+    private static java.sql.Connection conexao= null;
+    private static Statement declaracao = null;
+    private static String strSql;
 
-    public void cadastrar_Confeiteiro (String Nome, String Email, String Endereco, String Contanto,
+    public static void cadastrar_Confeiteiro (String Nome, String Email, String Endereco, String Contanto,
                                        String ID_Facebook)  throws Exception {
 
         try {
@@ -39,7 +39,7 @@ public class Confeiteiro_DAO {
     /*
      * Retorna listagem de confeiteiros
      */
-    public ResultSet GetConfeiteiros() throws Exception{
+    public static ResultSet GetConfeiteiros() throws Exception{
         try {
             ResultSet resultado;
             conexao = models.dao.Connection.getConnection();
@@ -55,7 +55,7 @@ public class Confeiteiro_DAO {
         }
     }
 
-    public Confeiteiro GetConfeiteiro(int ID) throws Exception{
+    public static Confeiteiro GetConfeiteiro(int ID) throws Exception{
         try {
             ResultSet resultado;
             Confeiteiro resposta= new Confeiteiro();
