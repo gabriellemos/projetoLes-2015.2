@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -53,5 +54,11 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    public static GregorianCalendar converteDateToGregorianCalendar(Date data) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(data);
+        return calendar;
     }
 }
