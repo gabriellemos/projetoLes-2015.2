@@ -8,6 +8,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
@@ -22,24 +23,29 @@ public class Anuncio_DAO {
     /*
      * Cria um Anúncio no banco de dados. Um id é atribuido automaticamente no ato da criação.
      */
-    public static void createAnuncio (String titulo, String descricao, String dataEdicao,
-                               String dataCriacao, String preco, String criador, String tipo)
-            throws Exception {
+    public static void insertAnuncio (String titulo, String descricao, GregorianCalendar dataEdicao,
+                                      GregorianCalendar dataCriacao, float preco, int criador,
+                                      String tipo) throws Exception {
 
+        java.sql.Date dataEdicaoBD;
+        java.sql.Date dataCriacaoBD;
         try {
-            conexao= Connection.getConnection();
-            declaracao= conexao.createStatement();
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
 
+            dataEdicaoBD = new java.sql.Date(dataEdicao.getTimeInMillis());
+            dataCriacaoBD = new java.sql.Date(dataCriacao.getTimeInMillis());
             strSql = "INSERT INTO Anuncio (titulo_anuncio, descricao_anuncio, edicao_anuncio, " +
                     "criacao_anuncio, preco_anuncio, criador_anuncio, tipo_anuncio) VALUES('" +
-                    titulo + "','" + descricao + "','" + dataEdicao + "','" + dataCriacao + "','" +
-                    preco + "','" + criador  + "','" + tipo + "')";
+                    titulo + "','" + descricao + "','" + dataEdicaoBD + "','" + dataCriacaoBD +
+                    "','" + preco + "','" + criador  + "','" + tipo + "')";
 
-            declaracao.executeLargeUpdate(strSql);
+            declaracao.executeUpdate(strSql);
             declaracao.close();
-            conexao.commit();
             conexao.close();
         } catch(Exception e){
+            System.out.println(e);
+            System.out.println(e.getMessage());
             throw new InvalidOperationException("Erro ao criar o Anúncio");
         }
     }
@@ -47,18 +53,39 @@ public class Anuncio_DAO {
     /*
      * Retorna Listagem de Anúncio do banco de dados.
      */
-    public static ResultSet getAnuncios() throws Exception{
+    public static ArrayList<Anuncio> getAnuncios() throws Exception{
         try {
-            ResultSet resultado;
+            ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Anuncio;";
-            resultado = declaracao.executeQuery(strSql);
+            resultadoQuery = declaracao.executeQuery(strSql);
+
+            Anuncio anuncio;
+            ArrayList<Anuncio> listaRetorno = new ArrayList();
+            while(resultadoQuery.next()){
+                anuncio = new Anuncio();
+                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
+                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
+                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
+                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("criacao_anuncio")));
+                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("edicao_anuncio")));
+                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
+                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
+                        resultadoQuery.getInt("criador_anuncio")));
+                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
+                        resultadoQuery.getString("tipo_anuncio").trim()));
+                listaRetorno.add(anuncio);
+            }
+
             declaracao.close();
             conexao.close();
-            return resultado;
+            return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
+            System.out.println(e);
             throw new InvalidOperationException("Tabela Inexistente");
         }
     }

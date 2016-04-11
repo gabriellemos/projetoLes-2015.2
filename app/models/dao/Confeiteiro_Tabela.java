@@ -1,6 +1,5 @@
 package models.dao;
 
-import java.sql.*;
 import java.sql.Statement;
 
 
@@ -8,7 +7,6 @@ import java.sql.Statement;
  * Created by jordan on 08/04/2016.
  */
 public class Confeiteiro_Tabela {
-
 
     private static java.sql.Connection conexao= null;
     private static Statement declaracao = null;
