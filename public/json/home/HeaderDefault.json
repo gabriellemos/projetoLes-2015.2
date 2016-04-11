@@ -8,10 +8,10 @@
     {
       "text": "Ver anúncios",
       "icon": "birthday-cake",
-      "url": "/dashboard"
+      "url": "/feed"
     }
   ],
-  "cellphoneimg": "https://lh3.googleusercontent.com/-H1x27H2vbdw/VwGXNNlxwkI/AAAAAAAA1n8/1PErJWUelWMdUYQe73bVhbMF4if-zGyVwCCo/s800-Ic42/mockup4version.png",
+  "cellphoneimg": "/assets/image/pictures/responsivity.png",
   "hdstyle": {
     "background": "url(/assets/image/background/holding-cake.jpg) no-repeat center center",
     "padding-top": "50px",

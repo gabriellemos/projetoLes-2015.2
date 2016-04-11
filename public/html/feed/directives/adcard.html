@@ -1,0 +1,11 @@
+<div class="card card-ad">
+	<img class="card-img-top img-fluid" ng-src="{{item.imglink}}" class="img-responsive">
+	<div class="card-block">
+		<h4 class="card-title" ng-bind="item.title"></h4>
+		<p class="card-text" ng-bind="item.chef"></p>		
+		<div class="card-text">
+			<span class="badge badge-lg badge-success">
+			<i class="fa fa-fw fa-money"></i> <span ng-bind="item.price"></span></span>
+		</div>
+	</div>
+</div>
