@@ -1,7 +1,6 @@
 package models.dao;
 
 import models.Anuncio;
-import models.Confeiteiro;
 import models.TipoAnuncio;
 import models.Utils;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
@@ -44,8 +43,6 @@ public class Anuncio_DAO {
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            System.out.println(e);
-            System.out.println(e.getMessage());
             throw new InvalidOperationException("Erro ao criar o Anúncio");
         }
     }
@@ -63,6 +60,7 @@ public class Anuncio_DAO {
 
             Anuncio anuncio;
             ArrayList<Anuncio> listaRetorno = new ArrayList();
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
             while(resultadoQuery.next()){
                 anuncio = new Anuncio();
                 anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
@@ -85,7 +83,6 @@ public class Anuncio_DAO {
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            System.out.println(e);
             throw new InvalidOperationException("Tabela Inexistente");
         }
     }
@@ -101,7 +98,8 @@ public class Anuncio_DAO {
             declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "';";
             resultado = declaracao.executeQuery(strSql);
-            // TODO: Verifica uma forma mais simples de resolver isso, utilizando o contutor da classe
+
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
             resposta.setId(resultado.getInt("id_anuncio"));
             resposta.setTitulo(resultado.getString("titulo_anuncio"));
             resposta.setDescricao(resultado.getString("descricao_anuncio"));

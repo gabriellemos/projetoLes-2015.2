@@ -31,8 +31,6 @@ public class Confeiteiro_DAO {
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            System.out.println(e);
-            System.out.print(e.getMessage());
             throw new InvalidOperationException("Erro ao criar o Confeiteiro");
         }
     }
@@ -50,6 +48,7 @@ public class Confeiteiro_DAO {
 
             Confeiteiro confeiteiro;
             ArrayList listaRetorno = new ArrayList();
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Confeiteiro.
             while(resultadoQuery.next()){
                 confeiteiro = new Confeiteiro();
                 confeiteiro.setNome(resultadoQuery.getString("Nome_Confeiteiro"));
@@ -66,7 +65,6 @@ public class Confeiteiro_DAO {
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e){
-            System.out.println(e);
             throw new InvalidOperationException("Tabela Inexistente");
         }
     }
@@ -80,7 +78,8 @@ public class Confeiteiro_DAO {
             resultado = declaracao.executeQuery(strSql);
 
             Confeiteiro confeiteiroResp = new Confeiteiro();
-            // TODO: Verifica uma forma mais simples de resolver isso, utilizando o contutor da classe
+
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Confeiteiro.
             resultado.next();
             confeiteiroResp.setNome(resultado.getString("Nome_Confeiteiro"));
             confeiteiroResp.setEmail(resultado.getString("Email_Confeiteiro"));
@@ -95,7 +94,6 @@ public class Confeiteiro_DAO {
             return confeiteiroResp;
             // Verifica a exceção do bd
         }catch (Exception e){
-            System.out.println(e);
             throw new InvalidOperationException("Confeiteiro Inexistente");
         }
     }

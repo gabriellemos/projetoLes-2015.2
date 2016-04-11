@@ -234,9 +234,10 @@ public class ConfeiteiroTeste {
 //
     @Test
     public void TestaReSetId() {
-        confeteiroDefault.setId(1);
+        int valorID = 1;
+        confeteiroDefault.setId(valorID);
         try {
-            confeteiroDefault.setId(2);
+            confeteiroDefault.setId(valorID+1);
             Assert.fail("Foi possível setar um novo 'ID' para o confeiteiro");
         } catch (IllegalArgumentException exception) {
             // Ok, continue o teste
@@ -245,25 +246,6 @@ public class ConfeiteiroTeste {
             Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
         }
     }
-
-//    @Test
-//    public void TestaSetIdInvalido() {
-//        Confeiteiro confeiteiroTeste;
-//        String[] idInvalidos = {null, "", "     "};
-//
-//        for (String idInvalido : idInvalidos) {
-//            try {
-//                confeiteiroTeste = new Confeiteiro();
-//                confeiteiroTeste.setId(idInvalido);
-//                Assert.fail("Foi possível setar o 'ID' do confeiteiro para: " + idInvalido);
-//            } catch (IllegalArgumentException exception) {
-//                // Ok, continue o teste
-//            } catch (Exception exception) {
-//                // Sempre irá falhar ao chegar aqui
-//                Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
-//            }
-//        }
-//    }
 
     // Testa addAnuncio
     @Test
