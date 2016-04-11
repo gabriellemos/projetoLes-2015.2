@@ -20,7 +20,6 @@ public class DataBaseTest {
         } catch (SQLException ex) {
             Assert.fail("Falha na conexão com o Banco de Dados");
         }
-
     }
 
     @Test
@@ -39,7 +38,6 @@ public class DataBaseTest {
             Assert.assertEquals(PSQLException.class, exception.getClass());
         }
 
-
         stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
         stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
         ResultSet query = stmt.executeQuery("SELECT tick FROM ticks");
@@ -49,4 +47,26 @@ public class DataBaseTest {
         stmt.close();
     }
 
+    @Test
+    public void TesteTemp() throws SQLException {
+        java.sql.Connection connection = null;
+
+        try {
+            connection = Connection.getConnection();
+            DatabaseMetaData md = connection.getMetaData();
+            ResultSet rs = md.getColumns(null, null, "anuncio", null);
+            final int colunaDaTabelaAnuncio= 4;
+
+            while (rs.next()) {
+                System.out.println("Tabela Anuncio Coluna : " + rs.getString(colunaDaTabelaAnuncio));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        if (connection != null) {
+            System.out.println("You made it, take control your database now!");
+        } else {
+            System.out.println("Failed to make connection!");
+        }
+    }
 }
