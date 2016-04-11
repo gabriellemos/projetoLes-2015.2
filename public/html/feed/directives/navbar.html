@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active" ng-repeat="x in item.navbarbtn | filter: { hasChild: false }">
-                <a ui-sref="{{x.url}}"><i class="fa fa-fw fa-{{x.icon}}"></i><span ng-bind="x.text"></span></a>
+                <a ui-sref="{{x.url}}" href="#"><i class="fa fa-fw fa-{{x.icon}}"></i><span ng-bind="x.text"></span></a>
             </li>
             <li ng-repeat="x in item.navbarbtn | filter: { hasChild: true }">
                 <a href="javascript:;" data-toggle="collapse" data-target="#{{x.url}}"><i class="fa fa-fw fa-{{x.icon}}"></i><span ng-bind="x.text"></span><i class="fa fa-fw fa-caret-down"></i></a>
