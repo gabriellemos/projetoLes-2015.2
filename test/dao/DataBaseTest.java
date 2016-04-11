@@ -55,9 +55,10 @@ public class DataBaseTest {
             connection = Connection.getConnection();
             DatabaseMetaData md = connection.getMetaData();
             ResultSet rs = md.getColumns(null, null, "anuncio", null);
+            final int colunaDaTabelaAnuncio= 4;
 
             while (rs.next()) {
-                System.out.println("Tabela Anuncio Coluna : " + rs.getString(4));
+                System.out.println("Tabela Anuncio Coluna : " + rs.getString(colunaDaTabelaAnuncio));
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
