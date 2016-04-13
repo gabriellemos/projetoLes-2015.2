@@ -13,10 +13,10 @@ feedApp.controller('AdsController', function($scope, $http, jsonService) {
     jsonService.get('title/AdsDefault.json').success(function(data){
         $scope.labels = data;
     }); // Title
-    /*$http.get('/api/ads').success(function(response){
+    $http.get('/api/ads').success(function(response){
         $scope.ads = response.ads.data;
-    });*/
-    $scope.ads = [
+    });
+    /*$scope.ads = [
         {
             title: 'Red Velvet Cake',
             chef: 'Panificadora Severo',
@@ -54,5 +54,5 @@ feedApp.controller('AdsController', function($scope, $http, jsonService) {
             price: '40,00'
         }
 
-    ];
+    ];*/
 });
