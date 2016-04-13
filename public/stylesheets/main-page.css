@@ -34,11 +34,10 @@ body {
 }
 
 #page-wrapper {
-    width: 100%;
-    padding: 0;
-	padding-top: 10px;
-	padding-bottom: 40px;
-	background: url(../image/patterns/red-cakes.png) top center repeat;
+    padding: 10px 0 40px;
+    /* Generated with http://gradient.quasi.ink */
+    background-size: cover;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAACOklEQVQ4T01T7WoUQRCs7p7JnfjehgT8IM8hoklE8E8Sgm+k6O1OT0n1XNCBY4+Z2froqrWnuw9kDrg7eu/ITJCs//pt24YxJqI3jJygG0DHhGEiQBomrZ5mBvv+8YqvXx0LkJmICNAMc07QfO2TGOezBMApMENSZ2dAOBwBe/56w+aGMQYwJ+BeTDQAcFAAZBFYCwAGwutMCksdmi7j0I8wWe7hZbVUkXBvQFmTkgUmqyKS3ToTmbUCX4COHh32ePu+FGrpRQGYBTyWmn2umZrslHKpA2YB6Y6eSzGTsB/fbjjHUifmslaArV4aZ0CprvmuWSCJsqtZSrX2mRP2eP+ORuEb9hzFBKmIxTyoMSyQYz/+AwMrHAHrqUWJ+f7pDS/aodj3PStVAeqOAKf5SnVOXLQ1/FUZIb3UBzAS+2mDPd1f061h3/cKQ8CwQNVDc/FYSlI7/y0Ry+q5DTr5/esn7Pn+Ss04VwNo/VAKTnsCDPSDbDq2MbDnVoQiZvXJlwA4cmw4tFAo17RKCaXCWy9le6r9gEevem45kHPCWyCig1M2V/F1ce5DVYc9316SStVXotU1Web6YnRWxVaiAlRHy5F0rSq5xsnE2P/AHj5fsrULYWA7DSRnBaENXVaK8EU4c1kUmJrxAjaZMEmeG+zhy3UBKjtZU3VS5a45cdVGtZbN4WitF1BorznG2DC2E8KI8IQ93L1lqBpkJba+lrMSW3MVgVsH2NAs1kcggDDkvmGOEy56IHzgL5MXhUb3EODWAAAAAElFTkSuQmCC");
 }
 
 .huge {
