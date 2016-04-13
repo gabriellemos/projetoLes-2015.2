@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.dao.GenericDAOImpl;
 import org.pac4j.core.profile.CommonProfile;
+import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
 import play.db.jpa.Transactional;
 import play.libs.Json;
@@ -21,7 +22,7 @@ public class Application extends UserProfileController<CommonProfile>{
      * @return página inicial do site
      */
     public Result index() {
-		return home();
+        return home();
     }
 
     /**
@@ -30,7 +31,7 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     private Result home() {
-        return ok("");//views.html.homepage.index.render("GetCake"));
+        return ok(views.html.homepage.index.render("GetCake"));//views.html.homepage.index.render("GetCake"));
     }
 
     /**
@@ -53,5 +54,11 @@ public class Application extends UserProfileController<CommonProfile>{
         result.set("ads", Text.getAds());
         return ok(result);
     }
+
+    @RequiresAuthentication(clientName = "FacebookClient")
+    public Result facebookIndex(){
+        return redirect(routes.Application.index());
+    }
+
 
 }
