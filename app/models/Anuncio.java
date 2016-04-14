@@ -102,9 +102,9 @@ public class Anuncio {
      * @param dataEdicao nova dataEdicao do Anúncio
      */
     public void setDataEdicao(GregorianCalendar dataEdicao) {
-        if (!Utils.dataValida(dataEdicao)) {
-            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de edição"));
-        }
+        //if (!Utils.dataValida(dataEdicao)) {
+        //    throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de edição"));
+        //}
         this.dataEdicao = dataEdicao;
     }
 
@@ -118,9 +118,9 @@ public class Anuncio {
      * @param dataCriacao nova dataCriacao do Anúncio
      */
     public void setDataCriacao(GregorianCalendar dataCriacao) {
-        if (!Utils.dataValida(dataCriacao)) {
-            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
-        }
+        //if (!Utils.dataValida(dataCriacao)) {
+        //    throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
+        //}
         this.dataCriacao = dataCriacao;
     }
 
