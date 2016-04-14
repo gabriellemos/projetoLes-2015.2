@@ -1,0 +1,18 @@
+<div class="container">
+	<br>
+	<div class="row white centered">
+		<h1 class="centered" ng-if="item.title" ng-bind="item.title"></h1>
+		<hr ng-if="item.title">
+		<br ng-if="item.title">
+		<br ng-if="item.title">
+		<div class="col-lg-4 centered" ng-repeat-start="element in item.contacts">
+			<img class="img img-circle" ng-src="{{element.imglink}}" height="120px" width="120px">
+			<br>
+			<h4><b ng-bind="element.name"></b></h4>
+			<a ng-href="{{contact.url}}" ng-repeat="contact in element.social"><i class="fa fa-{{contact.icon}} fa-fw"></i></a>
+			<p ng-if="contact.text" ng-bind="contact.text"></p>
+		</div>
+		<br ng-repeat-end>
+	</div>
+	<br>
+</div>

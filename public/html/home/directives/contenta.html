@@ -1,0 +1,18 @@
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">
+                    <br ng-repeat-start="e in item.header track by $index" ng-if="$index != 0">
+                    <span ng-bind="e" ng-repeat-end=""></span>
+                </h2>
+                <p class="lead" ng-bind-html="item.content"></p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" ng-src="{{item.imglink}}" alt="">
+            </div>
+        </div>
+    </div>
+</div>

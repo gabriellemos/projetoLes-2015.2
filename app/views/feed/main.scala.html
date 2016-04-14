@@ -1,0 +1,11 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<html ng-app="FeedApp">
+  <head>
+    @feed.head(title)
+  </head>
+  <body ng-controller="FeedController" data-spy="scroll" data-target=".navbar">
+    @content
+    @feed.scripts()
+  </body>
+</html>
