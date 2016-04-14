@@ -26,7 +26,7 @@ homeApp.controller('AboutController', function($scope, jsonService) {
     jsonService.get('content/AreasDefault.json').success(function(data){
         $scope.conA = data;
     }); // Where the site works
-    jsonService.get('content/HistoryDefault.json').success(function(data){
+    jsonService.get('content/MotivationDefault.json').success(function(data){
         $scope.conB = data;
     }); // History of the site
     jsonService.get('banners/RecallDefault.json').success(function(data){
