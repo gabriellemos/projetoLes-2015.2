@@ -30,7 +30,7 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     private Result home() {
-        return ok("");//views.html.homepage.index.render("GetCake"));
+        return ok(views.html.homepage.index.render("GetCake"));
     }
 
     /**
