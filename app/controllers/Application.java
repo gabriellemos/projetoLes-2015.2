@@ -18,8 +18,8 @@ public class Application extends UserProfileController<FacebookProfile>{
     private static GenericDAOImpl dao = new GenericDAOImpl();
 
     /**
-     * Retorna a página inicial.
-     * @return página inicial do site
+     * Retorna a página inicial se o usuário não está logado e mostra o feed se já está logado
+     * @return página inicial do site ou a página do feed
      */
     public Result index() {
         if(getUserProfile() != null){
@@ -27,7 +27,6 @@ public class Application extends UserProfileController<FacebookProfile>{
         } else {
             return home();
         }
-
     }
 
     /**
@@ -36,7 +35,7 @@ public class Application extends UserProfileController<FacebookProfile>{
      */
     @Transactional
     private Result home() {
-        return ok(views.html.homepage.index.render("GetCake"));//views.html.homepage.index.render("GetCake"));
+        return ok(views.html.homepage.index.render("GetCake"));
     }
 
     /**
@@ -59,6 +58,10 @@ public class Application extends UserProfileController<FacebookProfile>{
         return ok(result);
     }
 
+    /**
+     * Retorna a página de login do facebook
+     * @return página de login do facebook
+     */
     @RequiresAuthentication(clientName = "FacebookClient")
     public Result facebookIndex(){
         return redirect(routes.Application.index());
