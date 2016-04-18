@@ -1,7 +1,9 @@
 package models;
 
+import models.dao.Endereco;
 import org.apache.commons.lang.NullArgumentException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import javax.management.openmbean.KeyAlreadyExistsException;
 
@@ -13,7 +15,7 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 public class Confeiteiro {
 	
 	private String nome;
-	private String endereco;
+	private ArrayList<Endereco> endereco;
 	private String email;
 	private String contato;
 
@@ -62,7 +64,8 @@ public class Confeiteiro {
 	 * Recupera o endere�o do confeiteiro
 	 * @return o endere�o do confeiteiro
 	 */
-	public String getEndereco() {
+
+	public ArrayList<Endereco> getEnderecos() {
 		return endereco;
 	}
 
@@ -70,11 +73,7 @@ public class Confeiteiro {
 	 * Modifica o endereço do Confeiteiro, caso o mesmo seja válido
 	 * @param endereco novo enderço do Confeiteiro
      */
-	public void setEndereco(String endereco) {
-		if(endereco == null || endereco.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'Endereço' recebendo valores inválidos");
-		this.endereco = endereco;
-	}
+
 
 	/**
 	 * Recupera o email do confeiteiro
