@@ -5,6 +5,7 @@ import models.TipoAnuncio;
 import models.Utils;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -47,6 +48,122 @@ public class Anuncio_DAO {
         }
     }
 
+    public static void insertAnuncio (Anuncio anuncio) throws Exception {
+
+        java.sql.Date dataEdicaoBD;
+        java.sql.Date dataCriacaoBD;
+        try {
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+
+            dataEdicaoBD = new java.sql.Date(anuncio.getDataEdicao().getTimeInMillis());
+            dataCriacaoBD = new java.sql.Date(anuncio.getDataCriacao().getTimeInMillis());
+            strSql = "INSERT INTO Anuncio (titulo_anuncio, descricao_anuncio, edicao_anuncio, " +
+                    "criacao_anuncio, preco_anuncio, criador_anuncio, tipo_anuncio) VALUES('" +
+                    anuncio.getTitulo() + "','" + anuncio.getDescricao() + "','" + dataEdicaoBD + "','" + dataCriacaoBD +
+                    "','" + anuncio.getPreco() + "','" + anuncio.getCriador().getId()  + "','" + anuncio.getTipoAnuncio() + "')";
+
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        } catch(Exception e){
+            throw new InvalidOperationException("Erro ao criar o Anúncio");
+        }
+    }
+
+public static  void removeAnuncio (int id){
+
+    try{
+        conexao = Connection.getConnection();
+        declaracao = conexao.createStatement();
+        strSql= "DELETE FROM Anuncio WHERE ID_Anuncio = '"+id+"';";
+        declaracao.executeUpdate(strSql);
+        declaracao.close();
+        conexao.close();
+    }catch (Exception e){
+        throw new InvalidOperationException("Erro ao Deletar o Anúncio");
+    }
+
+}
+
+    public static  void removeAnuncio (Anuncio anuncio){
+
+        try{
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql= "DELETE FROM Anuncio WHERE ID_Anuncio = '"+anuncio.getId()+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            throw new InvalidOperationException("Erro ao Deletar o Anúncio");
+        }
+
+    }
+
+    public static  void ModificarVisibilidadeAnuncio (boolean boll, int id){
+        try{
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql= "UPDATE  Anuncio SET  Disponibilidade = '"+boll+"' WHERE ID_Anuncio = '"+id+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+        }
+    }
+
+    public static  void ModificarVisibilidadeAnuncio (boolean boll, Anuncio anuncio){
+        try{
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql= "UPDATE  Anuncio SET  Disponibilidade = '"+boll+"' WHERE ID_Anuncio = '"+anuncio.getId()+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+        }
+    }
+
+    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, int id){
+
+        try{
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            java.sql.Date dataEdicaoBD;
+            GregorianCalendar hoje= new GregorianCalendar();
+            dataEdicaoBD = new java.sql.Date(hoje.getTimeInMillis());
+            strSql= "UPDATE  Anuncio SET  Titulo_Anuncio  = '"+titulo+"', Descricao_Anuncio= '"+ descricao+"'," +
+                    "Preco_Anuncio= '"+preco+"', Tipo_Anuncio= '"+ tipo+"', Edicao_Anuncio = '"+dataEdicaoBD+"' WHERE ID_Anuncio = '"+id+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+        }
+
+    }
+
+    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, Anuncio anuncio){
+
+        try{
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            java.sql.Date dataEdicaoBD;
+            GregorianCalendar hoje= new GregorianCalendar();
+            dataEdicaoBD = new java.sql.Date(hoje.getTimeInMillis());
+            strSql= "UPDATE  Anuncio SET  Titulo_Anuncio  = '"+titulo+"', Descricao_Anuncio= '"+ descricao+"'," +
+                    "Preco_Anuncio= '"+preco+"', Tipo_Anuncio= '"+ tipo+"', Edicao_Anuncio = '"+dataEdicaoBD+"' WHERE ID_Anuncio = '"+anuncio.getId()+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+        }
+
+    }
     /*
      * Retorna Listagem de Anúncio do banco de dados.
      */
@@ -55,7 +172,7 @@ public class Anuncio_DAO {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio;";
+            strSql = "SELECT * FROM Anuncio ORDER BY Edicao_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
 
             Anuncio anuncio;
@@ -86,6 +203,8 @@ public class Anuncio_DAO {
             throw new InvalidOperationException("Tabela Inexistente");
         }
     }
+
+
 
     /*
      * Retorna um objeto Anúncio de acordo com o ID no banco de dados.
