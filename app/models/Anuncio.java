@@ -19,6 +19,7 @@ public class Anuncio {
     private Confeiteiro criador;
     private TipoAnuncio tipoAnuncio;
     private boolean disponibilidade;
+    private  final float valorDefault= 0.0f;
 
     private final String ARGUMENTO_INVALIDO = "Argumento '%s' recebendo valores inválidos";
 
@@ -136,7 +137,7 @@ public class Anuncio {
      * @param preco novo preco do Anúncio
      */
     public void setPreco(float preco) {
-        if (preco < 0.0f) {
+        if (preco < valorDefault) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Preço"));
         }
         this.preco = preco;
