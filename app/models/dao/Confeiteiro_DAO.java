@@ -23,8 +23,8 @@ public class Confeiteiro_DAO {
             Statement declaracao= conexao.createStatement();
 
             strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,Email_Confeiteiro ," +
-                    "Endereco_Confeiteiro, Contato_Confeiteiro,ID_Facebook  )" +
-                    "VALUES('" + Nome + "','" + Email + "','" + Endereco + "','" + Contanto +
+                    "Contato_Confeiteiro,ID_Facebook  )" +
+                    "VALUES('" + Nome + "','" + Email + "',''" + Contanto +
                     "','" + ID_Facebook + "')";
 
             declaracao.executeUpdate(strSql);
@@ -54,7 +54,6 @@ public class Confeiteiro_DAO {
                 confeiteiro.setNome(resultadoQuery.getString("Nome_Confeiteiro"));
                 confeiteiro.setEmail(resultadoQuery.getString("Email_Confeiteiro"));
                 confeiteiro.setContato(resultadoQuery.getString("Contato_Confeiteiro"));
-                confeiteiro.setEndereco(resultadoQuery.getString("Endereco_Confeiteiro"));
                 confeiteiro.setIdFacebook(resultadoQuery.getString("ID_Facebook"));
                 confeiteiro.setId(resultadoQuery.getInt("ID_Confeiteiro"));
                 listaRetorno.add(confeiteiro);
@@ -84,7 +83,6 @@ public class Confeiteiro_DAO {
             confeiteiroResp.setNome(resultado.getString("Nome_Confeiteiro"));
             confeiteiroResp.setEmail(resultado.getString("Email_Confeiteiro"));
             confeiteiroResp.setContato(resultado.getString("Contato_Confeiteiro"));
-            confeiteiroResp.setEndereco(resultado.getString("Endereco_Confeiteiro"));
             confeiteiroResp.setIdFacebook(resultado.getString("ID_Facebook"));
             confeiteiroResp.setId(resultado.getInt("ID_Confeiteiro"));
             //ate aqui
