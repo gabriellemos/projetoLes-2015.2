@@ -18,6 +18,7 @@ public class Anuncio {
     private float preco;
     private Confeiteiro criador;
     private TipoAnuncio tipoAnuncio;
+    private boolean disponibilidade;
 
     private final String ARGUMENTO_INVALIDO = "Argumento '%s' recebendo valores inválidos";
 
@@ -25,6 +26,7 @@ public class Anuncio {
      * Construtor padrão
      */
     public Anuncio() {
+        setDisponibilidade(true);
     }
 
     /**
@@ -172,8 +174,17 @@ public class Anuncio {
         this.tipoAnuncio = tipoAnuncio;
     }
 
+    public boolean getDisponibilidade (){return this.disponibilidade;}
+
+    public void setDisponibilidade(boolean dispor){
+        if(this.disponibilidade == dispor){
+            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO,"Disponibilidade sendo utilizada" ));
+        }
+        this.disponibilidade= dispor;
+    }
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
