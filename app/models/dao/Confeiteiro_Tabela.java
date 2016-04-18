@@ -28,6 +28,7 @@ public class Confeiteiro_Tabela {
                     "ID_Facebook            CHAR(64)     UNIQUE NOT NULL )";
 
 
+            //str="ALTER TABLE Confeiteiro DROP COLUMN Endereco_Confeiteiro;";
             declaracao.executeUpdate(str);
             declaracao.close();
             conexao.close();
