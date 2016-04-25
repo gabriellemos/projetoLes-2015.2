@@ -1,6 +1,7 @@
 package models.dao;
 
 import models.Anuncio;
+import models.Confeiteiro;
 import models.TipoAnuncio;
 import models.Utils;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
@@ -172,9 +173,8 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio ORDER BY Edicao_Anuncio ASC;";
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade = TRUE ORDER BY Edicao_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
-
             Anuncio anuncio;
             ArrayList<Anuncio> listaRetorno = new ArrayList();
             // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
@@ -205,6 +205,44 @@ public static  void removeAnuncio (int id){
     }
 
 
+    public static ArrayList<Anuncio> getAnunciosPelaCidadeEData(String cidade, GregorianCalendar data) throws Exception{
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            java.sql.Date dataEdicaoBD;
+            dataEdicaoBD = new java.sql.Date(data.getTimeInMillis());
+            strSql = "SELECT * FROM Anuncio WHERE Edicao_Anuncio = '"+ data+"' AND Disponibilidade = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
+                    " ORDER BY Titulo_Anuncio ASC;";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            Anuncio anuncio;
+            ArrayList<Anuncio> listaRetorno = new ArrayList();
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
+            while(resultadoQuery.next()){
+                anuncio = new Anuncio();
+                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
+                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
+                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
+                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("criacao_anuncio")));
+                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("edicao_anuncio")));
+                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
+                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
+                        resultadoQuery.getInt("criador_anuncio")));
+                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
+                        resultadoQuery.getString("tipo_anuncio").trim()));
+                listaRetorno.add(anuncio);
+            }
+            declaracao.close();
+            conexao.close();
+            return listaRetorno;
+            // Verifica a exceção do bd
+        } catch (Exception e) {
+            throw new InvalidOperationException("Tabela Inexistente");
+        }
+    }
+
 
     /*
      * Retorna um objeto Anúncio de acordo com o ID no banco de dados.
@@ -215,7 +253,7 @@ public static  void removeAnuncio (int id){
             Anuncio resposta= new Anuncio();
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "';";
+            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "' AND Disponibilidade = TRUE;";
             resultado = declaracao.executeQuery(strSql);
 
             // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
@@ -242,6 +280,77 @@ public static  void removeAnuncio (int id){
             // Verifica a exceção do bd
         }catch (Exception e){
             throw new InvalidOperationException("Confeiteiro Inexistente");
+        }
+    }
+
+    public static  ArrayList<Anuncio> getAnunciosPeloConfeiteiro(int IdConfeiteiro) throws Exception{
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade = TRUE AND criador_anuncio ='"+IdConfeiteiro+"'" +
+                    " ORDER BY Titulo_Anuncio ASC;";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            Anuncio anuncio;
+            ArrayList<Anuncio> listaRetorno = new ArrayList();
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
+            while(resultadoQuery.next()){
+                anuncio = new Anuncio();
+                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
+                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
+                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
+                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("criacao_anuncio")));
+                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("edicao_anuncio")));
+                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
+                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
+                        resultadoQuery.getInt("criador_anuncio")));
+                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
+                        resultadoQuery.getString("tipo_anuncio").trim()));
+                listaRetorno.add(anuncio);
+            }
+            declaracao.close();
+            conexao.close();
+            return listaRetorno;
+            // Verifica a exceção do bd
+        } catch (Exception e) {
+            throw new InvalidOperationException("Tabela Inexistente");
+        }
+    }
+
+    public static  void getAnunciosPeloConfeiteiro(Confeiteiro confeiteiro) throws Exception{
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade = TRUE AND criador_anuncio ='"+ confeiteiro.getId()+"'" +
+                    " ORDER BY Titulo_Anuncio ASC;";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            Anuncio anuncio;
+
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
+            while(resultadoQuery.next()){
+                anuncio = new Anuncio();
+                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
+                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
+                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
+                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("criacao_anuncio")));
+                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
+                        resultadoQuery.getDate("edicao_anuncio")));
+                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
+                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
+                        resultadoQuery.getInt("criador_anuncio")));
+                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
+                        resultadoQuery.getString("tipo_anuncio").trim()));
+                confeiteiro.addAnuncio(anuncio);
+            }
+            declaracao.close();
+            conexao.close();
+            // Verifica a exceção do bd
+        } catch (Exception e) {
+            throw new InvalidOperationException("Tabela Inexistente");
         }
     }
 }
