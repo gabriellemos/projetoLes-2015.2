@@ -1,7 +1,6 @@
 package models.dao;
 
 import models.Confeiteiro;
-import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ public class Confeiteiro_DAO {
     private static String strSql;
 
     public static void insertConfeiteiro (String Nome, String Email, String Endereco,
-                                       String ID_Facebook)  throws Exception {
+                                       String ID_Facebook)  throws RequisicaoInvalidaBD {
 
         try {
             conexao= models.dao.Connection.getConnection();
@@ -29,14 +28,14 @@ public class Confeiteiro_DAO {
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            throw new InvalidOperationException("Erro ao criar o Confeiteiro");
+            throw new RequisicaoInvalidaBD("Erro ao criar o Confeiteiro");
         }
     }
 
     /*
      * Retorna listagem de confeiteiros
      */
-    public static ArrayList<Confeiteiro> GetConfeiteiros() throws Exception{
+    public static ArrayList<Confeiteiro> GetConfeiteiros() throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = models.dao.Connection.getConnection();
@@ -60,11 +59,11 @@ public class Confeiteiro_DAO {
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e){
-            throw new InvalidOperationException("Tabela Inexistente");
+            throw new RequisicaoInvalidaBD("Tabela Inexistente");
         }
     }
 
-    public static Confeiteiro GetConfeiteiro(int ID) throws Exception{
+    public static Confeiteiro GetConfeiteiro(int ID) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultado;
             conexao = models.dao.Connection.getConnection();
@@ -86,7 +85,7 @@ public class Confeiteiro_DAO {
             return confeiteiroResp;
             // Verifica a exceção do bd
         }catch (Exception e){
-            throw new InvalidOperationException("Confeiteiro Inexistente");
+            throw new RequisicaoInvalidaBD("Confeiteiro Inexistente");
         }
     }
 }
