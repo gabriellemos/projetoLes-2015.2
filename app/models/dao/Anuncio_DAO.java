@@ -4,9 +4,7 @@ import models.Anuncio;
 import models.Confeiteiro;
 import models.TipoAnuncio;
 import models.Utils;
-import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -20,36 +18,26 @@ public class Anuncio_DAO {
     private static java.sql.Connection conexao= null;
     private static Statement declaracao = null;
     private static String strSql;
+    private static final String SEPARADOR = "','";
 
     /*
      * Cria um Anúncio no banco de dados. Um id é atribuido automaticamente no ato da criação.
      */
     public static void insertAnuncio (String titulo, String descricao, GregorianCalendar dataEdicao,
-                                      GregorianCalendar dataCriacao, float preco, int criador,
-                                      String tipo) throws Exception {
+                                      float preco, int criador, String tipo) throws RequisicaoInvalidaBD {
 
-        java.sql.Date dataEdicaoBD;
-        java.sql.Date dataCriacaoBD;
-        try {
-            conexao = Connection.getConnection();
-            declaracao = conexao.createStatement();
+        TipoAnuncio tipoAnuncio = TipoAnuncio.valueOf(tipo.trim());
+    Confeiteiro confeiteiro = new Confeiteiro();
+        confeiteiro.setId(criador);
 
-            dataEdicaoBD = new java.sql.Date(dataEdicao.getTimeInMillis());
-            dataCriacaoBD = new java.sql.Date(dataCriacao.getTimeInMillis());
-            strSql = "INSERT INTO Anuncio (titulo_anuncio, descricao_anuncio, edicao_anuncio, " +
-                    "criacao_anuncio, preco_anuncio, criador_anuncio, tipo_anuncio) VALUES('" +
-                    titulo + "','" + descricao + "','" + dataEdicaoBD + "','" + dataCriacaoBD +
-                    "','" + preco + "','" + criador  + "','" + tipo + "')";
+        Anuncio anuncio = new Anuncio(titulo, confeiteiro, descricao, tipoAnuncio, preco);
+        anuncio.setDataCriacao(new GregorianCalendar());
+        anuncio.setDataEdicao(dataEdicao);
 
-            declaracao.executeUpdate(strSql);
-            declaracao.close();
-            conexao.close();
-        } catch(Exception e){
-            throw new InvalidOperationException("Erro ao criar o Anúncio");
-        }
+        insertAnuncio(anuncio);
     }
 
-    public static void insertAnuncio (Anuncio anuncio) throws Exception {
+    public static void insertAnuncio (Anuncio anuncio) throws RequisicaoInvalidaBD {
 
         java.sql.Date dataEdicaoBD;
         java.sql.Date dataCriacaoBD;
@@ -61,14 +49,16 @@ public class Anuncio_DAO {
             dataCriacaoBD = new java.sql.Date(anuncio.getDataCriacao().getTimeInMillis());
             strSql = "INSERT INTO Anuncio (titulo_anuncio, descricao_anuncio, edicao_anuncio, " +
                     "criacao_anuncio, preco_anuncio, criador_anuncio, tipo_anuncio) VALUES('" +
-                    anuncio.getTitulo() + "','" + anuncio.getDescricao() + "','" + dataEdicaoBD + "','" + dataCriacaoBD +
-                    "','" + anuncio.getPreco() + "','" + anuncio.getCriador().getId()  + "','" + anuncio.getTipoAnuncio() + "')";
+                    anuncio.getTitulo() + SEPARADOR + anuncio.getDescricao() + SEPARADOR +
+                    dataEdicaoBD + SEPARADOR + dataCriacaoBD + SEPARADOR + anuncio.getPreco() +
+                    SEPARADOR + anuncio.getCriador().getId()  + SEPARADOR + anuncio.getTipoAnuncio()
+                    + "')";
 
             declaracao.executeUpdate(strSql);
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            throw new InvalidOperationException("Erro ao criar o Anúncio");
+            throw new RequisicaoInvalidaBD("Erro ao criar o Anúncio");
         }
     }
 
@@ -82,7 +72,7 @@ public static  void removeAnuncio (int id){
         declaracao.close();
         conexao.close();
     }catch (Exception e){
-        throw new InvalidOperationException("Erro ao Deletar o Anúncio");
+        throw new RequisicaoInvalidaBD("Erro ao Deletar o Anúncio");
     }
 
 }
@@ -97,7 +87,7 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new InvalidOperationException("Erro ao Deletar o Anúncio");
+            throw new RequisicaoInvalidaBD("Erro ao Deletar o Anúncio");
         }
 
     }
@@ -111,21 +101,12 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+            throw new RequisicaoInvalidaBD("Erro ao Modifica visibilidade o Anúncio");
         }
     }
 
     public static  void ModificarVisibilidadeAnuncio (boolean boll, Anuncio anuncio){
-        try{
-            conexao = Connection.getConnection();
-            declaracao = conexao.createStatement();
-            strSql= "UPDATE  Anuncio SET  Disponibilidade = '"+boll+"' WHERE ID_Anuncio = '"+anuncio.getId()+"';";
-            declaracao.executeUpdate(strSql);
-            declaracao.close();
-            conexao.close();
-        }catch (Exception e){
-            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
-        }
+        ModificarVisibilidadeAnuncio(boll, anuncio.getId());
     }
 
     public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, int id){
@@ -142,9 +123,8 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+            throw new RequisicaoInvalidaBD("Erro ao Modifica visibilidade o Anúncio");
         }
-
     }
 
     public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, Anuncio anuncio){
@@ -161,14 +141,14 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new InvalidOperationException("Erro ao Modifica visibilidade o Anúncio");
+            throw new RequisicaoInvalidaBD("Erro ao Modifica visibilidade o Anúncio");
         }
 
     }
     /*
      * Retorna Listagem de Anúncio do banco de dados.
      */
-    public static ArrayList<Anuncio> getAnuncios() throws Exception{
+    public static ArrayList<Anuncio> getAnuncios() throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
@@ -200,12 +180,12 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new InvalidOperationException("Tabela Inexistente");
+            throw new RequisicaoInvalidaBD("Tabela Inexistente");
         }
     }
 
 
-    public static ArrayList<Anuncio> getAnunciosPelaCidadeEData(String cidade, GregorianCalendar data) throws Exception{
+    public static ArrayList<Anuncio> getAnunciosPelaCidadeEData(String cidade, GregorianCalendar data) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
@@ -239,15 +219,14 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new InvalidOperationException("Tabela Inexistente");
+            throw new RequisicaoInvalidaBD("Tabela Inexistente");
         }
     }
-
 
     /*
      * Retorna um objeto Anúncio de acordo com o ID no banco de dados.
      */
-    public static Anuncio getAnuncio(int ID) throws Exception{
+    public static Anuncio getAnuncio(int ID) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultado;
             Anuncio resposta= new Anuncio();
@@ -279,11 +258,11 @@ public static  void removeAnuncio (int id){
             return resposta;
             // Verifica a exceção do bd
         }catch (Exception e){
-            throw new InvalidOperationException("Confeiteiro Inexistente");
+            throw new RequisicaoInvalidaBD("Confeiteiro Inexistente");
         }
     }
 
-    public static  ArrayList<Anuncio> getAnunciosPeloConfeiteiro(int IdConfeiteiro) throws Exception{
+    public static  ArrayList<Anuncio> getAnunciosPeloConfeiteiro(int IdConfeiteiro) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
@@ -315,11 +294,11 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new InvalidOperationException("Tabela Inexistente");
+            throw new RequisicaoInvalidaBD("Tabela Inexistente");
         }
     }
 
-    public static  void getAnunciosPeloConfeiteiro(Confeiteiro confeiteiro) throws Exception{
+    public static  void getAnunciosPeloConfeiteiro(Confeiteiro confeiteiro) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
@@ -350,7 +329,7 @@ public static  void removeAnuncio (int id){
             conexao.close();
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new InvalidOperationException("Tabela Inexistente");
+            throw new RequisicaoInvalidaBD("Tabela Inexistente");
         }
     }
 }

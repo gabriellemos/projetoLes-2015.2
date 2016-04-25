@@ -1,11 +1,11 @@
-package models.dao;
+package models.dao.Tabelas;
 
 import java.sql.Statement;
 
 /**
- * Created by jordan on 18/04/2016.
+ * Created by jordan on 20/04/2016.
  */
-public class EnderecoTabela {
+public class Contato_Tabela {
 
     private static java.sql.Connection conexao= null;
     private static Statement declaracao = null;
@@ -17,15 +17,13 @@ public class EnderecoTabela {
             conexao= models.dao.Connection.getConnection();
             declaracao= conexao.createStatement();
 
-            str = "CREATE TABLE Endereco " +
-                    "(ID_Endereco SERIAL PRIMARY KEY," +
-                    "Rua         CHAR(64)    NOT NULL, " +
-                    "Numero      CHAR(8) NOT NULL, " +
-                    "Bairro         CHAR(16) NOT NULL, " +
-                    "cidade       CHAR(32) NOT NULL,"  +
-                    "Estado          CHAR(24) NOT NULL,"  +
-                    "Dono_Endereco        INT references Confeiteiro(ID_Confeiteiro),"  +  // Chave estrangeira
-                    "Cep          CHAR(16) NOT NULL )";
+            str = "CREATE TABLE Contato " +
+                    "(ID_Contato SERIAL PRIMARY KEY," +
+                    "Numero_Contato         CHAR(16)    NOT NULL, " +
+                    "Codigo_Estado      CHAR(4) NOT NULL, " +
+                    "Codigo_Operadora         CHAR(4) , " +
+                    "Codigo_Pais       CHAR(4) ,"  +
+                    "Dono_Contato        INT references Confeiteiro(ID_Confeiteiro))";    // Chave estrangeira
 
 
 

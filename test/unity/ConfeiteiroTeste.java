@@ -154,36 +154,36 @@ public class ConfeiteiroTeste {
     }
 
     // Testa SetEmail
-    @Test
-    public void TestaSetEmailValido() {
-        String[] emailValidos = {".", "f", "fulano", "fulano@mail.com"};
-
-        for (String emailValido : emailValidos) {
-            try {
-                confeteiroDefault.setEmail(emailValido);
-                // Ok, continue o teste
-            } catch (IllegalArgumentException exception) {
-                Assert.fail("Não foi possível setar o 'Email' do confeiteiro para: " + emailValido);
-            }
-        }
-    }
-
-    @Test
-    public void TestaSetEmailInvalido() {
-        String[] emailInvalidos = {null, "", "     "};
-
-        for (String emailInvalido : emailInvalidos) {
-            try {
-                confeteiroDefault.setEmail(emailInvalido);
-                Assert.fail("Foi possível setar o 'Email' do confeiteiro para: " + emailInvalido);
-            } catch (IllegalArgumentException exception) {
-                // Ok, continue o teste
-            } catch (Exception exception) {
-                // Sempre irá falhar ao chegar aqui
-                Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
-            }
-        }
-    }
+    //@Test
+    //public void TestaSetEmailValido() {
+    //    String[] emailValidos = {".", "f", "fulano", "fulano@mail.com"};
+//
+    //    for (String emailValido : emailValidos) {
+    //        try {
+    //            confeteiroDefault.setEmail(emailValido);
+    //            // Ok, continue o teste
+    //        } catch (IllegalArgumentException exception) {
+    //            Assert.fail("Não foi possível setar o 'Email' do confeiteiro para: " + emailValido);
+    //        }
+    //    }
+    //}
+//
+    //@Test
+    //public void TestaSetEmailInvalido() {
+    //    String[] emailInvalidos = {null, "", "     "};
+//
+    //    for (String emailInvalido : emailInvalidos) {
+    //        try {
+    //            confeteiroDefault.setEmail(emailInvalido);
+    //            Assert.fail("Foi possível setar o 'Email' do confeiteiro para: " + emailInvalido);
+    //        } catch (IllegalArgumentException exception) {
+    //            // Ok, continue o teste
+    //        } catch (Exception exception) {
+    //            // Sempre irá falhar ao chegar aqui
+    //            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
+    //        }
+    //    }
+    //}
 
     // Testa SetContato
     //@Test

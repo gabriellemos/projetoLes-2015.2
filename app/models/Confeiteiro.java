@@ -1,8 +1,5 @@
 package models;
 
-import models.dao.Contato;
-import models.dao.Email;
-import models.dao.Endereco;
 import org.apache.commons.lang.NullArgumentException;
 
 import java.util.ArrayList;
@@ -17,8 +14,8 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 public class Confeiteiro {
 	
 	private String nome;
-	private ArrayList<Endereco> enderecos;
-	private ArrayList<Email> emails;
+	private ArrayList<TipoAnuncio.Endereco> enderecos;
+	private ArrayList<Utils.Email> emails;
 	private ArrayList<Contato> contatos;
 
 	private  String idFacebook;
@@ -67,7 +64,7 @@ public class Confeiteiro {
 	 * @return o endere�o do confeiteiro
 	 */
 
-	public ArrayList<Endereco> getEnderecos() {
+	public ArrayList<TipoAnuncio.Endereco> getEnderecos() {
 		return this.enderecos;
 	}
 
@@ -81,7 +78,7 @@ public class Confeiteiro {
 	 * Recupera o email do confeiteiro
 	 * @return o email do confeiteiro
 	 */
-	public ArrayList<Email> getEmail() {
+	public ArrayList<Utils.Email> getEmail() {
 		return emails;
 	}
 
@@ -169,10 +166,73 @@ public class Confeiteiro {
 		this.contatos.add(contato);
 	}
 
-	public void AddEndereco (Endereco endereco){
+	public void AddEndereco (TipoAnuncio.Endereco endereco){
 		this.enderecos.add(endereco);
 	}
-	public void AddEmail (Email email){
+	public void AddEmail (Utils.Email email){
 		this.emails.add(email);
 	}
+
+	/**
+     * Created by jordan on 20/04/2016.
+     */
+    public static class Contato {
+
+        String numero;
+        String CodigoPais;
+        int idContato;
+        String codigoOperadora;
+        String codigoEstado;
+        int donoContato;
+
+        public Contato(){}
+        public String getNumero() {
+            return numero;
+        }
+
+        public void setNumero(String numero) {
+            this.numero = numero;
+        }
+
+        public String getCodigoPais() {
+            return CodigoPais;
+        }
+
+        public void setCodigoPais(String codigoPais) {
+            CodigoPais = codigoPais;
+        }
+
+        public int getIdContato() {
+            return idContato;
+        }
+
+        public void setIdContato(int idContato) {
+            this.idContato = idContato;
+        }
+
+        public String getCodigoEstado() {
+            return codigoEstado;
+        }
+
+        public void setCodigoEstado(String codigoEstado) {
+            this.codigoEstado = codigoEstado;
+        }
+
+        public int getDonoContato() {
+            return donoContato;
+        }
+
+        public void setDonoContato(int donoContato) {
+            this.donoContato = donoContato;
+        }
+
+        public String getCodigoOperadora() {
+            return codigoOperadora;
+        }
+
+        public void setCodigoOperadora(String codigoOperadora) {
+            this.codigoOperadora = codigoOperadora;
+        }
+
+    }
 }

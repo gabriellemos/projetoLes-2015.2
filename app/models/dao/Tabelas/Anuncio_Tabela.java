@@ -1,4 +1,4 @@
-package models.dao;
+package models.dao.Tabelas;
 
 import java.sql.Statement;
 

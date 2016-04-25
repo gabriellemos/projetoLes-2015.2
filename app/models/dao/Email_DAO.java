@@ -1,6 +1,7 @@
 package models.dao;
 
 
+import models.Utils;
 import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
 
 import java.sql.Statement;
@@ -13,7 +14,7 @@ public class Email_DAO {
     private static Statement declaracao = null;
     private static String strSql;
 
-    public static void insertEmail (Email email) throws Exception {
+    public static void insertEmail (Utils.Email email) throws Exception {
         try {
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
