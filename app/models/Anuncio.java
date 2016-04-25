@@ -105,9 +105,13 @@ public class Anuncio {
      * @param dataEdicao nova dataEdicao do Anúncio
      */
     public void setDataEdicao(GregorianCalendar dataEdicao) {
-        if (!Utils.dataValida(dataEdicao)) {
-            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de edição"));
-        }
+        /*
+         * TODO: Modificar validação para invalidar data no futuro. A data no passado dá problema na
+         * hora de recuperar as datas no BD cuja marioria é anterior ao dia de hoje.
+         */
+        //if (!Utils.dataValida(dataEdicao)) {
+        //    throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de edição"));
+        //}
         this.dataEdicao = dataEdicao;
     }
 
@@ -121,7 +125,11 @@ public class Anuncio {
      * @param dataCriacao nova dataCriacao do Anúncio
      */
     public void setDataCriacao(GregorianCalendar dataCriacao) {
-        if (!Utils.dataValida(dataCriacao)) {
+        /*
+         * TODO: Modificar validação para invalidar data no futuro. A data no passado dá problema na
+         * hora de recuperar as datas no BD cuja marioria é anterior ao dia de hoje.
+         */
+        if (!Utils.dataValida(dataCriacao, Utils.getHoje())) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
         }
         this.dataCriacao = dataCriacao;
