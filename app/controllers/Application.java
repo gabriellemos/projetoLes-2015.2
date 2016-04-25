@@ -30,7 +30,13 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     private Result home() {
-        return ok(views.html.homepage.index.render("GetCake"));
+       // return ok(views.html.homepage.index.render("GetCake"));
+        return new Result() {
+            @Override
+            public play.api.mvc.Result toScala() {
+                return null;
+            }
+        };
     }
 
     /**
@@ -39,7 +45,8 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     public Result feed() {
-        return ok(views.html.feed.index.render("GetCake"));
+        //return ok(views.html.feed.index.render("GetCake"));
+        return ok("");
     }
 
     /**
