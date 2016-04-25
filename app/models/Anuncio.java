@@ -126,9 +126,9 @@ public class Anuncio {
          * TODO: Modificar validação para invalidar data no futuro. A data no passado dá problema na
          * hora de recuperar as datas no BD cuja marioria é anterior ao dia de hoje.
          */
-        //if (!Utils.dataValida(dataCriacao)) {
-        //    throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
-        //}
+        if (!Utils.dataValida(dataCriacao, Utils.getHoje())) {
+            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Data de criação"));
+        }
         this.dataCriacao = dataCriacao;
     }
 
