@@ -12,6 +12,7 @@ public class Endereco {
     private String bairro;
     private String cep;
     private String estado;
+    private int confeiteiro;
 
     public  Endereco(){}
 
@@ -30,6 +31,11 @@ public class Endereco {
     public void setId(int id) {
         this.id = id;
     }
+    public int getConfeiteiro() {
+        return this.confeiteiro;
+    }
+
+    public void setConfeiteiro(int codigo){this.confeiteiro=codigo; }
 
     public String getNumero() {
         return numero;
