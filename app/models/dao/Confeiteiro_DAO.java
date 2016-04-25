@@ -15,17 +15,15 @@ public class Confeiteiro_DAO {
     private static java.sql.Connection conexao= null;
     private static String strSql;
 
-    public static void insertConfeiteiro (String Nome, String Email, String Endereco, String Contanto,
+    public static void insertConfeiteiro (String Nome, String Email, String Endereco,
                                        String ID_Facebook)  throws Exception {
 
         try {
             conexao= models.dao.Connection.getConnection();
             Statement declaracao= conexao.createStatement();
 
-            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,Email_Confeiteiro ," +
-                    "Contato_Confeiteiro,ID_Facebook  )" +
-                    "VALUES('" + Nome + "','" + Email + "',''" + Contanto +
-                    "','" + ID_Facebook + "')";
+            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
+                    "VALUES('" + Nome + "',''" + ID_Facebook + "')";
 
             declaracao.executeUpdate(strSql);
             declaracao.close();
@@ -52,8 +50,6 @@ public class Confeiteiro_DAO {
             while(resultadoQuery.next()){
                 confeiteiro = new Confeiteiro();
                 confeiteiro.setNome(resultadoQuery.getString("Nome_Confeiteiro"));
-                confeiteiro.setEmail(resultadoQuery.getString("Email_Confeiteiro"));
-                confeiteiro.setContato(resultadoQuery.getString("Contato_Confeiteiro"));
                 confeiteiro.setIdFacebook(resultadoQuery.getString("ID_Facebook"));
                 confeiteiro.setId(resultadoQuery.getInt("ID_Confeiteiro"));
                 listaRetorno.add(confeiteiro);
@@ -81,8 +77,6 @@ public class Confeiteiro_DAO {
             // TODO: Verificar forma para converter a linha da tabela diretamente para Confeiteiro.
             resultado.next();
             confeiteiroResp.setNome(resultado.getString("Nome_Confeiteiro"));
-            confeiteiroResp.setEmail(resultado.getString("Email_Confeiteiro"));
-            confeiteiroResp.setContato(resultado.getString("Contato_Confeiteiro"));
             confeiteiroResp.setIdFacebook(resultado.getString("ID_Facebook"));
             confeiteiroResp.setId(resultado.getInt("ID_Confeiteiro"));
             //ate aqui
