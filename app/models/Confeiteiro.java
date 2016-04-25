@@ -1,5 +1,7 @@
 package models;
 
+import models.dao.Contato;
+import models.dao.Email;
 import models.dao.Endereco;
 import org.apache.commons.lang.NullArgumentException;
 
@@ -15,9 +17,9 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 public class Confeiteiro {
 	
 	private String nome;
-	private ArrayList<Endereco> endereco;
-	private String email;
-	private String contato;
+	private ArrayList<Endereco> enderecos;
+	private ArrayList<Email> emails;
+	private ArrayList<Contato> contatos;
 
 	private  String idFacebook;
 
@@ -66,7 +68,7 @@ public class Confeiteiro {
 	 */
 
 	public ArrayList<Endereco> getEnderecos() {
-		return endereco;
+		return this.enderecos;
 	}
 
 	/**
@@ -79,37 +81,28 @@ public class Confeiteiro {
 	 * Recupera o email do confeiteiro
 	 * @return o email do confeiteiro
 	 */
-	public String getEmail() {
-		return email;
+	public ArrayList<Email> getEmail() {
+		return emails;
 	}
 
 	/**
 	 * Modifica o email do Confeiteiro, caso o mesmo seja válido
 	 * @param email novo email do Confeiteiro
      */
-	public void setEmail(String email) {
-		if(email == null || email.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'Email' recebendo valores inválidos");
-		this.email = email;
-	}
+
 
 	/**
 	 * Recupera o contato do confeiteiro
 	 * @return o contato do confeiteiro
 	 */
-	public String getContato() {
-		return contato;
+	public ArrayList<Contato> getContato() {
+		return contatos;
 	}
 
 	/**
 	 * Modifica o contato do Confeiteiro, caso o mesmo seja válido
 	 * @param contato novo contato do Confeiteiro
      */
-	public void setContato(String contato) {
-		if(contato == null || contato.trim().equals(STRING_VAZIA))
-			throw new IllegalArgumentException("Argumento 'Contato' recebendo valores inválidos");
-		this.contato = contato;
-	}
 	
 	 /**
      * Recupera o id do confeiteiro
@@ -170,5 +163,16 @@ public class Confeiteiro {
 		if(idFacebook == null || idFacebook.trim().equals(STRING_VAZIA))
 			throw new IllegalArgumentException("Argumento 'IdFacebok' recebendo valores inválidos");
 		this.idFacebook = idFacebook;
+	}
+
+	public void AddContato (Contato contato){
+		this.contatos.add(contato);
+	}
+
+	public void AddEndereco (Endereco endereco){
+		this.enderecos.add(endereco);
+	}
+	public void AddEmail (Email email){
+		this.emails.add(email);
 	}
 }
