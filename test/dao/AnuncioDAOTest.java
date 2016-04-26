@@ -3,10 +3,13 @@ package dao;
 import models.Anuncio;
 import models.Confeiteiro;
 import models.TipoAnuncio;
+import models.Utils;
 import models.dao.Anuncio_DAO;
 import models.dao.Confeiteiro_DAO;
+import org.apache.maven.wagon.observers.Debug;
 import org.junit.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -21,8 +24,10 @@ public class AnuncioDAOTest {
     @BeforeClass
     public static void SetUp() {
         anuncios = Anuncio_DAO.getAnuncios();
+        System.out.println(anuncios);
 
         EspereBdRequest();
+
         confeiteiro = Confeiteiro_DAO.GetConfeiteiros().get(0);
     }
 
@@ -37,25 +42,33 @@ public class AnuncioDAOTest {
 
         anunciosDepois.removeAll(anuncios);
         for (Anuncio anuncio: anunciosDepois) {
-            EspereBdRequest();
-            Anuncio_DAO.removeAnuncio(anuncio);
+            System.out.println("Blalab:" + anuncio);
+            //EspereBdRequest();
+            //Anuncio_DAO.removeAnuncio(anuncio);
         }
     }
 
     private static void EspereBdRequest() {
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    TimeUnit.MILLISECONDS.sleep(250);
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     @Test
     public void TesteCreate() {
         Anuncio anuncio = new Anuncio("Anuncio teste #01", confeiteiro, "Descrição macabra",
                 TipoAnuncio.COMUM, 5.0f);
+        anuncio.setDataCriacao(Utils.getHoje());
+        anuncio.setDataEdicao(Utils.getHoje());
 
-        Anuncio_DAO.insertAnuncio(anuncio);
+        //Anuncio_DAO.insertAnuncio(anuncio);
+//
+        //EspereBdRequest();
+        //ArrayList<Anuncio> resultAnuncios = Anuncio_DAO.getAnuncios();
+//
+        //Assert.assertTrue(resultAnuncios.contains(anuncio));
     }
 
     @Test

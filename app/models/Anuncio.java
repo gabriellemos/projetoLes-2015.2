@@ -1,6 +1,7 @@
 package models;
 
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * Classe que modela um Anuncio do sistema
@@ -203,5 +204,24 @@ public class Anuncio {
     @Override
     public String toString() {
         return this.titulo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean returnResult = true;
+        if (!(obj instanceof Anuncio)) {
+            return false;
+        }
+
+        Anuncio that = (Anuncio) obj;
+        returnResult &= this.getTitulo().equals(that.getTitulo());
+        returnResult &= this.getDescricao().equals(that.getDescricao());
+        returnResult &= this.getDataEdicao().equals(that.getDataEdicao());
+        returnResult &= this.getDataCriacao().equals(that.getDataCriacao());
+        returnResult &= this.getPreco() == (that.getPreco());
+        returnResult &= this.getCriador().equals(that.getCriador());
+        returnResult &= this.getTipoAnuncio().equals(that.getTipoAnuncio());
+
+        return returnResult;
     }
 }

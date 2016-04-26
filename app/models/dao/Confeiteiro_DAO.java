@@ -85,6 +85,7 @@ public class Confeiteiro_DAO {
             return confeiteiroResp;
             // Verifica a exceção do bd
         }catch (Exception e){
+            System.out.println(e);
             throw new RequisicaoInvalidaBD("Confeiteiro Inexistente");
         }
     }

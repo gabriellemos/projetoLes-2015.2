@@ -27,13 +27,10 @@ public class Anuncio_DAO {
                                       float preco, int criador, String tipo) throws RequisicaoInvalidaBD {
 
         TipoAnuncio tipoAnuncio = TipoAnuncio.valueOf(tipo.trim());
-    Confeiteiro confeiteiro = new Confeiteiro();
+        Confeiteiro confeiteiro = new Confeiteiro();
         confeiteiro.setId(criador);
 
         Anuncio anuncio = new Anuncio(titulo, confeiteiro, descricao, tipoAnuncio, preco);
-        anuncio.setDataCriacao(new GregorianCalendar());
-        anuncio.setDataEdicao(dataEdicao);
-
         insertAnuncio(anuncio);
     }
 
@@ -45,8 +42,8 @@ public class Anuncio_DAO {
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
 
-            dataEdicaoBD = new java.sql.Date(anuncio.getDataEdicao().getTimeInMillis());
-            dataCriacaoBD = new java.sql.Date(anuncio.getDataCriacao().getTimeInMillis());
+            dataEdicaoBD = new java.sql.Date(Utils.getHoje().getTimeInMillis());
+            dataCriacaoBD = new java.sql.Date(Utils.getHoje().getTimeInMillis());
             strSql = "INSERT INTO Anuncio (titulo_anuncio, descricao_anuncio, edicao_anuncio, " +
                     "criacao_anuncio, preco_anuncio, criador_anuncio, tipo_anuncio) VALUES('" +
                     anuncio.getTitulo() + SEPARADOR + anuncio.getDescricao() + SEPARADOR +
@@ -161,17 +158,31 @@ public static  void removeAnuncio (int id){
             while(resultadoQuery.next()){
                 anuncio = new Anuncio();
                 anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
-                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
-                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
-                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("criacao_anuncio")));
-                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("edicao_anuncio")));
-                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
-                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
-                        resultadoQuery.getInt("criador_anuncio")));
-                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
-                        resultadoQuery.getString("tipo_anuncio").trim()));
+                anuncio.setTitulo(
+                        UtilsBD.GetString(resultadoQuery.getString("titulo_anuncio"))
+                );
+                anuncio.setDescricao(
+                        UtilsBD.GetString(resultadoQuery.getString("descricao_anuncio"))
+                );
+                anuncio.setDataCriacao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("criacao_anuncio"))
+                );
+                anuncio.setDataEdicao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("edicao_anuncio"))
+                );
+                anuncio.setPreco(
+                        resultadoQuery.getFloat("Preco_Anuncio")
+                );
+                anuncio.setCriador(
+                        Confeiteiro_DAO.GetConfeiteiro(
+                                resultadoQuery.getInt("criador_anuncio"))
+                );
+                anuncio.setTipoAnuncio(
+                        TipoAnuncio.valueOf(UtilsBD.GetString(
+                                resultadoQuery.getString("tipo_anuncio").trim()))
+                );
                 listaRetorno.add(anuncio);
             }
 
@@ -180,6 +191,7 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
+            System.out.println(e);
             throw new RequisicaoInvalidaBD("Tabela Inexistente");
         }
     }
@@ -200,18 +212,32 @@ public static  void removeAnuncio (int id){
             // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
             while(resultadoQuery.next()){
                 anuncio = new Anuncio();
-                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
-                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
-                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
-                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("criacao_anuncio")));
-                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("edicao_anuncio")));
-                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
-                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
-                        resultadoQuery.getInt("criador_anuncio")));
-                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
-                        resultadoQuery.getString("tipo_anuncio").trim()));
+                anuncio.setId(
+                        resultadoQuery.getInt("Id_Anuncio")
+                );
+                anuncio.setTitulo(
+                        UtilsBD.GetString(resultadoQuery.getString("titulo_anuncio"))
+                );
+                anuncio.setDescricao(
+                        UtilsBD.GetString(resultadoQuery.getString("descricao_anuncio"))
+                );
+                anuncio.setDataCriacao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("criacao_anuncio"))
+                );
+                anuncio.setDataEdicao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("edicao_anuncio"))
+                );
+                anuncio.setPreco(
+                        resultadoQuery.getFloat("Preco_Anuncio")
+                );
+                anuncio.setCriador(
+                        Confeiteiro_DAO.GetConfeiteiro(resultadoQuery.getInt("criador_anuncio"))
+                );
+                anuncio.setTipoAnuncio(
+                        TipoAnuncio.valueOf(
+                                UtilsBD.GetString(resultadoQuery.getString("tipo_anuncio"))));
                 listaRetorno.add(anuncio);
             }
             declaracao.close();
@@ -236,21 +262,29 @@ public static  void removeAnuncio (int id){
             resultado = declaracao.executeQuery(strSql);
 
             // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
-            resposta.setId(resultado.getInt("id_anuncio"));
-            resposta.setTitulo(resultado.getString("titulo_anuncio"));
-            resposta.setDescricao(resultado.getString("descricao_anuncio"));
-            resposta.setDataEdicao(Utils.converteDateToGregorianCalendar(
-                    resultado.getDate("edicao_anuncio")
+            resposta.setId(
+                    resultado.getInt("id_anuncio")
+            );
+            resposta.setTitulo(
+                    UtilsBD.GetString(resultado.getString("titulo_anuncio"))
+            );
+            resposta.setDescricao(
+                    UtilsBD.GetString(resultado.getString("descricao_anuncio"))
+            );
+            resposta.setDataEdicao(
+                    Utils.converteDateToGregorianCalendar(resultado.getDate("edicao_anuncio")
             ));
-            resposta.setDataCriacao(Utils.converteDateToGregorianCalendar(
-                    resultado.getDate("criacao_anuncio")
+            resposta.setDataCriacao(
+                    Utils.converteDateToGregorianCalendar(resultado.getDate("criacao_anuncio")
             ));
-            resposta.setPreco(resultado.getFloat("preco_anuncio"));
-            resposta.setCriador(Confeiteiro_DAO.GetConfeiteiro(
-                    resultado.getInt("criador_anuncio")
+            resposta.setPreco(
+                    resultado.getFloat("preco_anuncio")
+            );
+            resposta.setCriador(
+                    Confeiteiro_DAO.GetConfeiteiro(resultado.getInt("criador_anuncio")
             ));
-            resposta.setTipoAnuncio(TipoAnuncio.valueOf(
-                    resultado.getString("tipo-anuncio")
+            resposta.setTipoAnuncio(
+                    TipoAnuncio.valueOf(UtilsBD.GetString(resultado.getString("tipo-anuncio"))
             ));
             //ate aqui
             declaracao.close();
@@ -276,17 +310,30 @@ public static  void removeAnuncio (int id){
             while(resultadoQuery.next()){
                 anuncio = new Anuncio();
                 anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
-                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
-                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
-                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("criacao_anuncio")));
-                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("edicao_anuncio")));
-                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
-                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
-                        resultadoQuery.getInt("criador_anuncio")));
-                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
-                        resultadoQuery.getString("tipo_anuncio").trim()));
+                anuncio.setTitulo(
+                        UtilsBD.GetString(resultadoQuery.getString("titulo_anuncio"))
+                );
+                anuncio.setDescricao(
+                        UtilsBD.GetString(resultadoQuery.getString("descricao_anuncio"))
+                );
+                anuncio.setDataCriacao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("criacao_anuncio"))
+                );
+                anuncio.setDataEdicao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("edicao_anuncio"))
+                );
+                anuncio.setPreco(
+                        resultadoQuery.getFloat("Preco_Anuncio")
+                );
+                anuncio.setCriador(
+                        Confeiteiro_DAO.GetConfeiteiro(resultadoQuery.getInt("criador_anuncio"))
+                );
+                anuncio.setTipoAnuncio(
+                        TipoAnuncio.valueOf(
+                                UtilsBD.GetString(resultadoQuery.getString("tipo_anuncio")))
+                );
                 listaRetorno.add(anuncio);
             }
             declaracao.close();
@@ -311,18 +358,33 @@ public static  void removeAnuncio (int id){
             // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
             while(resultadoQuery.next()){
                 anuncio = new Anuncio();
-                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
-                anuncio.setTitulo(resultadoQuery.getString("titulo_anuncio"));
-                anuncio.setDescricao(resultadoQuery.getString("descricao_anuncio"));
-                anuncio.setDataCriacao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("criacao_anuncio")));
-                anuncio.setDataEdicao(Utils.converteDateToGregorianCalendar(
-                        resultadoQuery.getDate("edicao_anuncio")));
-                anuncio.setPreco(resultadoQuery.getFloat("Preco_Anuncio"));
-                anuncio.setCriador(Confeiteiro_DAO.GetConfeiteiro(
-                        resultadoQuery.getInt("criador_anuncio")));
-                anuncio.setTipoAnuncio(TipoAnuncio.valueOf(
-                        resultadoQuery.getString("tipo_anuncio").trim()));
+                anuncio.setId(
+                        resultadoQuery.getInt("Id_Anuncio")
+                );
+                anuncio.setTitulo(
+                        UtilsBD.GetString(resultadoQuery.getString("titulo_anuncio"))
+                );
+                anuncio.setDescricao(
+                        UtilsBD.GetString(resultadoQuery.getString("descricao_anuncio"))
+                );
+                anuncio.setDataCriacao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("criacao_anuncio"))
+                );
+                anuncio.setDataEdicao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("edicao_anuncio"))
+                );
+                anuncio.setPreco(
+                        resultadoQuery.getFloat("Preco_Anuncio")
+                );
+                anuncio.setCriador(
+                        Confeiteiro_DAO.GetConfeiteiro(resultadoQuery.getInt("criador_anuncio"))
+                );
+                anuncio.setTipoAnuncio(
+                        TipoAnuncio.valueOf(
+                                UtilsBD.GetString(resultadoQuery.getString("tipo_anuncio")))
+                );
                 confeiteiro.addAnuncio(anuncio);
             }
             declaracao.close();

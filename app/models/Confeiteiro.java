@@ -14,8 +14,8 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 public class Confeiteiro {
 	
 	private String nome;
-	private ArrayList<TipoAnuncio.Endereco> enderecos;
-	private ArrayList<Utils.Email> emails;
+	private ArrayList<Endereco> enderecos;
+	private ArrayList<Email> emails;
 	private ArrayList<Contato> contatos;
 
 	private  String idFacebook;
@@ -30,15 +30,20 @@ public class Confeiteiro {
 	/**
 	 * Construtor padrão
 	 */
-	public Confeiteiro() {}
+	public Confeiteiro() {
+		this.meusAnuncios = new HashSet<>();
+		this.emails = new ArrayList<Email>();
+		this.contatos = new ArrayList<Contato>();
+		this.enderecos = new ArrayList<Endereco>();
+	}
 
 	/**
 	 * Construtor padrão
 	 * @param nome o nome do Confeiteiro
 	 */
 	public Confeiteiro(String nome) {
+		super();
 		setNome(nome);
-		this.meusAnuncios = new HashSet<>();
 	}
 	
 	/**
@@ -64,7 +69,7 @@ public class Confeiteiro {
 	 * @return o endere�o do confeiteiro
 	 */
 
-	public ArrayList<TipoAnuncio.Endereco> getEnderecos() {
+	public ArrayList<Endereco> getEnderecos() {
 		return this.enderecos;
 	}
 
@@ -78,7 +83,7 @@ public class Confeiteiro {
 	 * Recupera o email do confeiteiro
 	 * @return o email do confeiteiro
 	 */
-	public ArrayList<Utils.Email> getEmail() {
+	public ArrayList<Email> getEmail() {
 		return emails;
 	}
 
@@ -166,73 +171,28 @@ public class Confeiteiro {
 		this.contatos.add(contato);
 	}
 
-	public void AddEndereco (TipoAnuncio.Endereco endereco){
+	public void AddEndereco (Endereco endereco){
 		this.enderecos.add(endereco);
 	}
-	public void AddEmail (Utils.Email email){
+	public void AddEmail (Email email){
 		this.emails.add(email);
 	}
 
-	/**
-     * Created by jordan on 20/04/2016.
-     */
-    public static class Contato {
+	@Override
+	public boolean equals(Object obj) {
+		boolean returnResult = true;
+		if (!(obj instanceof Confeiteiro)) {
+			return false;
+		}
 
-        String numero;
-        String CodigoPais;
-        int idContato;
-        String codigoOperadora;
-        String codigoEstado;
-        int donoContato;
+		Confeiteiro that = (Confeiteiro) obj;
+		returnResult &= this.getNome().equals(that.getNome());
+		returnResult &= this.getEnderecos().equals(that.getEnderecos());
+		returnResult &= this.getEmail().equals(that.getEmail());
+		returnResult &= this.getContato().equals(that.getContato());
+		returnResult &= this.getIdFacebook().equals(that.getIdFacebook());
 
-        public Contato(){}
-        public String getNumero() {
-            return numero;
-        }
+		return returnResult;
+	}
 
-        public void setNumero(String numero) {
-            this.numero = numero;
-        }
-
-        public String getCodigoPais() {
-            return CodigoPais;
-        }
-
-        public void setCodigoPais(String codigoPais) {
-            CodigoPais = codigoPais;
-        }
-
-        public int getIdContato() {
-            return idContato;
-        }
-
-        public void setIdContato(int idContato) {
-            this.idContato = idContato;
-        }
-
-        public String getCodigoEstado() {
-            return codigoEstado;
-        }
-
-        public void setCodigoEstado(String codigoEstado) {
-            this.codigoEstado = codigoEstado;
-        }
-
-        public int getDonoContato() {
-            return donoContato;
-        }
-
-        public void setDonoContato(int donoContato) {
-            this.donoContato = donoContato;
-        }
-
-        public String getCodigoOperadora() {
-            return codigoOperadora;
-        }
-
-        public void setCodigoOperadora(String codigoOperadora) {
-            this.codigoOperadora = codigoOperadora;
-        }
-
-    }
 }
