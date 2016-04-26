@@ -1,0 +1,14 @@
+<div class="mdl-layout__header-row">
+    <span class="mdl-layout-title mdl-color-text--brown-50" ng-bind="title"></span>
+    <div class="mdl-layout-spacer"></div>
+    <button ng-if="item.user" class="mdl-button mdl-js-button mdl-js-ripple-effect" id="userbtn">
+        <i class="material-icons mdl-color-text--brown-50" ng-bind="item.user.icon"></i>
+        <span class="mdl-color-text--brown-50" ng-bind="item.user.name"></span>
+    </button>
+    <ul ng-if="item.user" class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="userbtn">
+        <li class="mdl-menu__item" ng-repeat="btn in item.btns" ng-click="callFunc(btn.url)">
+            <i class="material-icons" ng-bind="btn.icon"></i>
+            <span ng-bind="btn.text"></span>
+        </li>
+    </ul>
+</div>

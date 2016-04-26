@@ -1,21 +1,14 @@
 {
-  "brand": {
+  "logo": {
     "text": "GetCake",
-    "url": "ads"
+    "url": "ads",
+    "imglink": "favicon.svg"
   },
-  "username": "Dennis Dantas",
-  "userbtn": {
-    "before": [
-      { "url": "/logout",
-        "icon": "sign-out",
-        "text": "Logout"   }
-    ],
-    "divided": false
-  },
-  "navbarbtn": [
-    { "url": "ads",
-      "icon": "sign-out",
-      "text": "Anúncios",
-      "hasChild": false   }
+  "sections": [
+    {
+      "name": "Anúncios",
+      "icon": "cake",
+      "url": "ads"
+    }
   ]
 }

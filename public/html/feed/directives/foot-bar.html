@@ -1,0 +1,10 @@
+<div class="mdl-mini-footer--left-section">
+	<p ng-repeat="element in item.credits" class="copyright small" ng-bind-html="element"></p>
+</div>
+<div class="mdl-mini-footer--right-section">
+	<ul class="list-inline">
+		<li ng-repeat="btn in item.btns">
+			<a ui-sref="{{btn.url}}" ng-bind="btn.text" class="md-accent"></a>
+		</li>
+	</ul>
+</div>

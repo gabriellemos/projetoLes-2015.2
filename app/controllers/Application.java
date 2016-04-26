@@ -48,9 +48,20 @@ public class Application extends UserProfileController<CommonProfile>{
      */
     @Transactional
     public Result getFeedAds() {
-
         ObjectNode result = Json.newObject();
         result.set("ads", Text.getAds());
+        return ok(result);
+    }
+
+    /**
+     * Retorna um JSON contendo texto dos Anúncios do Feed
+     * @return texto dos Anúncios do Feed
+     */
+    @Transactional
+    public Result getToolbarUserInfo() {
+        ObjectNode result = Json.newObject();
+        // The response will be empty if user not logged.
+        // result.set("user", Text.getToolbarUserInfo(c));
         return ok(result);
     }
 
