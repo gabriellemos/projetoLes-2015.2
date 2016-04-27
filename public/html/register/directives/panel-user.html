@@ -1,0 +1,36 @@
+<div class="p-l-20 p-r-20 p-b-20">
+	<br>
+	<h4 ng-bind="item.text"></h4>
+	<br> 
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		<input class="mdl-textfield__input" type="text" name="name" id="name" required />
+		<label class="mdl-textfield__label" for="name" ng-bind="item.nameLbl"></label>
+	</div>
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		<input class="mdl-textfield__input" type="text" name="city" id="city" required />
+		<label class="mdl-textfield__label" for="city" ng-bind="item.cityLbl"></label>
+	</div>
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		<input class="mdl-textfield__input" type="text" name="address" id="address" required />
+		<label class="mdl-textfield__label" for="address" ng-bind="item.addressLbl"></label>
+	</div>
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		<input class="mdl-textfield__input" type="number" name="phone" id="phone" required />
+		<label class="mdl-textfield__label" for="phone" ng-bind="item.phoneLbl"></label>
+	</div>
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		<input class="mdl-textfield__input" type="text" name="email" id="email" required />
+		<label class="mdl-textfield__label" for="email" ng-bind="item.emailLbl"></label>
+	</div>
+	<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="news">
+		<input type="checkbox" id="news" class="mdl-checkbox__input" name="news" />
+		<span class="mdl-checkbox__label f13 mdl-color-text--grey" ng-bind="item.newsLbl"></span>
+	</label>
+	
+	<div class="m-t-20" compile="item.buttonNext + item.buttonPrevious">
+		<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green" ng-bind="item.nextLbl"></button>
+		<button type="reset" class="mdl-button mdl-js-button" ng-click="previous()">
+			<a class="button" ng-bind="item.previousLbl"></a>
+		</button>
+	</div>
+</div>

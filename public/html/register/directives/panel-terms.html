@@ -1,0 +1,24 @@
+<div class="p-l-20 p-r-20 p-b-20">
+	<br>
+	<h4 ng-bind="item.text"></h4><br> 
+	<div class="mdl-textfield mdl-js-textfield">
+		<textarea class="mdl-textfield__input terms" type="text" rows= "14" maxrows="14" id="terms" disabled ng-bind="item.terms"></textarea>
+		<label class="mdl-textfield__label" for="terms" ng-bind="terms_text"></label>
+	</div>
+
+	<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="terms-1">
+		<input type="checkbox" id="terms-1" class="mdl-checkbox__input" ng-model="terms_accepted" ng-change="change()"/>
+		<span class="mdl-checkbox__label f13 mdl-color-text--grey" ng-bind="item.accept_message"></span>
+		<span class="site-textfield__error" ng-show="!terms_accepted && terms_next_pressed" ng-bind="item.error_message"></span>
+	</label>
+						
+	<div class="m-t-20">
+		<br ng-show="!terms_accepted && terms_next_pressed">
+		<button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--light-green" ng-click="next()">
+			<a id="terms-next" class="button" ng-bind="item.nextLbl"></a>
+		</button>
+		<button type="reset" class="mdl-button mdl-js-button" ng-click="previous()">
+			<a class="button" ng-bind="item.previousLbl"></a>
+		</button>
+	</div>
+</div>
