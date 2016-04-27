@@ -10,7 +10,25 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
     $stateProvider
         .state('ads', {
             url: '/',
-            templateUrl: '/assets/html/feed/sections/ads.html',
-            controller: 'AdsController'
+            data: {
+                title: 'Anúncios'
+            },
+            views: {
+                'main' : {
+                    templateUrl: '/assets/html/feed/sections/ads-main.html',
+                    controller: 'AdsController'
+                },
+                "modals" : {
+                    templateUrl: '/assets/html/feed/sections/ads-modals.html',
+                    controller: 'AdsController'
+                }
+            }
         });
 }]);
+
+// Initialize Modals -- This must be done only after all HTML are loaded.
+feedApp.run(function($rootScope, $timeout) {
+    $timeout(function() {
+        Modal.init();
+    }, 5000);
+});

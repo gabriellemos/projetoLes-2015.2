@@ -1,0 +1,19 @@
+<div class="mdl-card mdl-shadow--2dp">
+	<div class="mdl-card__media">
+		<img ng-src="{{item.imglink}}" class="img-responsive">
+	</div>
+	<div class="mdl-card__title">
+		<h2 class="mdl-card__title-text" ng-bind="item.title"></h2>
+	</div>
+	<div class="mdl-card__supporting-text">
+		<span ng-bind="item.chef"></span>
+		<span class="badge badge-lg badge-success">
+			<i class="material-icons">credit_card</i>
+			<span ng-bind="item.price"></span>
+		</span>
+	</div>
+	<div class="mdl-card__actions">
+		<button class="modal__trigger mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-attr-data-modal="{{'#ad-card--' + index + '-modal'}}" ng-bind="labels.contact">
+		</button>
+	</div>
+</div>
