@@ -51,6 +51,35 @@ public class Text {
     }
 
     /**
+     * Return JSON containing all ads from some confectioner.
+     * @return JSON with all confectioner's ads.
+     */
+    public static JsonNode getAdsConfeiteiro(int IdConfeiteiro) {
+        ArrayNode result = new ArrayNode(JsonNodeFactory.instance);
+        List<Anuncio> list;
+        try {
+            // descomentar a linha abaixo e excluir a seguinte
+            //list = Anuncio_DAO.getAnunciosPeloConfeiteiro(IdConfeiteiro);
+            list = Anuncio_DAO.getAnuncios();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("[ERRO]: Nenhum anúncio pode ser obtido do banco de dados no momento.\n\n"
+                    + e.getMessage());
+        }
+        for (Anuncio ad : list) {
+            ObjectNode item = Json.newObject();
+            item.put("title", ad.getTitulo());
+            item.put("chef", ad.getCriador().getNome());
+            item.put("imglink", cakes[rand(0, cakes.length - 1)]);
+            item.put("price", String.format("%.2f", ad.getPreco()));
+            item.put("contact", ad.getCriador().getContato());
+            item.put("address", ad.getCriador().getEndereco());
+        }
+        return result;
+    }
+
+
+    /**
      * Return JSON containing minimal information of User, for the toolbar.
      * @param user the user logged.
      * @return JSON with info about user.

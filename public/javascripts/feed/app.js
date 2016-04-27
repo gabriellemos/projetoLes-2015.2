@@ -24,6 +24,25 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
                 }
             }
         });
+
+    // States
+    $stateProvider
+        .state('adsConfeiteiro', {
+            url: '/',
+            data: {
+                title: 'Meus Anúncios'
+            },
+            views: {
+                'main': {
+                    templateUrl: '/assets/html/feed/sections/ads-main.html',
+                    controller: 'AdsController'
+                },
+                "modals": {
+                    templateUrl: '/assets/html/feed/sections/ads-modals.html',
+                    controller: 'AdsController'
+                }
+            }
+        });
 }]);
 
 // Initialize Modals -- This must be done only after all HTML are loaded.

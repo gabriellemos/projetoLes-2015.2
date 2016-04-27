@@ -9,6 +9,11 @@
       "name": "Anúncios",
       "icon": "cake",
       "url": "ads"
+    },
+    {
+      "name": "Meus Anúncios",
+      "icon": "cake",
+      "url": "adsConfeiteiro"
     }
   ]
 }

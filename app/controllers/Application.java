@@ -54,6 +54,18 @@ public class Application extends UserProfileController<CommonProfile>{
     }
 
     /**
+     * Retorna um JSON contendo texto dos Anúncios de um confeiteiro
+     * @return texto dos Anúncios de um confeiteiro
+     */
+    @Transactional
+    public Result getFeedAdsConfeiteiro() {
+        ObjectNode result = Json.newObject();
+        result.set("adsConfeiteiro", Text.getAdsConfeiteiro(0)); // idConfeiteiroLogad
+        return ok(result);
+    }
+
+
+    /**
      * Retorna um JSON contendo texto dos Anúncios do Feed
      * @return texto dos Anúncios do Feed
      */
