@@ -44,8 +44,8 @@ public class Text {
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", String.format("%.2f", ad.getPreco()));
-            item.put("contact", ad.getCriador().getContato());
-            item.put("address", ad.getCriador().getEndereco());
+            item.put("contact", String.valueOf(ad.getCriador().getContato().get(0)));
+            item.put("address", String.valueOf(ad.getCriador().getEnderecos().get(0)));
         }
         return result;
     }
