@@ -1,0 +1,11 @@
+{
+  "text": "Preencha os campos abaixo com seus dados.",
+  "nameLbl": "Nome da Empresa/Doceiro",
+  "cityLbl": "Cidade",
+  "addressLbl": "Endereço Principal",
+  "phoneLbl": "Telefone para Contato",
+  "emailLbl": "E-mail",
+  "newsLbl": "Receber notícias via e-mail?",
+  "nextLbl": "Registrar",
+  "previousLbl": "Anterior"
+}

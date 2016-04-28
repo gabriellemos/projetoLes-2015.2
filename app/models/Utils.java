@@ -50,7 +50,7 @@ public class Utils {
      */
     public static boolean dataValida(GregorianCalendar dataParaValidacao,
                                      GregorianCalendar dataLimite) {
-        if (dataParaValidacao != null && dataParaValidacao.compareTo(dataLimite) < 0) {
+        if (dataParaValidacao != null && dataParaValidacao.compareTo(dataLimite) > 0) {
             return false;
         }
         return true;
@@ -61,4 +61,5 @@ public class Utils {
         calendar.setTime(data);
         return calendar;
     }
+
 }

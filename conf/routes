@@ -5,6 +5,7 @@
 # Home page
 GET        /                        @controllers.Application.index
 GET        /feed                    @controllers.Application.feed
+GET        /register                @controllers.Application.register
 
 # Facebook login page
 GET         /login                  @controllers.Application.facebookIndex
@@ -16,6 +17,7 @@ GET        /logout                  @org.pac4j.play.ApplicationLogoutController.
 
 # Api (JSON Requests)
 GET        /api/ads                 @controllers.Application.getFeedAds
+GET        /api/toolbar-user        @controllers.Application.getToolbarUserInfo
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file           controllers.Assets.at(path="/public", file)

@@ -1,17 +1,15 @@
-package models.dao;
+package models.dao.Tabelas;
 
 import java.sql.Statement;
 
-
 /**
- * Created by jordan on 08/04/2016.
+ * Created by jordan on 20/04/2016.
  */
-public class Confeiteiro_Tabela {
+public class Contato_Tabela {
 
     private static java.sql.Connection conexao= null;
     private static Statement declaracao = null;
     private static  String str;
-
     //NAO EXECUTE ESSA CLASSE OU VAI GERA UM ERRO DIZENDO QUE A TABELA JA FOI CRIADA
     public static void main( String args[] ) throws Exception {
 
@@ -19,13 +17,14 @@ public class Confeiteiro_Tabela {
             conexao= models.dao.Connection.getConnection();
             declaracao= conexao.createStatement();
 
-            str = "CREATE TABLE Confeiteiro " +
-                    "(ID_Confeiteiro SERIAL PRIMARY KEY," +
-                    " Nome_Confeiteiro           CHAR(32)   NOT NULL, " +
-                    " Email_Confeiteiro     CHAR(64)     NOT NULL, " +
-                    " Endereco_Confeiteiro        CHAR(128)  NOT NULL, " +
-                    " Contato_Confeiteiro         CHAR(16) NOT NULL,"  +
-                    "ID_Facebook            CHAR(64)     UNIQUE NOT NULL )";
+            str = "CREATE TABLE Contato " +
+                    "(ID_Contato SERIAL PRIMARY KEY," +
+                    "Numero_Contato         CHAR(16)    NOT NULL, " +
+                    "Codigo_Estado      CHAR(4) NOT NULL, " +
+                    "Codigo_Operadora         CHAR(4) , " +
+                    "Codigo_Pais       CHAR(4) ,"  +
+                    "Dono_Contato        INT references Confeiteiro(ID_Confeiteiro))";    // Chave estrangeira
+
 
 
             declaracao.executeUpdate(str);
@@ -33,10 +32,9 @@ public class Confeiteiro_Tabela {
             conexao.close();
             System.out.print("Sucesso");}
         catch (Exception e){
-             System.out.print(e.getMessage());
+            System.out.print(e.getMessage());
 
         }
 
     }
-
 }
