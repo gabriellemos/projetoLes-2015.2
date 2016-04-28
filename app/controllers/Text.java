@@ -9,7 +9,9 @@ import models.Confeiteiro;
 import models.dao.Anuncio_DAO;
 import play.libs.Json;
 
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Class that packages JSON files to system.
@@ -37,10 +39,10 @@ public class Text {
             ObjectNode item = Json.newObject();
             item.put("title", ad.getTitulo());
             item.put("chef", ad.getCriador().getNome());
-            item.put("imglink", cakes[rand(0, cakes.length - 1)]);
+            item.put("imglink", cakes[rand(cakes.length - 1)]);
             item.put("price", String.format("%.2f", ad.getPreco()));
-            item.put("contact", String.valueOf(ad.getCriador().getContato().get(0)));
-            item.put("address", String.valueOf(ad.getCriador().getEnderecos().get(0)));
+            item.put("contact", "Sem contato");//String.valueOf(ad.getCriador().getContato().get(0)));
+            item.put("address", "Sem endereco");//String.valueOf(ad.getCriador().getEnderecos().get(0)));
             result.add(item);
         }
         return result;
@@ -60,12 +62,11 @@ public class Text {
 
     /**
      * Return random number between min and max
-     * @param min the minimum value for random
      * @param max the maximun value for random
      * @return the random number
      */
-    private static int rand(int min, int max){
-        return (int) (min + Math.random() * ((max - min) + 1));
+    private static int rand(int max){
+        return (int) Math.random() * max;
     }
 
 

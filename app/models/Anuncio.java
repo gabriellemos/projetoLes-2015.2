@@ -203,7 +203,7 @@ public class Anuncio {
 
     @Override
     public String toString() {
-        return this.titulo;
+        return this.getCriador().toString();
     }
 
     @Override

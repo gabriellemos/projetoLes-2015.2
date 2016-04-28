@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
+import play.Logger;
 import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Result;
@@ -58,6 +59,7 @@ public class Application extends UserProfileController<FacebookProfile>{
     public Result getFeedAds() {
         ObjectNode result = Json.newObject();
         result.set("ads", Text.getAds());
+        Logger.info(result.toString());
         return ok(result);
     }
 
