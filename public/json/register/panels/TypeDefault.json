@@ -1,0 +1,7 @@
+{
+  "content": "<h4>Escolha o tipo de usuário que você é.</h4><br><p>Confeiteiro se você deseja anunciar que faz encomendas.<br>Cliente se você quer encomendar bolos e avaliá-los.</p>",
+  "type1": "Confeiteiro",
+  "type2": "Cliente",
+  "nextLbl": "Próximo",
+  "previousLbl": "Cancelar"
+}

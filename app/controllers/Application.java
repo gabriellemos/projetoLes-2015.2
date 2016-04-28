@@ -43,6 +43,13 @@ public class Application extends UserProfileController<CommonProfile>{
     }
 
     /**
+     * Retorna a página para registrar usuários novos
+     * @return página para registrar usuários
+     */
+    @Transactional
+    public Result register() { return ok(views.html.register.index.render("GetCake"));}
+
+    /**
      * Retorna um JSON contendo texto dos Anúncios do Feed
      * @return texto dos Anúncios do Feed
      */

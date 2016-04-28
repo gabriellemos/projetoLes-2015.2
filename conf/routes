@@ -5,6 +5,7 @@
 # Home page
 GET        /                        @controllers.Application.index
 GET        /feed                    @controllers.Application.feed
+GET        /register                @controllers.Application.register
 
 # Api (JSON Requests)
 GET        /api/ads                 @controllers.Application.getFeedAds

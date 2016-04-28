@@ -1,0 +1,11 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<html ng-app="RegisterApp">
+  <head>
+    @register.head(title)
+  </head>
+  <body ng-controller="RegisterController">
+    @content
+    @register.scripts()
+  </body>
+</html>

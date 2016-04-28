@@ -1,0 +1,7 @@
+{
+  "tabs": [
+    { "id": "tab1", "text": "1. Tipo de Usuário" },
+    { "id": "tab2", "text": "2. Termos e Condições" },
+    { "id": "tab3", "text": "3. Confirmar Dados" }
+  ]
+}
