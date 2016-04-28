@@ -1,4 +1,4 @@
-package models.dao;
+package models.dao.Tabelas;
 
 import java.sql.Statement;
 
@@ -30,6 +30,7 @@ public class Anuncio_Tabela {
                     "Tipo_Anuncio           CHAR(16) NOT NULL )";
 
 
+            //str="ALTER TABLE Anuncio ADD Disponibilidade BOOLEAN DEFAULT TRUE";
             declaracao.executeUpdate(str);
             declaracao.close();
             conexao.close();

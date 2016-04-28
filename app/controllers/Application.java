@@ -1,7 +1,6 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.dao.GenericDAOImpl;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.play.java.UserProfileController;
 import play.db.jpa.Transactional;
@@ -12,9 +11,6 @@ import play.mvc.Result;
  * Classe principal que responde a requisições HTTP.
  */
 public class Application extends UserProfileController<CommonProfile>{
-
-    @SuppressWarnings("unused")
-    private static GenericDAOImpl dao = new GenericDAOImpl();
 
     /**
      * Retorna a página inicial.

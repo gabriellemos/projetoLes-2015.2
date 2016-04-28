@@ -1,6 +1,7 @@
 package models;
 
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 /**
  * Classe que modela um Anuncio do sistema
@@ -18,6 +19,8 @@ public class Anuncio {
     private float preco;
     private Confeiteiro criador;
     private TipoAnuncio tipoAnuncio;
+    private boolean disponibilidade;
+    private  final float valorDefault= 0.0f;
 
     private final String ARGUMENTO_INVALIDO = "Argumento '%s' recebendo valores inválidos";
 
@@ -25,6 +28,7 @@ public class Anuncio {
      * Construtor padrão
      */
     public Anuncio() {
+        setDisponibilidade(true);
     }
 
     /**
@@ -142,7 +146,7 @@ public class Anuncio {
      * @param preco novo preco do Anúncio
      */
     public void setPreco(float preco) {
-        if (preco < 0.0f) {
+        if (preco < valorDefault) {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Preço"));
         }
         this.preco = preco;
@@ -180,11 +184,44 @@ public class Anuncio {
         this.tipoAnuncio = tipoAnuncio;
     }
 
+    public boolean getDisponibilidade (){return this.disponibilidade;}
+
+    public void setDisponibilidade(boolean dispor){
+        if(this.disponibilidade == dispor){
+            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO,"Disponibilidade sendo utilizada" ));
+        }
+        this.disponibilidade= dispor;
+    }
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return this.titulo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean returnResult = true;
+        if (!(obj instanceof Anuncio)) {
+            return false;
+        }
+
+        Anuncio that = (Anuncio) obj;
+        returnResult &= this.getTitulo().equals(that.getTitulo());
+        returnResult &= this.getDescricao().equals(that.getDescricao());
+        returnResult &= this.getDataEdicao().equals(that.getDataEdicao());
+        returnResult &= this.getDataCriacao().equals(that.getDataCriacao());
+        returnResult &= this.getPreco() == (that.getPreco());
+        returnResult &= this.getCriador().equals(that.getCriador());
+        returnResult &= this.getTipoAnuncio().equals(that.getTipoAnuncio());
+
+        return returnResult;
     }
 }
