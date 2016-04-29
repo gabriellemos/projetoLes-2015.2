@@ -1,13 +1,33 @@
 /* Service responsible to load JSON files, and retrieving data as a JSON object */
 regApp.factory('jsonService', function($rootScope, $http){
-    var jsonService = {};
 
-    // Get a JSON data
-    jsonService.get = function (local) {
-        var url = "/assets/json/register/" + local;
+    return {
+        // Get a JSON data
+        get : function (local) {
+            var url = "/assets/json/register/" + local;
+            return $http.get(url);
+        }
+    }
+});
 
-        return $http.get(url);
-    };
+regApp.factory('formService', function($rootScope, $http){
 
-    return jsonService;
+    return {
+        post : function(form){
+            return $http({
+                method  : 'POST',
+                url     : '/reg/' + form.type,
+                data    : form.data,
+                headers : {'Content-Type': 'application/json'}
+            });
+        }
+    }
+});
+
+regApp.factory('redirectService', function($rootScope, $window){
+    return {
+        goto : function(url){
+            $window.location.href = url;
+        }
+    }
 });
