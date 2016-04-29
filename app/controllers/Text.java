@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Anuncio;
 import models.Confeiteiro;
 import models.dao.Anuncio_DAO;
+import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import play.libs.Json;
 
 import java.util.List;
@@ -55,10 +56,30 @@ public class Text {
      * @param user the user logged.
      * @return JSON with info about user.
      */
-    public static JsonNode getToolbarUserInfo(Confeiteiro user) {
+    public static JsonNode getToolbarUserInfo(FacebookProfile user) {
         ObjectNode result = Json.newObject();
-        result.put("name", user.getNome());
+        result.put("name", user.getDisplayName());
         result.put("icon", "person");
+        return result;
+    }
+
+    public static JsonNode getFacebookInfo(FacebookProfile user) {
+        ObjectNode result = Json.newObject();
+        if(user != null) {
+            result.put("name", user.getDisplayName());
+            result.put("city", user.getHometown().getName());
+            result.put("address", user.getLocation());
+            result.put("email", user.getEmail());
+            result.put("id", user.getId());
+        } else {
+            result.put("name", "");
+            result.put("city", "");
+            result.put("address", "");
+            result.put("email", "");
+            result.put("id", "");
+        }
+        result.put("phone", "");
+        result.put("news", "");
         return result;
     }
 
@@ -71,6 +92,7 @@ public class Text {
     private static int rand(int min, int max){
         return (int) (min + Math.random() * ((max - min) + 1));
     }
+
 
 
 }

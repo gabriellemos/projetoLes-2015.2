@@ -15,9 +15,13 @@ GET        /callback                @org.pac4j.play.CallbackController.callback
 POST       /callback                @org.pac4j.play.CallbackController.callback
 GET        /logout                  @org.pac4j.play.ApplicationLogoutController.logout
 
+# Register data
+POST       /reg/user                @controllers.Application.registerUser
+
 # Api (JSON Requests)
 GET        /api/ads                 @controllers.Application.getFeedAds
 GET        /api/toolbar-user        @controllers.Application.getToolbarUserInfo
+GET        /api/facebook-info       @controllers.Application.getFacebookInfo
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file           controllers.Assets.at(path="/public", file)

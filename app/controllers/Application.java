@@ -1,12 +1,18 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Confeiteiro;
+import models.dao.Confeiteiro_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
+import play.Logger;
+import play.data.DynamicForm;
 import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Result;
+
+import java.util.List;
 
 /**
  * Classe principal que responde a requisições HTTP.
@@ -18,11 +24,7 @@ public class Application extends UserProfileController<FacebookProfile>{
      * @return página inicial do site ou a página do feed
      */
     public Result index() {
-        if(getUserProfile() != null){
-            return feed();
-        } else {
-            return home();
-        }
+        return home();
     }
 
     /**
@@ -68,10 +70,18 @@ public class Application extends UserProfileController<FacebookProfile>{
     @Transactional
     public Result getToolbarUserInfo() {
         ObjectNode result = Json.newObject();
-        // The response will be empty if user not logged.
-        // result.set("user", Text.getToolbarUserInfo(c));
+        if(getUserProfile() != null)
+            result.set("user", Text.getToolbarUserInfo(getUserProfile()));
         return ok(result);
     }
+
+    @Transactional
+    public Result getFacebookInfo(){
+        ObjectNode result = Json.newObject();
+        result.set("formInfo", Text.getFacebookInfo(getUserProfile()));
+        return ok(result);
+    }
+
 
     /**
      * Retorna a página de login do facebook
@@ -79,8 +89,48 @@ public class Application extends UserProfileController<FacebookProfile>{
      */
     @RequiresAuthentication(clientName = "FacebookClient")
     public Result facebookIndex(){
-        return redirect(routes.Application.index());
+        FacebookProfile profile = getUserProfile();
+        Confeiteiro user = getConfeiteiro(profile);
+        if(user != null){
+            String origin = request().getHeader("referer");
+            return redirect(origin);
+        } else
+            return redirect(routes.Application.register());
     }
 
+    private Confeiteiro getConfeiteiro(FacebookProfile profile) {
+        List<Confeiteiro> confeiteiros = Confeiteiro_DAO.GetConfeiteiros();
+        for (Confeiteiro c : confeiteiros){
+            if(c.getIdFacebook().equals(profile.getId()))
+                return c;
+        }
+        return null;
+    }
+
+    /**
+     * Registra um novo usuário
+     */
+    @Transactional
+    public Result registerUser(){
+        DynamicForm filledForm = new DynamicForm().bindFromRequest();
+
+        if (filledForm.hasErrors()) {
+            return badRequest("Erro ao receber os dados.");
+        } else {
+            Logger.info("Tentando registrar novo Confeiteiro no BD...");
+            String nome = filledForm.get("name");
+            String email = filledForm.get("email");
+            String address = filledForm.get("address");
+            String id = filledForm.get("id");
+            try {
+                Confeiteiro_DAO.insertConfeiteiro(nome, email, address, id);
+            } catch (Exception e){
+                Logger.error(e.getMessage());
+                return badRequest(e.getMessage());
+            }
+        }
+
+        return ok("Novo usuário registrado com sucesso!");
+    }
 
 }
