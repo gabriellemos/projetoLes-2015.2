@@ -1,5 +1,5 @@
 <div class="site-tabs__tab-bar">
 	<a ng-repeat="tab in item.tabs" ng-attr-id="{{tab.id}}" class="site-tabs__tab" ng-bind="tab.text"></a>
 </div>
-<form action="#" ng-transclude>
+<form ng-submit="item.submit()" ng-transclude>
 </form>
