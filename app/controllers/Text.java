@@ -9,6 +9,7 @@ import models.Confeiteiro;
 import models.Contato;
 import models.Endereco;
 import models.dao.Anuncio_DAO;
+import play.Logger;
 import play.libs.Json;
 
 import java.util.List;
@@ -34,8 +35,12 @@ public class Text {
         ArrayNode result = new ArrayNode(JsonNodeFactory.instance);
         List<Anuncio> list;
 
+        Logger.info(">>> [OPER]: Carregando Anúncios do BD (Text.getAds())");
+
         list = Anuncio_DAO.getAnuncios();
         for(Anuncio ad : list){
+            Logger.info(">>> [OPER]: Anúncio " + ad.getId() + " encontrado (Text.getAds())");
+
             ObjectNode item = Json.newObject();
             item.put("title", ad.getTitulo());
             item.put("chef", ad.getCriador().getNome());
@@ -53,6 +58,9 @@ public class Text {
             item.set("address", address);
             result.add(item);
         }
+
+        Logger.info(">>> [OPER]: Retornando " + result.size() + " anúncios encontrados (Text.getAds())");
+
         return result;
     }
 
