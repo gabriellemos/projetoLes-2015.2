@@ -5,6 +5,10 @@ feedApp.directive('navBar', function() {
         scope: {
             item: '=item'
         },
+        link: function(scope, element, attr){
+            element.addClass('site-drawer mdl-layout__drawer mdl-color--brown-900 mdl-color-text-brown-50');
+            componentHandler.upgradeDom();
+        },
         templateUrl: '/assets/html/feed/directives/nav-bar.html'
     };
 });
@@ -16,6 +20,10 @@ feedApp.directive('toolBar', function() {
         scope: {
             item: '=item',
             title: '=title'
+        },
+        link: function(scope, element, attr){
+            element.addClass('site-header mdl-layout__header mdl-color--brown-700 mdl-color-text--brown-50');
+            componentHandler.upgradeDom();
         },
         controller: ['$parse', "$http", "$window", "$state", function($scope, $parse, $http, $window, $state) {
             $scope.callFunc = function(exp) {
@@ -49,6 +57,10 @@ feedApp.directive('footBar', function() {
         scope: {
             item: '=item'
         },
+        link: function(scope, element, attr){
+            element.addClass('mdl-mini-footer');
+            componentHandler.upgradeDom();
+        },
         templateUrl: '/assets/html/feed/directives/foot-bar.html'
     };
 });
@@ -62,6 +74,9 @@ feedApp.directive('adCard', function() {
             labels: '=labels',
             index: '=index'
         },
+        link: function(scope, element, attr){
+            componentHandler.upgradeDom();
+        },
         templateUrl: '/assets/html/feed/directives/ad-card.html'
     };
 });
@@ -74,6 +89,10 @@ feedApp.directive('adModal', function() {
             item: '=item',
             labels: '=labels',
             index: '=index'
+        },
+        link: function(scope, element, attr){
+            element.addClass('modal modal__bg');
+            componentHandler.upgradeDom();
         },
         templateUrl: '/assets/html/feed/directives/ad-modal.html'
     };
