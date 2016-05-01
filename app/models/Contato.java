@@ -61,4 +61,7 @@ public class Contato {
         this.codigoOperadora = codigoOperadora;
     }
 
+    public String toString(){
+        return String.format("+%s (%s) %s", getCodigoPais(), getCodigoEstado(), getCodigoOperadora() + getNumero());
+    }
 }

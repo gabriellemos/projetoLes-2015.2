@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Anuncio;
 import models.Confeiteiro;
+import models.Contato;
+import models.Endereco;
 import models.dao.Anuncio_DAO;
 import play.libs.Json;
 
@@ -39,8 +41,16 @@ public class Text {
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", String.format("%.2f", ad.getPreco()));
-            item.put("contact", String.valueOf(ad.getCriador().getContato().get(0)));
-            item.put("address", String.valueOf(ad.getCriador().getEnderecos().get(0)));
+
+            ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getContatos()
+                    .forEach(c -> contacts.add(c.toString()));
+
+            item.set("contacts", contacts);
+            ArrayNode address = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getEnderecos()
+                    .forEach(e -> address.add(e.toString()));
+            item.set("address", address);
             result.add(item);
         }
         return result;
