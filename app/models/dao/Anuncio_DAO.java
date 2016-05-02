@@ -55,7 +55,9 @@ public class Anuncio_DAO {
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            throw new RequisicaoInvalidaBD("Erro ao criar o Anúncio");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -69,7 +71,9 @@ public static  void removeAnuncio (int id){
         declaracao.close();
         conexao.close();
     }catch (Exception e){
-        throw new RequisicaoInvalidaBD("Erro ao Deletar o Anúncio");
+        RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+        exception.setStackTrace(e.getStackTrace());
+        throw exception;
     }
 
 }
@@ -84,7 +88,9 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new RequisicaoInvalidaBD("Erro ao Deletar o Anúncio");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
 
     }
@@ -98,7 +104,9 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new RequisicaoInvalidaBD("Erro ao Modifica visibilidade o Anúncio");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -120,7 +128,9 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new RequisicaoInvalidaBD("Erro ao Modifica visibilidade o Anúncio");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -138,7 +148,9 @@ public static  void removeAnuncio (int id){
             declaracao.close();
             conexao.close();
         }catch (Exception e){
-            throw new RequisicaoInvalidaBD("Erro ao Modifica visibilidade o Anúncio");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
 
     }
@@ -191,8 +203,9 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            System.out.println(e);
-            throw new RequisicaoInvalidaBD("Tabela Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -245,7 +258,9 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new RequisicaoInvalidaBD("Tabela Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -292,7 +307,9 @@ public static  void removeAnuncio (int id){
             return resposta;
             // Verifica a exceção do bd
         }catch (Exception e){
-            throw new RequisicaoInvalidaBD("Confeiteiro Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -341,7 +358,9 @@ public static  void removeAnuncio (int id){
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new RequisicaoInvalidaBD("Tabela Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -391,7 +410,9 @@ public static  void removeAnuncio (int id){
             conexao.close();
             // Verifica a exceção do bd
         } catch (Exception e) {
-            throw new RequisicaoInvalidaBD("Tabela Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 }
