@@ -187,10 +187,10 @@ public class Confeiteiro {
 
 		Confeiteiro that = (Confeiteiro) obj;
 		returnResult &= this.getNome().equals(that.getNome());
-		returnResult &= this.getEnderecos().equals(that.getEnderecos());
-		returnResult &= this.getEmail().equals(that.getEmail());
-		returnResult &= this.getContato().equals(that.getContato());
-		returnResult &= this.getIdFacebook().equals(that.getIdFacebook());
+		//returnResult &= this.getEnderecos().equals(that.getEnderecos());
+		//returnResult &= this.getEmail().equals(that.getEmail());
+		//returnResult &= this.getContato().equals(that.getContato());
+		//returnResult &= this.getIdFacebook().equals(that.getIdFacebook());
 
 		return returnResult;
 	}
