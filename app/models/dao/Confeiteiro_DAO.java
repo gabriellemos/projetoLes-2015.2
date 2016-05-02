@@ -28,7 +28,9 @@ public class Confeiteiro_DAO {
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            throw new RequisicaoInvalidaBD("Erro ao criar o Confeiteiro");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -59,7 +61,9 @@ public class Confeiteiro_DAO {
             return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e){
-            throw new RequisicaoInvalidaBD("Tabela Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 
@@ -85,8 +89,9 @@ public class Confeiteiro_DAO {
             return confeiteiroResp;
             // Verifica a exceção do bd
         }catch (Exception e){
-            System.out.println(e);
-            throw new RequisicaoInvalidaBD("Confeiteiro Inexistente");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
 }
