@@ -99,7 +99,7 @@ public static  void removeAnuncio (int id){
         try{
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql= "UPDATE  Anuncio SET  Disponibilidade = '"+boll+"' WHERE ID_Anuncio = '"+id+"';";
+            strSql= "UPDATE  Anuncio SET  Disponibilidade_Anuncio = '"+boll+"' WHERE ID_Anuncio = '"+id+"';";
             declaracao.executeUpdate(strSql);
             declaracao.close();
             conexao.close();
@@ -162,7 +162,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade = TRUE ORDER BY Edicao_Anuncio ASC;";
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE ORDER BY Edicao_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             Anuncio anuncio;
             ArrayList<Anuncio> listaRetorno = new ArrayList();
@@ -217,7 +217,7 @@ public static  void removeAnuncio (int id){
             declaracao = conexao.createStatement();
             java.sql.Date dataEdicaoBD;
             dataEdicaoBD = new java.sql.Date(data.getTimeInMillis());
-            strSql = "SELECT * FROM Anuncio WHERE Edicao_Anuncio = '"+ data+"' AND Disponibilidade = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
+            strSql = "SELECT * FROM Anuncio WHERE Edicao_Anuncio = '"+ data+"' AND Disponibilidade_Anuncio = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             Anuncio anuncio;
@@ -273,7 +273,7 @@ public static  void removeAnuncio (int id){
             Anuncio resposta= new Anuncio();
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "' AND Disponibilidade = TRUE;";
+            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "' AND Disponibilidade_Anuncio = TRUE;";
             resultado = declaracao.executeQuery(strSql);
 
             // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
@@ -318,7 +318,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade = TRUE AND criador_anuncio ='"+IdConfeiteiro+"'" +
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio= TRUE AND criador_anuncio ='"+IdConfeiteiro+"'" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             Anuncio anuncio;
@@ -369,7 +369,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade = TRUE AND criador_anuncio ='"+ confeiteiro.getId()+"'" +
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE AND criador_anuncio ='"+ confeiteiro.getId()+"'" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             Anuncio anuncio;
@@ -408,6 +408,107 @@ public static  void removeAnuncio (int id){
             }
             declaracao.close();
             conexao.close();
+            // Verifica a exceção do bd
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+    public static  ArrayList<Anuncio> getAnunciosPeloConfeiteiroFacebook(String IdConfeiteiroFacebook) throws RequisicaoInvalidaBD{
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio= TRUE AND criador_anuncio = (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+IdConfeiteiroFacebook+"')" +
+                    " ORDER BY Titulo_Anuncio ASC;";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            Anuncio anuncio;
+            ArrayList<Anuncio> listaRetorno = new ArrayList();
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
+            while(resultadoQuery.next()){
+                anuncio = new Anuncio();
+                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
+                anuncio.setTitulo(
+                        UtilsBD.GetString(resultadoQuery.getString("titulo_anuncio"))
+                );
+                anuncio.setDescricao(
+                        UtilsBD.GetString(resultadoQuery.getString("descricao_anuncio"))
+                );
+                anuncio.setDataCriacao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("criacao_anuncio"))
+                );
+                anuncio.setDataEdicao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("edicao_anuncio"))
+                );
+                anuncio.setPreco(
+                        resultadoQuery.getFloat("Preco_Anuncio")
+                );
+                anuncio.setCriador(
+                        Confeiteiro_DAO.GetConfeiteiro(resultadoQuery.getInt("criador_anuncio"))
+                );
+                anuncio.setTipoAnuncio(
+                        TipoAnuncio.valueOf(
+                                UtilsBD.GetString(resultadoQuery.getString("tipo_anuncio")))
+                );
+                listaRetorno.add(anuncio);
+            }
+            declaracao.close();
+            conexao.close();
+            return listaRetorno;
+            // Verifica a exceção do bd
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
+    public static  ArrayList<Anuncio> getAnunciosPeloConfeiteiroFacebook(Confeiteiro confeiteiro) throws RequisicaoInvalidaBD{
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio= TRUE AND criador_anuncio = (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+confeiteiro.getIdFacebook()+"')" +
+                    " ORDER BY Titulo_Anuncio ASC;";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            Anuncio anuncio;
+            ArrayList<Anuncio> listaRetorno = new ArrayList();
+            // TODO: Verificar forma para converter a linha da tabela diretamente para Anuncio.
+            while(resultadoQuery.next()){
+                anuncio = new Anuncio();
+                anuncio.setId(resultadoQuery.getInt("Id_Anuncio"));
+                anuncio.setTitulo(
+                        UtilsBD.GetString(resultadoQuery.getString("titulo_anuncio"))
+                );
+                anuncio.setDescricao(
+                        UtilsBD.GetString(resultadoQuery.getString("descricao_anuncio"))
+                );
+                anuncio.setDataCriacao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("criacao_anuncio"))
+                );
+                anuncio.setDataEdicao(
+                        Utils.converteDateToGregorianCalendar(
+                                resultadoQuery.getDate("edicao_anuncio"))
+                );
+                anuncio.setPreco(
+                        resultadoQuery.getFloat("Preco_Anuncio")
+                );
+                anuncio.setCriador(
+                        Confeiteiro_DAO.GetConfeiteiro(resultadoQuery.getInt("criador_anuncio"))
+                );
+                anuncio.setTipoAnuncio(
+                        TipoAnuncio.valueOf(
+                                UtilsBD.GetString(resultadoQuery.getString("tipo_anuncio")))
+                );
+                listaRetorno.add(anuncio);
+            }
+            declaracao.close();
+            conexao.close();
+            return listaRetorno;
             // Verifica a exceção do bd
         } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
