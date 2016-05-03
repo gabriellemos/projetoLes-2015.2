@@ -5,12 +5,12 @@ package models;
  */
 public class Contato {
 
-    String numero;
-    String CodigoPais;
-    int idContato;
-    String codigoOperadora;
-    String codigoEstado;
-    int donoContato;
+    private String numero;
+    private String CodigoPais;
+    private int idContato;
+    private String codigoOperadora;
+    private String codigoEstado;
+    private int donoContato;
 
     public Contato(){}
     public String getNumero() {
@@ -61,4 +61,7 @@ public class Contato {
         this.codigoOperadora = codigoOperadora;
     }
 
+    public String toString(){
+        return String.format("+%s (%s) %s", getCodigoPais(), getCodigoEstado(), getCodigoOperadora() + getNumero());
+    }
 }

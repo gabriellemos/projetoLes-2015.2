@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
+import play.Logger;
 import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Result;
@@ -57,6 +58,9 @@ public class Application extends UserProfileController<FacebookProfile>{
     @Transactional
     public Result getFeedAds() {
         ObjectNode result = Json.newObject();
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getFeedAds())");
+
         result.set("ads", Text.getAds());
         return ok(result);
     }
