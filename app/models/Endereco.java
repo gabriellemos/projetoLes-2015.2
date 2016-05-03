@@ -77,4 +77,9 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public String toString(){
+        return String.format("%s/%s - Rua %s, %s. Bairro %s. %s",
+                getCidade(), getEstado(), getRua(), getNumero(), getBairro(), getCep());
+    }
+
 }

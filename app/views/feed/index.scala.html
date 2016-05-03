@@ -2,12 +2,12 @@
 
 @feed.main(title) {
     <div class="site-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header tool-bar class="site-header mdl-layout__header mdl-color--brown-700 mdl-color-text--brown-50" item="toolbarText" title="title"></header>
-        <div nav-bar item="navbarText" class="site-drawer mdl-layout__drawer mdl-color--brown-900 mdl-color-text-brown-50"></div>
+        <header tool-bar item="toolbarText" title="title"></header>
+        <div nav-bar item="navbarText"></div>
         <main class="mdl-layout__content mdl-color--brown-100">
             <div class="mdl-grid site-content" ui-view="main">
             </div>
-            <footer foot-bar class="mdl-mini-footer" item="footbarText"></footer>
+            <footer foot-bar item="footbarText"></footer>
         </main>
     </div>
     <div ui-view="modals">

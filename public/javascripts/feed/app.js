@@ -25,10 +25,3 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
             }
         });
 }]);
-
-// Initialize Modals -- This must be done only after all HTML are loaded.
-feedApp.run(function($rootScope, $timeout) {
-    $timeout(function() {
-        Modal.init();
-    }, 5000);
-});
