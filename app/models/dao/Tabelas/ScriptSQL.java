@@ -77,6 +77,7 @@ public class ScriptSQL {
         sqlBuilder.append("Criacao_Anuncio\t\tDATE \t\tNOT NULL, ");
         sqlBuilder.append("Preco_Anuncio\t\tMONEY\t\tDEFAULT 0.00\tNOT NULL, ");
         sqlBuilder.append("Tipo_Anuncio\t\tCHAR(16)\tNOT NULL, ");
+        sqlBuilder.append("Disponibilidade_Anuncio\t\tBOOLEAN\t\tDEFAULT TRUE\tNOT NULL, ");
         sqlBuilder.append("Criador_Anuncio\t\tINT\t\t\treferences Confeiteiro(ID_Confeiteiro)");
         sqlBuilder.append(")");
 
