@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Confeiteiro_DAO {
 
     private static java.sql.Connection conexao= null;
+    private static Statement declaracao = null;
     private static String strSql;
 
     public static void insertConfeiteiro (String Nome, String Email, String Endereco,
@@ -19,7 +20,7 @@ public class Confeiteiro_DAO {
 
         try {
             conexao= models.dao.Connection.getConnection();
-            Statement declaracao= conexao.createStatement();
+            declaracao= conexao.createStatement();
 
             strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
                     "VALUES('" + Nome + "',''" + ID_Facebook + "')";
@@ -34,6 +35,24 @@ public class Confeiteiro_DAO {
         }
     }
 
+    public static void insertConfeiteiro(Confeiteiro confeiteiro) {
+        try {
+            conexao = models.dao.Connection.getConnection();
+            declaracao= conexao.createStatement();
+
+            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook )" +
+                    "VALUES ('" + confeiteiro.getNome() + "',''" + confeiteiro.getIdFacebook() + "')";
+
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
     /*
      * Retorna listagem de confeiteiros
      */
@@ -41,7 +60,7 @@ public class Confeiteiro_DAO {
         try {
             ResultSet resultadoQuery;
             conexao = models.dao.Connection.getConnection();
-            Statement declaracao = conexao.createStatement();
+            declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Confeiteiro;";
             resultadoQuery = declaracao.executeQuery(strSql);
 
@@ -71,7 +90,7 @@ public class Confeiteiro_DAO {
         try {
             ResultSet resultado;
             conexao = models.dao.Connection.getConnection();
-            Statement declaracao = conexao.createStatement();
+            declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Confeiteiro c WHERE c.ID_Confeiteiro='" + ID + "';";
             resultado = declaracao.executeQuery(strSql);
 
