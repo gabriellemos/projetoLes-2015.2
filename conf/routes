@@ -5,7 +5,6 @@
 # Home page
 GET        /                        @controllers.Application.index
 GET        /feed                    @controllers.Application.feed
-GET        /register                @controllers.Application.register
 
 # Facebook login page
 GET         /login                  @controllers.Application.facebookIndex

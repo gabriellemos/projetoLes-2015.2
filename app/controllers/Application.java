@@ -50,13 +50,6 @@ public class Application extends UserProfileController<FacebookProfile>{
     }
 
     /**
-     * Retorna a página para registrar usuários novos
-     * @return página para registrar usuários
-     */
-    @Transactional
-    public Result register() { return ok(views.html.register.index.render("GetCake"));}
-
-    /**
      * Retorna um JSON contendo texto dos Anúncios do Feed
      * @return texto dos Anúncios do Feed
      */
@@ -97,12 +90,12 @@ public class Application extends UserProfileController<FacebookProfile>{
     @RequiresAuthentication(clientName = "FacebookClient")
     public Result facebookIndex(){
         FacebookProfile profile = getUserProfile();
+        // Confeiteiro user = Confeiteiro_DAO.GetConfeiteiro(getUserProfile().getId());
         Confeiteiro user = getConfeiteiro(profile);
         if(user != null){
-            String origin = request().getHeader("referer");
-            return redirect(origin);
+            return redirect(routes.Application.feed());
         } else
-            return redirect(routes.Application.register());
+            return ok(views.html.register.index.render("GetCake"));
     }
 
     private Confeiteiro getConfeiteiro(FacebookProfile profile) {
