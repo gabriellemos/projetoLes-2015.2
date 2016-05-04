@@ -18,11 +18,19 @@
         </p>
         <p>
             <span ng-bind="labels.contacts"></span>
-            <span ng-bind="item.contact"></span>
+            <ul class="contact-list mdl-list">
+                <li class="mdl-list__item" ng-repeat="cont in item.contacts">
+                    <span class="mdl-list__item-primary-content" ng-bind="cont"></span>
+                </li>
+            </ul>
         </p>
         <p>
             <span ng-bind="labels.address"></span>
-            <span ng-bind="item.address"></span>
+            <ul class="address-list mdl-list">
+                <li class="mdl-list__item" ng-repeat="addr in item.address">
+                    <span class="mdl-list__item-primary-content" ng-bind="addr"></span>
+                </li>
+            </ul>
         </p>
         <div class="mdl-card__actions">
             <button class="modal__close mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-bind="labels.close">

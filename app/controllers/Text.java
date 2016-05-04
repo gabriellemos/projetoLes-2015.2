@@ -32,22 +32,28 @@ public class Text {
     public static JsonNode getAds(){
         ArrayNode result = new ArrayNode(JsonNodeFactory.instance);
         List<Anuncio> list;
-        try {
-            list = Anuncio_DAO.getAnuncios();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("[ERRO]: Nenhum anúncio pode ser obtido do banco de dados no momento.\n\n"
-                                     + e.getMessage());
-        }
+
+        list = Anuncio_DAO.getAnuncios();
         for(Anuncio ad : list){
+
             ObjectNode item = Json.newObject();
             item.put("title", ad.getTitulo());
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", String.format("%.2f", ad.getPreco()));
-            item.put("contact", String.valueOf(ad.getCriador().getContato().get(0)));
-            item.put("address", String.valueOf(ad.getCriador().getEnderecos().get(0)));
+
+            ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getContatos()
+                    .forEach(c -> contacts.add(c.toString()));
+
+            item.set("contacts", contacts);
+            ArrayNode address = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getEnderecos()
+                    .forEach(e -> address.add(e.toString()));
+            item.set("address", address);
+            result.add(item);
         }
+
         return result;
     }
 

@@ -24,7 +24,11 @@ public class Application extends UserProfileController<FacebookProfile>{
      * @return página inicial do site ou a página do feed
      */
     public Result index() {
-        return home();
+        if(getUserProfile() != null){
+            return feed();
+        } else {
+            return home();
+        }
     }
 
     /**
@@ -59,6 +63,9 @@ public class Application extends UserProfileController<FacebookProfile>{
     @Transactional
     public Result getFeedAds() {
         ObjectNode result = Json.newObject();
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getFeedAds())");
+
         result.set("ads", Text.getAds());
         return ok(result);
     }
