@@ -15,8 +15,7 @@ public class Confeiteiro_DAO {
     private static Statement declaracao = null;
     private static String strSql;
 
-    public static void insertConfeiteiro (String Nome, String Email, String Endereco,
-                                       String ID_Facebook)  throws RequisicaoInvalidaBD {
+    public static void insertConfeiteiro (String Nome, String ID_Facebook)  throws RequisicaoInvalidaBD {
 
         try {
             conexao= models.dao.Connection.getConnection();
