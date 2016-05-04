@@ -113,4 +113,29 @@ public class Confeiteiro_DAO {
             throw exception;
         }
     }
+
+    public static Confeiteiro getConfeiteiro(String idFacebook) throws RequisicaoInvalidaBD {
+        try {
+            ResultSet resultado;
+            conexao = models.dao.Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Confeiteiro c WHERE c.ID_Facebook='" + idFacebook + "';";
+            resultado = declaracao.executeQuery(strSql);
+
+            Confeiteiro confeiteiroResp = new Confeiteiro();
+
+            resultado.next();
+            confeiteiroResp.setNome(resultado.getString("Nome_Confeiteiro"));
+            confeiteiroResp.setIdFacebook(resultado.getString("ID_Facebook"));
+            confeiteiroResp.setId(resultado.getInt("ID_Confeiteiro"));
+
+            declaracao.close();
+            conexao.close();
+            return confeiteiroResp;
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
 }
