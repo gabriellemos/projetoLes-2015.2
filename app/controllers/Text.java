@@ -64,8 +64,14 @@ public class Text {
      */
     public static JsonNode getToolbarUserInfo(FacebookProfile user) {
         ObjectNode result = Json.newObject();
-        result.put("name", user.getDisplayName());
-        result.put("icon", "person");
+        if(user != null){
+            result.put("name", user.getDisplayName());
+            result.put("icon", "account");
+        } else {
+            result.put("text", "Login via Facebook");
+            result.put("icon", "facebook-box");
+            result.put("url", "/login");
+        }
         return result;
     }
 

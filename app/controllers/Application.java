@@ -70,9 +70,18 @@ public class Application extends UserProfileController<FacebookProfile>{
     @Transactional
     public Result getToolbarUserInfo() {
         ObjectNode result = Json.newObject();
-        if(getUserProfile() != null)
-            result.set("user", Text.getToolbarUserInfo(getUserProfile()));
+        FacebookProfile profile = getLoggedUser();
+        if(profile != null)
+            result.set("user", Text.getToolbarUserInfo(profile));
+        else
+            result.set("login", Text.getToolbarUserInfo(profile));
         return ok(result);
+    }
+
+    private FacebookProfile getLoggedUser() {
+        if(getConfeiteiro(getUserProfile()) != null)
+            return getUserProfile();
+        return null;
     }
 
     @Transactional
@@ -119,14 +128,15 @@ public class Application extends UserProfileController<FacebookProfile>{
         } else {
             Logger.info("Tentando registrar novo Confeiteiro no BD...");
             String nome = filledForm.get("name");
-            String email = filledForm.get("email");
-            String address = filledForm.get("address");
-            String id = filledForm.get("id");
+            //String email = filledForm.get("email");
+            //String address = filledForm.get("address");
+            String faceId = filledForm.get("id");
             try {
-                Confeiteiro_DAO.insertConfeiteiro(nome, email, address, id);
+                Confeiteiro_DAO.insertConfeiteiro(nome, faceId);
             } catch (Exception e){
                 Logger.error(e.getMessage());
-                return badRequest(e.getMessage());
+                throw e;
+                //return badRequest(e.getMessage());
             }
         }
 

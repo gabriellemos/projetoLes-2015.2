@@ -12,6 +12,8 @@ feedApp.controller('FeedController', function($scope, $state, HTTP, JSONs) {
     HTTP.get('api/toolbar-user').success(function(response){
         if(response.user)
             $scope.toolbarText.user = response.user;
+        else
+            $scope.toolbarText.login = response.login;
     });
     JSONs.get('ToolbarDefault.json').success(function(data){
         $scope.toolbarText.btns = data;
