@@ -98,9 +98,7 @@ public class Application extends UserProfileController<FacebookProfile>{
      */
     @RequiresAuthentication(clientName = "FacebookClient")
     public Result facebookIndex(){
-        FacebookProfile profile = getUserProfile();
-        // Confeiteiro user = Confeiteiro_DAO.GetConfeiteiro(getUserProfile().getId());
-        Confeiteiro user = getConfeiteiro(profile);
+        Confeiteiro user = getConfeiteiro(getUserProfile());
         if(user != null){
             return redirect(routes.Application.feed());
         } else
@@ -108,12 +106,11 @@ public class Application extends UserProfileController<FacebookProfile>{
     }
 
     private Confeiteiro getConfeiteiro(FacebookProfile profile) {
-        List<Confeiteiro> confeiteiros = Confeiteiro_DAO.GetConfeiteiros();
-        for (Confeiteiro c : confeiteiros){
-            if(c.getIdFacebook().equals(profile.getId()))
-                return c;
+        try {
+            return Confeiteiro_DAO.getConfeiteiro(profile.getId());
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 
     /**
@@ -127,12 +124,11 @@ public class Application extends UserProfileController<FacebookProfile>{
             return badRequest("Erro ao receber os dados.");
         } else {
             Logger.info("Tentando registrar novo Confeiteiro no BD...");
-            String nome = filledForm.get("name");
-            //String email = filledForm.get("email");
-            //String address = filledForm.get("address");
-            String faceId = filledForm.get("id");
+            Confeiteiro conf = new Confeiteiro();
+            conf.setNome(filledForm.get("name"));
+            conf.setIdFacebook(filledForm.get("id"));
             try {
-                Confeiteiro_DAO.insertConfeiteiro(nome, faceId);
+                Confeiteiro_DAO.insertConfeiteiro(conf);
             } catch (Exception e){
                 Logger.error(e.getMessage());
                 throw e;
