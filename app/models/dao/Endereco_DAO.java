@@ -1,8 +1,9 @@
 package models.dao;
 
-import org.apache.poi.openxml4j.exceptions.InvalidOperationException;
-
+import models.Endereco;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 /**
@@ -14,13 +15,13 @@ public class Endereco_DAO {
     private static String strSql;
 
     public static void insertEndereco (String rua, String cidade, String numero,
-                                      String bairro, String cep, int criador,
-                                      String estado) throws Exception {
+                                         String bairro, String cep, int criador,
+                                         String estado) throws Exception {
         try {
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
 
-            strSql = "INSERT INTO Anuncio (Rua, Numero, Bairro , " +
+            strSql = "INSERT INTO Endereco (Rua, Numero, Bairro , " +
                     "cidade, Estado, Dono_Endereco , Cep) VALUES('" +
                     rua + "','" + numero + "','" + bairro + "','" + cidade +
                     "','" + estado + "','" + criador  + "','" + cep + "')";
@@ -29,7 +30,98 @@ public class Endereco_DAO {
             declaracao.close();
             conexao.close();
         } catch(Exception e){
-            throw new InvalidOperationException("Erro ao cadastrar Endereço");
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
     }
+
+    public static void insertEndereco (Endereco end) throws Exception {
+        try {
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+
+            strSql = "INSERT INTO Endereco (Rua, Numero, Bairro , " +
+                    "cidade, Estado, Dono_Endereco , Cep) VALUES('" +
+                    end.getRua() + "','" + end.getNumero()+ "','" + end.getBairro() + "','" + end.getCidade() +
+                    "','" + end.getEstado() + "','" + end.getConfeiteiro() + "','" + end.getCep() + "')";
+
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        } catch(Exception e){
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
+    public static ArrayList<Endereco> getEnderecos(int idConfeiteiro)throws Exception {
+
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+
+            strSql = "SELECT * FROM Endereco WHERE Dono_Endereco= '"+idConfeiteiro+"';";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            ArrayList<Endereco> endRetorno= new ArrayList<Endereco>();
+            Endereco end;
+            while(resultadoQuery.next()){
+                end= new Endereco();
+                end.setId(resultadoQuery.getInt("ID_Endereco"));
+                end.setRua(resultadoQuery.getString("Rua"));
+                end.setNumero(resultadoQuery.getString("Numero"));
+                end.setBairro(resultadoQuery.getString("Bairro"));
+                end.setCidade(resultadoQuery.getString("cidade"));
+                end.setEstado(resultadoQuery.getString("Estado"));
+                end.setConfeiteiro(resultadoQuery.getInt("Dono_Endereco"));
+                end.setCep(resultadoQuery.getString("Cep"));
+                endRetorno.add(end);
+
+            }
+            declaracao.close();
+            conexao.close();
+            return endRetorno;
+        } catch(Exception e){
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
+    public static ArrayList<Endereco> getEnderecos(String idConfeiteiroFacebook)throws Exception {
+
+        try {
+            ResultSet resultadoQuery;
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+
+            strSql = "SELECT * FROM Endereco WHERE Dono_Endereco= (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+idConfeiteiroFacebook+"');";
+            resultadoQuery = declaracao.executeQuery(strSql);
+            ArrayList<Endereco> endRetorno= new ArrayList<Endereco>();
+            Endereco end;
+            while(resultadoQuery.next()){
+                end= new Endereco();
+                end.setId(resultadoQuery.getInt("ID_Endereco"));
+                end.setRua(resultadoQuery.getString("Rua"));
+                end.setNumero(resultadoQuery.getString("Numero"));
+                end.setBairro(resultadoQuery.getString("Bairro"));
+                end.setCidade(resultadoQuery.getString("cidade"));
+                end.setEstado(resultadoQuery.getString("Estado"));
+                end.setConfeiteiro(resultadoQuery.getInt("Dono_Endereco"));
+                end.setCep(resultadoQuery.getString("Cep"));
+                endRetorno.add(end);
+
+            }
+            declaracao.close();
+            conexao.close();
+            return endRetorno;
+        } catch(Exception e){
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
 }

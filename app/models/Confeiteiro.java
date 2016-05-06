@@ -15,9 +15,8 @@ public class Confeiteiro {
 	
 	private String nome;
 	private ArrayList<Endereco> enderecos;
-	private ArrayList<Email> emails;
 	private ArrayList<Contato> contatos;
-
+	private ArrayList<Email> emails;
 	private  String idFacebook;
 
 	private final String STRING_VAZIA = "";
@@ -195,4 +194,16 @@ public class Confeiteiro {
 		return returnResult;
 	}
 
+	public void setEnderecos(ArrayList<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+
+	public void setEmails(ArrayList<Email> emails) {
+		this.emails = emails;
+	}
+
+	public void setContatos(ArrayList<Contato> contatos) {
+		this.contatos = contatos;
+	}
 }

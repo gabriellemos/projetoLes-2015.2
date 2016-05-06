@@ -15,6 +15,8 @@ public class Email {
         setDonoEmail(idDono);
     };
 
+    public Email(){};
+
     public int getIdEmail() {
         return idEmail;
     }
