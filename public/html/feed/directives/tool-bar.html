@@ -6,7 +6,7 @@
         <span class="mdl-color-text--brown-50 p-l-10" ng-bind="item.user.name"></span>
     </button>
     <ul ng-if="item.user" class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="userbtn">
-        <li class="mdl-menu__item" ng-repeat="btn in item.btns" ng-click="callFunc(btn.url)">
+        <li class="mdl-menu__item" ng-repeat="btn in item.btns" data-ng-click="callFunc(btn.func)">
             <i class="mdi mdi-{{btn.icon}}"></i>
             <span class="p-l-10" ng-bind="btn.text"></span>
         </li>
