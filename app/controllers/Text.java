@@ -79,7 +79,10 @@ public class Text {
         ObjectNode result = Json.newObject();
         if(user != null) {
             result.put("name", user.getDisplayName());
-            result.put("city", user.getHometown().getName());
+			if(user.getHometown() != null)
+				result.put("city", user.getHometown().getName());
+			else
+				result.put("city", "");
             result.put("email", user.getEmail());
             result.put("id", user.getId());
         } else {
