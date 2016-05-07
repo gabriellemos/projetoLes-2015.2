@@ -80,16 +80,12 @@ public class Text {
         if(user != null) {
             result.put("name", user.getDisplayName());
             result.put("city", user.getHometown().getName());
-            result.put("address", user.getLocation());
             result.put("email", user.getEmail());
             result.put("id", user.getId());
         } else {
-            result.put("name", "");
-            result.put("city", "");
-            result.put("address", "");
-            result.put("email", "");
-            result.put("id", "");
+            throw new RuntimeException("Usuário não logado no Facebook");
         }
+		result.put("address", "");
         result.put("phone", "");
         result.put("news", "");
         return result;
