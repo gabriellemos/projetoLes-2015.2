@@ -2,13 +2,17 @@
     <span class="mdl-layout-title mdl-color-text--brown-50" ng-bind="title"></span>
     <div class="mdl-layout-spacer"></div>
     <button ng-if="item.user" class="mdl-button mdl-js-button mdl-js-ripple-effect" id="userbtn">
-        <i class="material-icons mdl-color-text--brown-50" ng-bind="item.user.icon"></i>
-        <span class="mdl-color-text--brown-50" ng-bind="item.user.name"></span>
+        <i class="mdi mdi-{{item.user.icon}} mdl-color-text--brown-50"></i>
+        <span class="mdl-color-text--brown-50 p-l-10" ng-bind="item.user.name"></span>
     </button>
     <ul ng-if="item.user" class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="userbtn">
-        <li class="mdl-menu__item" ng-repeat="btn in item.btns" ng-click="callFunc(btn.url)">
-            <i class="material-icons" ng-bind="btn.icon"></i>
-            <span ng-bind="btn.text"></span>
+        <li class="mdl-menu__item" ng-repeat="btn in item.btns" data-ng-click="callFunc(btn.func)">
+            <i class="mdi mdi-{{btn.icon}}"></i>
+            <span class="p-l-10" ng-bind="btn.text"></span>
         </li>
     </ul>
+    <a ng-href="{{item.login.url}}" ng-if="item.login" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+        <i class="mdi mdi-{{item.login.icon}} mdl-color-text--brown-50"></i>
+        <span class="mdl-color-text--brown-50 p-l-10" ng-bind="item.login.text"></span>
+    </a>
 </div>

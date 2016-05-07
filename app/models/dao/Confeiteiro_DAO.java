@@ -40,7 +40,7 @@ public class Confeiteiro_DAO {
             declaracao= conexao.createStatement();
 
             strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook )" +
-                    "VALUES ('" + confeiteiro.getNome() + "',''" + confeiteiro.getIdFacebook() + "')";
+                    "VALUES ('" + confeiteiro.getNome() + "','" + confeiteiro.getIdFacebook() + "')";
 
             declaracao.executeUpdate(strSql);
             declaracao.close();

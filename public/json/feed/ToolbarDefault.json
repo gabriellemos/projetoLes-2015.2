@@ -1,5 +1,5 @@
 [
-  { "url": "/logout",
+  { "func": "logout",
     "icon": "logout",
     "text": "Logout"   }
 ]
