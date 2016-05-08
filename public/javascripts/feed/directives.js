@@ -14,7 +14,7 @@ feedApp.directive('navBar', function() {
 });
 
 /* Directive informing section, and with button indicating login */
-feedApp.directive('toolBar', function() {
+feedApp.directive('toolBar', function($http, $parse, $window) {
     return {
         restrict: 'A',
         scope: {
@@ -23,29 +23,20 @@ feedApp.directive('toolBar', function() {
         },
         link: function(scope, element, attr){
             element.addClass('site-header mdl-layout__header mdl-color--brown-700 mdl-color-text--brown-50');
-            componentHandler.upgradeDom();
-        },
-        controller: ['$parse', "$http", "$window", "$state", function($scope, $parse, $http, $window, $state) {
-            $scope.callFunc = function(exp) {
-                //Parse the function name to get the expression and invoke it on the scope
-                $parse(exp)($scope);
-            };
-            $scope.logout = function() {
+
+            scope.logout = function() {
                 // Execute logout route, and refresh page
                 $http.get('/logout').success(function() {
                     $window.location.reload();
                 }).error(function() {});
             };
-            $scope.getStateName = function(){
-                // Get the current state title
-                try {
-                    $scope.currentState = $state.get($state.current).data.title;
-                }
-                catch(err) {
-                    $scope.currentState =  '';
-                }
+
+            scope.callFunc = function(exp) {
+                if (exp == 'logout') scope.logout();
             };
-        }],
+
+            componentHandler.upgradeDom();
+        },
         templateUrl: '/assets/html/feed/directives/tool-bar.html'
     };
 });

@@ -11,13 +11,14 @@ import java.util.ArrayList;
 public class Confeiteiro_DAO {
 
     private static java.sql.Connection conexao= null;
+    private static Statement declaracao = null;
     private static String strSql;
 
     public static void insertConfeiteiro (String Nome, String ID_Facebook)  throws RequisicaoInvalidaBD {
 
         try {
             conexao= models.dao.Connection.getConnection();
-            Statement declaracao= conexao.createStatement();
+            declaracao= conexao.createStatement();
 
             strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
                     "VALUES('" + Nome + "','" + ID_Facebook + "')";
@@ -44,7 +45,7 @@ public class Confeiteiro_DAO {
         try {
             ResultSet resultadoQuery;
             conexao = models.dao.Connection.getConnection();
-            Statement declaracao = conexao.createStatement();
+            declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Confeiteiro;";
             resultadoQuery = declaracao.executeQuery(strSql);
 
@@ -77,7 +78,7 @@ public class Confeiteiro_DAO {
         try {
             ResultSet resultado;
             conexao = models.dao.Connection.getConnection();
-            Statement declaracao = conexao.createStatement();
+            declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Confeiteiro c WHERE c.ID_Confeiteiro='" + ID + "';";
             resultado = declaracao.executeQuery(strSql);
 
@@ -98,6 +99,31 @@ public class Confeiteiro_DAO {
             return confeiteiroResp;
             // Verifica a exceção do bd
         }catch (Exception e){
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
+    public static Confeiteiro getConfeiteiro(String idFacebook) throws RequisicaoInvalidaBD {
+        try {
+            ResultSet resultado;
+            conexao = models.dao.Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT * FROM Confeiteiro c WHERE c.ID_Facebook='" + idFacebook + "';";
+            resultado = declaracao.executeQuery(strSql);
+
+            Confeiteiro confeiteiroResp = new Confeiteiro();
+
+            resultado.next();
+            confeiteiroResp.setNome(resultado.getString("Nome_Confeiteiro"));
+            confeiteiroResp.setIdFacebook(resultado.getString("ID_Facebook"));
+            confeiteiroResp.setId(resultado.getInt("ID_Confeiteiro"));
+
+            declaracao.close();
+            conexao.close();
+            return confeiteiroResp;
+        } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());
             throw exception;

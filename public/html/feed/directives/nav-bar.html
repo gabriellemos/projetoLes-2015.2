@@ -4,7 +4,7 @@
 </header>
 <nav class="site-navigation mdl-navigation mdl-color--brown-800">
     <a class="mdl-navigation__link" ui-sref="{{section.url}}" ng-repeat="section in item.sections">
-        <i class="mdl-color-text--brown-50 material-icons" role="presentation" ng-bind="section.icon"></i>
-        <span class="mdl-color-text--brown-50" ng-bind="section.name"></span>
+        <i class="mdi mdi-{{section.icon}} mdl-color-text--brown-50" role="presentation"></i>
+        <span class="mdl-color-text--brown-50 p-l-10" ng-bind="section.name"></span>
     </a>
 </nav>

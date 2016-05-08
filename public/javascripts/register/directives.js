@@ -115,7 +115,8 @@ regApp.directive('panelUser', function() {
         restrict: 'A',
         transclude: true,
         scope: {
-            item: '=item'
+            item: '=item',
+            face: '=face'
         },
         link: function(scope, element, attr){
             element.addClass('mdl-tabs__panel');
