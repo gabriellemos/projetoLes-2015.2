@@ -34,21 +34,7 @@ public class Confeiteiro_DAO {
 
     public static void insertConfeiteiro (Confeiteiro conf)  throws RequisicaoInvalidaBD {
 
-        try {
-            conexao= models.dao.Connection.getConnection();
-            Statement declaracao= conexao.createStatement();
-
-            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
-                    "VALUES('" + conf.getNome() + "','" + conf.getIdFacebook()+ "')";
-
-            declaracao.executeUpdate(strSql);
-            declaracao.close();
-            conexao.close();
-        } catch(Exception e){
-            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
-            exception.setStackTrace(e.getStackTrace());
-            throw exception;
-        }
+       insertConfeiteiro(conf.getNome(), conf.getIdFacebook());
     }
 
     /*
