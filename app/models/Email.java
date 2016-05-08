@@ -6,14 +6,16 @@ package models;
 public class Email {
 
 
-    int idEmail;
-    String email;
-    int DonoEmail;
+    private int idEmail;
+    private String email;
+    private int DonoEmail;
 
     public Email(String email, int idDono){
         setEmail(email);
         setDonoEmail(idDono);
     };
+
+    public Email(){};
 
     public int getIdEmail() {
         return idEmail;

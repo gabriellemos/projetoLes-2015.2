@@ -4,7 +4,6 @@ import models.Anuncio;
 import models.Confeiteiro;
 import models.TipoAnuncio;
 import models.Utils;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -183,12 +182,12 @@ public static  void removeAnuncio (int id){
         }
     }
 
-    public static ArrayList<Anuncio> getAnunciosPelaCidadeEData(String cidade, GregorianCalendar data) throws RequisicaoInvalidaBD{
+    public static ArrayList<Anuncio> getAnunciosPelaCidade(String cidade) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE Edicao_Anuncio = '"+ data+"' AND Disponibilidade_Anuncio = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();
