@@ -24,7 +24,7 @@ public class Anuncio_DAO {
      * Cria um Anúncio no banco de dados. Um id é atribuido automaticamente no ato da criação.
      */
     public static void insertAnuncio (String titulo, String descricao, GregorianCalendar dataEdicao,
-                                      float preco, int criador, String tipo) throws RequisicaoInvalidaBD {
+                                      String preco, int criador, String tipo) throws RequisicaoInvalidaBD {
 
         TipoAnuncio tipoAnuncio = TipoAnuncio.valueOf(tipo.trim());
         Confeiteiro confeiteiro = new Confeiteiro();
@@ -114,7 +114,7 @@ public static  void removeAnuncio (int id){
         ModificarVisibilidadeAnuncio(boll, anuncio.getId());
     }
 
-    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, int id){
+    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, String preco, String tipo, int id){
 
         try{
             conexao = Connection.getConnection();
@@ -134,7 +134,7 @@ public static  void removeAnuncio (int id){
         }
     }
 
-    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, Anuncio anuncio){
+    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, String preco, String tipo, Anuncio anuncio){
 
         try{
             conexao = Connection.getConnection();
@@ -353,7 +353,7 @@ public static  void removeAnuncio (int id){
                         resultadoQuery.getDate("Criacao_Anuncio"))
         );
         anuncio.setPreco(
-                resultadoQuery.getFloat("Preco_Anuncio")
+                resultadoQuery.getString("Preco_Anuncio")
         );
         anuncio.setTipoAnuncio(
                 TipoAnuncio.valueOf(UtilsBD.GetString(
