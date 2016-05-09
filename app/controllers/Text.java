@@ -40,7 +40,7 @@ public class Text {
             item.put("title", ad.getTitulo());
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
-            item.put("price", String.format("%.2f", ad.getPreco()));
+            item.put("price", ad.getPreco());
 
             ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
             ad.getCriador().getContatos()

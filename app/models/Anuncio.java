@@ -16,11 +16,10 @@ public class Anuncio {
     private GregorianCalendar dataEdicao;
     private GregorianCalendar dataCriacao;
 
-    private float preco;
+    private String preco;
     private Confeiteiro criador;
     private TipoAnuncio tipoAnuncio;
     private boolean disponibilidade;
-    private  final float valorDefault= 0.0f;
 
     private final String ARGUMENTO_INVALIDO = "Argumento '%s' recebendo valores inválidos";
 
@@ -39,7 +38,7 @@ public class Anuncio {
      * @param confeiteiro Confeiteiro associado.
      */
     public Anuncio(String titulo, Confeiteiro confeiteiro) {
-        this(titulo, confeiteiro, "Sem descrição", TipoAnuncio.COMUM, 0.0f);
+        this(titulo, confeiteiro, "Sem descrição", TipoAnuncio.COMUM, "0.0");
     }
 
     /**
@@ -52,7 +51,7 @@ public class Anuncio {
      * @param preco         Preço do anúncio.
      */
     public Anuncio(String titulo, Confeiteiro confeiteiro, String descricao,
-                   TipoAnuncio tipoAnuncio, float preco) {
+                   TipoAnuncio tipoAnuncio, String preco) {
         setTitulo(titulo);
         setCriador(confeiteiro);
         setDescricao(descricao);
@@ -136,7 +135,7 @@ public class Anuncio {
         this.dataCriacao = dataCriacao;
     }
 
-    public float getPreco() {
+    public String getPreco() {
         return preco;
     }
 
@@ -145,8 +144,8 @@ public class Anuncio {
      *
      * @param preco novo preco do Anúncio
      */
-    public void setPreco(float preco) {
-        if (preco < valorDefault) {
+    public void setPreco(String preco) {
+        if (preco == null || preco == "") {
             throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO, "Preço"));
         }
         this.preco = preco;
@@ -187,9 +186,6 @@ public class Anuncio {
     public boolean getDisponibilidade (){return this.disponibilidade;}
 
     public void setDisponibilidade(boolean dispor){
-        if(this.disponibilidade == dispor){
-            throw new IllegalArgumentException(String.format(ARGUMENTO_INVALIDO,"Disponibilidade sendo utilizada" ));
-        }
         this.disponibilidade= dispor;
     }
 
