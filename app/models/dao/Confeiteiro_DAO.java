@@ -12,15 +12,15 @@ import java.util.HashSet;
  */
 public class Confeiteiro_DAO {
 
-    private static java.sql.Connection conexao= null;
+    private static java.sql.Connection conexao = null;
     private static Statement declaracao = null;
     private static String strSql;
 
-    public static void insertConfeiteiro (String Nome, String ID_Facebook)  throws RequisicaoInvalidaBD {
+    public static void insertConfeiteiro(String Nome, String ID_Facebook) throws RequisicaoInvalidaBD {
 
         try {
-            conexao= models.dao.Connection.getConnection();
-            declaracao= conexao.createStatement();
+            conexao = models.dao.Connection.getConnection();
+            declaracao = conexao.createStatement();
 
             strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
                     "VALUES('" + Nome + "','" + ID_Facebook + "')";
@@ -28,20 +28,20 @@ public class Confeiteiro_DAO {
             declaracao.executeUpdate(strSql);
             declaracao.close();
             conexao.close();
-        } catch(Exception e){
+        } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());
             throw exception;
         }
     }
 
-    public static void insertConfeiteiro (Confeiteiro conf)  throws RequisicaoInvalidaBD {
+    public static void insertConfeiteiro(Confeiteiro conf) throws RequisicaoInvalidaBD {
 
-       insertConfeiteiro(conf.getNome(), conf.getIdFacebook());
+        insertConfeiteiro(conf.getNome(), conf.getIdFacebook());
     }
 
-    public static void modificarAtributosDeConfeiteiro (String nome, ArrayList<Endereco> enderecos, ArrayList<Contato> contatos, ArrayList<Email> emails, String idFacebook, int idConfeiteiro, HashSet<Anuncio> meusAnuncios) throws Exception{
-        try{
+    public static void modificarAtributosDeConfeiteiro(String nome, ArrayList<Endereco> enderecos, ArrayList<Contato> contatos, ArrayList<Email> emails, String idFacebook, int idConfeiteiro, HashSet<Anuncio> meusAnuncios) throws Exception {
+        try {
             Endereco_DAO enderecoDao = new Endereco_DAO();
             Contato_DAO contatoDao = new Contato_DAO();
             Email_DAO emailDao = new Email_DAO();
@@ -64,31 +64,31 @@ public class Confeiteiro_DAO {
             }
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql= "UPDATE  Confeiteiro SET  Nome_Confeiteiro  = '"+nome+"', ID_Facebook = '"+idFacebook+"' WHERE ID_Confeiteiro = '"+idConfeiteiro+"';";
+            strSql = "UPDATE  Confeiteiro SET  Nome_Confeiteiro  = '" + nome + "', ID_Facebook = '" + idFacebook + "' WHERE ID_Confeiteiro = '" + idConfeiteiro + "';";
             declaracao.executeUpdate(strSql);
             declaracao.close();
             conexao.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());
             throw exception;
         }
+    }
 
     /*
      * Retorna listagem de confeiteiros
      */
-    public static ArrayList<Confeiteiro> GetConfeiteiros() throws RequisicaoInvalidaBD{
+    public static ArrayList<Confeiteiro> GetConfeiteiros ()throws RequisicaoInvalidaBD {
         try {
             ResultSet resultadoQuery;
             conexao = models.dao.Connection.getConnection();
             declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Confeiteiro;";
             resultadoQuery = declaracao.executeQuery(strSql);
-
             Confeiteiro confeiteiro;
             ArrayList listaRetorno = new ArrayList();
             // TODO: Verificar forma para converter a linha da tabela diretamente para Confeiteiro.
-            while(resultadoQuery.next()){
+            while (resultadoQuery.next()) {
                 confeiteiro = new Confeiteiro();
                 confeiteiro.setNome(resultadoQuery.getString("Nome_Confeiteiro"));
                 confeiteiro.setIdFacebook(resultadoQuery.getString("ID_Facebook"));
@@ -98,19 +98,18 @@ public class Confeiteiro_DAO {
                 confeiteiro.setContatos(Contato_DAO.getContatos(confeiteiro.getId()));
                 listaRetorno.add(confeiteiro);
             }
-
             declaracao.close();
             conexao.close();
             return listaRetorno;
             // Verifica a exceção do bd
-        } catch (Exception e){
+        } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());
             throw exception;
         }
     }
 
-    public static Confeiteiro GetConfeiteiro(int ID) throws RequisicaoInvalidaBD{
+    public static Confeiteiro GetConfeiteiro(int ID) throws RequisicaoInvalidaBD {
         try {
             ResultSet resultado;
             conexao = models.dao.Connection.getConnection();
@@ -134,7 +133,7 @@ public class Confeiteiro_DAO {
             conexao.close();
             return confeiteiroResp;
             // Verifica a exceção do bd
-        }catch (Exception e){
+        } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());
             throw exception;
@@ -165,4 +164,5 @@ public class Confeiteiro_DAO {
             throw exception;
         }
     }
+
 }

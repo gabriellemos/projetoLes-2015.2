@@ -32,19 +32,20 @@ public class Email_DAO {
         }
     }
 
-    public static void modificarAtributosDeEmail (String email, int DonoEmail, int idEmail) throws Exception{
-        try{
+    public static void modificarAtributosDeEmail (String email, int DonoEmail, int idEmail) throws Exception {
+        try {
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql= "UPDATE  Email SET  Email  = '"+email+"', Dono_Email = '"+DonoEmail+"' WHERE ID_Email = '"+idEmail+"';";
+            strSql = "UPDATE  Email SET  Email  = '" + email + "', Dono_Email = '" + DonoEmail + "' WHERE ID_Email = '" + idEmail + "';";
             declaracao.executeUpdate(strSql);
             declaracao.close();
             conexao.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());
             throw exception;
         }
+    }
 
     public static ArrayList<Email> getEmails(int idConfeiteiro)throws Exception {
 
