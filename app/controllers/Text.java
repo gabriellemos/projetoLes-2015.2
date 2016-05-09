@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Anuncio;
-import models.Confeiteiro;
 import models.dao.Anuncio_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import play.libs.Json;
@@ -54,6 +53,40 @@ public class Text {
             result.add(item);
         }
 
+        return result;
+    }
+
+    public static JsonNode getAdsConfeiteiro(int IdConfeiteiro) {
+        ArrayNode result = new ArrayNode(JsonNodeFactory.instance);
+        List<Anuncio> list;
+
+        try {
+            list = Anuncio_DAO.getAnunciosPeloConfeiteiro(IdConfeiteiro);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("[ERRO]: Nenhum anúncio pode ser obtido do banco de dados no momento.\n\n"
+                    + e.getMessage());
+            }
+
+        for (Anuncio ad : list) {
+            ObjectNode item = Json.newObject();
+            item.put("title", ad.getTitulo());
+            item.put("chef", ad.getCriador().getNome());
+            item.put("imglink", cakes[rand(0, cakes.length - 1)]);
+            item.put("price", ad.getPreco());
+
+            ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getContatos()
+                    .forEach(c -> contacts.add(c.toString()));
+
+            item.set("contacts", contacts);
+            ArrayNode address = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getEnderecos()
+                    .forEach(e -> address.add(e.toString()));
+            item.set("address", address);
+            result.add(item);
+
+        }
         return result;
     }
 

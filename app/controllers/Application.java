@@ -64,6 +64,24 @@ public class Application extends UserProfileController<FacebookProfile>{
     }
 
     /**
+    * Retorna um JSON contendo texto dos Anúncios de um confeiteiro
+    * @return Se existir algum confeiteiro logado, retorna seus anúncios. Caso contrário, retorna os anúncios do confeiteiro de id 1 no BD
+    */
+    @Transactional
+    public Result getFeedAdsConfeiteiro() {
+        ObjectNode result = Json.newObject();
+
+        if(getUserProfile() != null) {
+            Confeiteiro conf = Confeiteiro_DAO.getConfeiteiro(getUserProfile().getId());
+            result.set("adsConfeiteiro", Text.getAdsConfeiteiro(conf.getId())); // idConfeiteiroLogado
+        } else {
+            result.set("adsConfeiteiro", Text.getAdsConfeiteiro(1));
+        }
+
+        return ok(result);
+    }
+
+    /**
      * Retorna um JSON contendo texto dos Anúncios do Feed
      * @return texto dos Anúncios do Feed
      */

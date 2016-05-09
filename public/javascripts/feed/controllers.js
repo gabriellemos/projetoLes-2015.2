@@ -47,3 +47,22 @@ feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
         }, 2000);
     });
 });
+
+feedApp.controller('AdsControllerConf', function($scope, $timeout, HTTP, JSONs) {
+    // Load Toolbar with new Title
+    $scope.setStateTitle();
+
+    JSONs.get('labels/AdsDefault.json').success(function(data){
+        $scope.labels = data;
+    }); // Title
+
+    $scope.adsList = [];
+
+    HTTP.get('/api/adsConfeiteiro').success(function(response){
+        $scope.adsList = response.adsConfeiteiro;
+
+        $timeout(function() {
+            Modal.init();
+        }, 2000);
+    });
+});

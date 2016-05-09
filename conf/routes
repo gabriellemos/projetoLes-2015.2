@@ -19,6 +19,7 @@ POST       /reg/user                @controllers.Application.registerUser
 
 # Api (JSON Requests)
 GET        /api/ads                 @controllers.Application.getFeedAds
+GET        /api/adsConfeiteiro      @controllers.Application.getFeedAdsConfeiteiro
 GET        /api/toolbar-user        @controllers.Application.getToolbarUserInfo
 GET        /api/facebook-info       @controllers.Application.getFacebookInfo
 
