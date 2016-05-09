@@ -56,6 +56,21 @@ public class Contato_DAO {
         }
     }
 
+    public static void modificarAtributosDeContato (String numero, String codigoPais, int idContato, String codigoOperadora, String codigoEstado, int donoContato) throws Exception{
+        try{
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql= "UPDATE  Contato SET  Numero_Contato  = '"+numero+"', Codigo_Estado= '"+ codigoEstado+"'," +
+                    "Codigo_Operadora= '"+codigoOperadora+"', Codigo_Pais= '"+ codigoPais+"', Dono_Contato = '"+donoContato+"' WHERE ID_Contato = '"+idContato+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+
     public static ArrayList<Contato> getContatos(int idConfeiteiro)throws Exception {
         try {
             ResultSet resultadoQuery;

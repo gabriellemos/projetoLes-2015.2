@@ -1,9 +1,11 @@
 package models.dao;
 
-import models.Confeiteiro;
+import models.*;
+
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by jordan on 08/04/2016.
@@ -37,6 +39,40 @@ public class Confeiteiro_DAO {
 
        insertConfeiteiro(conf.getNome(), conf.getIdFacebook());
     }
+
+    public static void modificarAtributosDeConfeiteiro (String nome, ArrayList<Endereco> enderecos, ArrayList<Contato> contatos, ArrayList<Email> emails, String idFacebook, int idConfeiteiro, HashSet<Anuncio> meusAnuncios) throws Exception{
+        try{
+            Endereco_DAO enderecoDao = new Endereco_DAO();
+            Contato_DAO contatoDao = new Contato_DAO();
+            Email_DAO emailDao = new Email_DAO();
+            Anuncio_DAO anuncioDao = new Anuncio_DAO();
+            for (Endereco endereco :
+                    enderecos) {
+                enderecoDao.modificarAtributosDeEndereco(endereco.getRua(), endereco.getId(), endereco.getCidade(), endereco.getNumero(), endereco.getBairro(), endereco.getCep(), endereco.getEstado(), endereco.getConfeiteiro());
+            }
+            for (Contato contato :
+                    contatos) {
+                contatoDao.modificarAtributosDeContato(contato.getNumero(), contato.getCodigoPais(), contato.getIdContato(), contato.getCodigoOperadora(), contato.getCodigoEstado(), contato.getDonoContato());
+            }
+            for (Email email :
+                    emails) {
+                emailDao.modificarAtributosDeEmail(email.getEmail(), email.getDonoEmail(), email.getIdEmail());
+            }
+            for (Anuncio anuncio :
+                    meusAnuncios) {
+                anuncioDao.ModificarAtributosDeAnuncio(anuncio.getTitulo(), anuncio.getDescricao(), anuncio.getPreco(), anuncio.getTipoAnuncio().toString(), anuncio);
+            }
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql= "UPDATE  Confeiteiro SET  Nome_Confeiteiro  = '"+nome+"', ID_Facebook = '"+idFacebook+"' WHERE ID_Confeiteiro = '"+idConfeiteiro+"';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        }catch (Exception e){
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
 
     /*
      * Retorna listagem de confeiteiros
