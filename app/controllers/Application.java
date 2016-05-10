@@ -5,6 +5,7 @@ import models.Confeiteiro;
 import models.Contato;
 import models.Endereco;
 import models.dao.Confeiteiro_DAO;
+import models.dao.Contato_DAO;
 import models.dao.Endereco_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import org.pac4j.play.java.RequiresAuthentication;
@@ -167,10 +168,11 @@ public class Application extends UserProfileController<FacebookProfile>{
 
             try {
                 Confeiteiro_DAO.insertConfeiteiro(conf);
+                Endereco_DAO.insertEndereco(end);
+                Contato_DAO.insertContato(cont);
             } catch (Exception e){
                 Logger.error(e.getMessage());
-                throw e;
-                //return badRequest(e.getMessage());
+                return badRequest(e.getMessage());
             }
         }
 
