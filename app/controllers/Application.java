@@ -2,7 +2,10 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Confeiteiro;
+import models.Contato;
+import models.Endereco;
 import models.dao.Confeiteiro_DAO;
+import models.dao.Endereco_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
@@ -124,9 +127,26 @@ public class Application extends UserProfileController<FacebookProfile>{
             return badRequest("Erro ao receber os dados.");
         } else {
             Logger.info("Tentando registrar novo Confeiteiro no BD...");
+
             Confeiteiro conf = new Confeiteiro();
             conf.setNome(filledForm.get("name"));
             conf.setIdFacebook(filledForm.get("id"));
+
+            Endereco end = new Endereco();
+            end.setCidade(filledForm.get("city"));
+            end.setEstado(filledForm.get("state"));
+            end.setRua(filledForm.get("rua"));
+            end.setNumero(filledForm.get("number"));
+            end.setBairro(filledForm.get("neighborhood"));
+            end.setCep(filledForm.get("cep"));
+            end.setConfeiteiro(conf.getId());
+
+            Contato cont = new Contato();
+            cont.setCodigoPais(filledForm.get("countryCode"));
+            cont.setCodigoEstado(filledForm.get("stateCode"));
+            cont.setNumero(filledForm.get("phone"));
+            cont.setDonoContato(conf.getId());
+
             try {
                 Confeiteiro_DAO.insertConfeiteiro(conf);
             } catch (Exception e){
