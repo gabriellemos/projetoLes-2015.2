@@ -1,32 +1,91 @@
 <div class="p-l-20 p-r-20 p-b-20">
 	<br>
 	<h4 ng-bind="item.text"></h4>
-	<br> 
-	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.name}">
-		<input class="mdl-textfield__input" type="text" name="name" id="name" ng-attr-value="face.name" ng-model="face.name" required />
-		<label class="mdl-textfield__label" for="name" ng-bind="item.nameLbl"></label>
+	<br>
+	<div class="mdl-grid mdl-grid-mask">
+		<div class="mdl-cell-mask mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.name}">
+				<input class="mdl-textfield__input" type="text" name="name" id="name" ng-attr-value="face.name" ng-model="face.name" ng-pattern="item.namePtn" required />
+				<label class="mdl-textfield__label" for="name" ng-bind="item.nameLbl"></label>
+			</div>
+		</div>
 	</div>
-	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.city}">
-		<input class="mdl-textfield__input" type="text" name="city" id="city" ng-attr-value="face.city" ng-model="face.city" required />
-		<label class="mdl-textfield__label" for="city" ng-bind="item.cityLbl"></label>
+	<div class="mdl-grid mdl-grid-mask">
+		<div class="mdl-cell-mask mdl-cell--8-col-desktop mdl-cell--8-col-tablet mdl-cell--6-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.city}">
+				<input class="mdl-textfield__input" type="text" name="city" id="city" ng-attr-value="face.city" ng-model="face.city" ng-pattern="item.cityPtn" required />
+				<label class="mdl-textfield__label" for="city" ng-bind="item.cityLbl"></label>
+			</div>
+		</div>
+		<div class="mdl-cell-mask mdl-cell--3-col-desktop mdl-cell--1-offset-desktop mdl-cell--3-col-tablet mdl-cell--1-offset-tablet mdl-cell--5-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.state}">
+				<input class="mdl-textfield__input" type="text" name="state" id="state" ng-model="face.state" ng-pattern="item.statePtn" required />
+				<label class="mdl-textfield__label" for="state" ng-bind="item.stateLbl"></label>
+			</div>
+		</div>
 	</div>
-	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.address}">
-		<input class="mdl-textfield__input" type="text" name="address" id="address" ng-attr-value="face.address" ng-model="face.address" required />
-		<label class="mdl-textfield__label" for="address" ng-bind="item.addressLbl"></label>
+	<div class="mdl-grid mdl-grid-mask">
+		<div class="mdl-cell-mask mdl-cell--9-col-desktop mdl-cell--9-col-tablet mdl-cell--12-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.street}">
+				<input class="mdl-textfield__input" type="text" name="street" id="street" ng-model="face.street" ng-pattern="item.streetPtn" required />
+				<label class="mdl-textfield__label" for="street" ng-bind="item.streetLbl"></label>
+			</div>
+		</div>
+		<div class="mdl-cell-mask mdl-cell--2-col-desktop mdl-cell--1-offset-desktop mdl-cell--2-col-tablet mdl-cell--1-offset-tablet mdl-cell--12-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.number}">
+				<input class="mdl-textfield__input" type="number" name="number" id="number" ng-model="face.number" required />
+				<label class="mdl-textfield__label" for="number" ng-bind="item.numberLbl"></label>
+			</div>
+		</div>
 	</div>
-	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-		<input class="mdl-textfield__input" type="number" name="phone" id="phone" ng-model="face.phone" required />
-		<label class="mdl-textfield__label" for="phone" ng-bind="item.phoneLbl"></label>
+	<div class="mdl-grid mdl-grid-mask">
+		<div class="mdl-cell-mask mdl-cell--7-col-desktop mdl-cell--7-col-tablet mdl-cell--12-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.neighborhood}">
+				<input class="mdl-textfield__input" type="text" name="neighborhood" id="neighborhood" ng-model="face.neighborhood" required />
+				<label class="mdl-textfield__label" for="neighborhood" ng-bind="item.neighborhoodLbl"></label>
+			</div>
+		</div>
+		<div class="mdl-cell-mask mdl-cell--4-col-desktop mdl-cell--1-offset-desktop mdl-cell--4-col-tablet mdl-cell--1-offset-tablet mdl-cell--6-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.cep}">
+				<input class="mdl-textfield__input" type="text" name="cep" id="cep" ng-model="face.cep" ng-pattern="item.cepPtn" required />
+				<label class="mdl-textfield__label" for="cep" ng-bind="item.cepLbl"></label>
+			</div>
+		</div>
 	</div>
-	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.email}">
-		<input class="mdl-textfield__input" type="text" name="email" id="email" ng-attr-value="face.email" ng-model="face.email" required />
-		<label class="mdl-textfield__label" for="email" ng-bind="item.emailLbl"></label>
+	<div class="mdl-grid mdl-grid-mask">
+		<div class="mdl-cell-mask mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--3-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.countryCode}">
+				<input class="mdl-textfield__input" type="number" name="countryCode" id="countryCode" ng-model="face.countryCode" required />
+				<label class="mdl-textfield__label" for="countryCode" ng-bind="item.countryCodeLbl"></label>
+			</div>
+		</div>
+		<div class="mdl-cell-mask mdl-cell--2-col-desktop mdl-cell--1-offset-desktop mdl-cell--2-col-tablet mdl-cell--1-offset-tablet mdl-cell--3-col-phone mdl-cell--1-offset-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.stateCode}">
+				<input class="mdl-textfield__input" type="number" name="stateCode" id="stateCode" ng-model="face.stateCode" required />
+				<label class="mdl-textfield__label" for="stateCode" ng-bind="item.stateCodeLbl"></label>
+			</div>
+		</div>
+		<div class="mdl-cell-mask mdl-cell--6-col-desktop mdl-cell--1-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell--4-col-phone mdl-cell--1-offset-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.phone}">
+				<input class="mdl-textfield__input" type="text" name="phone" id="phone" ng-model="face.phone" ng-pattern="item.phonePtn" required />
+				<label class="mdl-textfield__label" for="phone" ng-bind="item.phoneLbl"></label>
+			</div>
+		</div>
 	</div>
+	<div class="mdl-grid mdl-grid-mask">
+		<div class="mdl-cell-mask mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : face.email}">
+				<input class="mdl-textfield__input" type="text" name="email" id="email" ng-attr-value="face.email" ng-model="face.email" ng-pattern="item.emailPtn" required />
+				<label class="mdl-textfield__label" for="email" ng-bind="item.emailLbl"></label>
+			</div>
+		</div>
+	</div>
+
 	<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="news" ng-model="face.news">
 		<input type="checkbox" id="news" class="mdl-checkbox__input" name="news" />
 		<span class="mdl-checkbox__label f13 mdl-color-text--grey" ng-bind="item.newsLbl"></span>
 	</label>
-	
+
 	<div class="m-t-20">
 		<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green" ng-bind="item.nextLbl"></button>
 		<button type="reset" class="mdl-button mdl-js-button" ng-click="previous()">
