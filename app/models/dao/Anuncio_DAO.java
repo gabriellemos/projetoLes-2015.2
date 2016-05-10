@@ -4,7 +4,6 @@ import models.Anuncio;
 import models.Confeiteiro;
 import models.TipoAnuncio;
 import models.Utils;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,7 +24,7 @@ public class Anuncio_DAO {
      * Cria um Anúncio no banco de dados. Um id é atribuido automaticamente no ato da criação.
      */
     public static void insertAnuncio (String titulo, String descricao, GregorianCalendar dataEdicao,
-                                      float preco, int criador, String tipo) throws RequisicaoInvalidaBD {
+                                      String preco, int criador, String tipo) throws RequisicaoInvalidaBD {
 
         TipoAnuncio tipoAnuncio = TipoAnuncio.valueOf(tipo.trim());
         Confeiteiro confeiteiro = new Confeiteiro();
@@ -115,7 +114,7 @@ public static  void removeAnuncio (int id){
         ModificarVisibilidadeAnuncio(boll, anuncio.getId());
     }
 
-    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, int id){
+    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, String preco, String tipo, int id){
 
         try{
             conexao = Connection.getConnection();
@@ -135,7 +134,7 @@ public static  void removeAnuncio (int id){
         }
     }
 
-    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, float preco, String tipo, Anuncio anuncio){
+    public static  void ModificarAtributosDeAnuncio (String titulo, String descricao, String preco, String tipo, Anuncio anuncio){
 
         try{
             conexao = Connection.getConnection();
@@ -183,12 +182,12 @@ public static  void removeAnuncio (int id){
         }
     }
 
-    public static ArrayList<Anuncio> getAnunciosPelaCidadeEData(String cidade, GregorianCalendar data) throws RequisicaoInvalidaBD{
+    public static ArrayList<Anuncio> getAnunciosPelaCidade(String cidade) throws RequisicaoInvalidaBD{
         try {
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE Edicao_Anuncio = '"+ data+"' AND Disponibilidade_Anuncio = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
+            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE AND criador_anuncio IN (SELECT Dono_Endereco FROM  Endereco  WHERE cidade  = '"+cidade+"')" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();
@@ -354,7 +353,7 @@ public static  void removeAnuncio (int id){
                         resultadoQuery.getDate("Criacao_Anuncio"))
         );
         anuncio.setPreco(
-                resultadoQuery.getFloat("Preco_Anuncio")
+                resultadoQuery.getString("Preco_Anuncio")
         );
         anuncio.setTipoAnuncio(
                 TipoAnuncio.valueOf(UtilsBD.GetString(

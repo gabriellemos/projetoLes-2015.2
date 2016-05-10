@@ -1,7 +1,6 @@
 package models.dao;
 
 import models.Confeiteiro;
-
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class Confeiteiro_DAO {
             declaracao= conexao.createStatement();
 
             strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
-                    "VALUES('" + Nome + "',''" + ID_Facebook + "')";
+                    "VALUES('" + Nome + "','" + ID_Facebook + "')";
 
             declaracao.executeUpdate(strSql);
             declaracao.close();
@@ -34,22 +33,9 @@ public class Confeiteiro_DAO {
         }
     }
 
-    public static void insertConfeiteiro(Confeiteiro confeiteiro) {
-        try {
-            conexao = models.dao.Connection.getConnection();
-            declaracao= conexao.createStatement();
+    public static void insertConfeiteiro (Confeiteiro conf)  throws RequisicaoInvalidaBD {
 
-            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook )" +
-                    "VALUES ('" + confeiteiro.getNome() + "','" + confeiteiro.getIdFacebook() + "')";
-
-            declaracao.executeUpdate(strSql);
-            declaracao.close();
-            conexao.close();
-        } catch (Exception e) {
-            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
-            exception.setStackTrace(e.getStackTrace());
-            throw exception;
-        }
+       insertConfeiteiro(conf.getNome(), conf.getIdFacebook());
     }
 
     /*
@@ -71,6 +57,9 @@ public class Confeiteiro_DAO {
                 confeiteiro.setNome(resultadoQuery.getString("Nome_Confeiteiro"));
                 confeiteiro.setIdFacebook(resultadoQuery.getString("ID_Facebook"));
                 confeiteiro.setId(resultadoQuery.getInt("ID_Confeiteiro"));
+                confeiteiro.setEnderecos(Endereco_DAO.getEnderecos(confeiteiro.getId()));
+                confeiteiro.setEmails(Email_DAO.getEmails(confeiteiro.getId()));
+                confeiteiro.setContatos(Contato_DAO.getContatos(confeiteiro.getId()));
                 listaRetorno.add(confeiteiro);
             }
 
@@ -100,6 +89,9 @@ public class Confeiteiro_DAO {
             confeiteiroResp.setNome(resultado.getString("Nome_Confeiteiro"));
             confeiteiroResp.setIdFacebook(resultado.getString("ID_Facebook"));
             confeiteiroResp.setId(resultado.getInt("ID_Confeiteiro"));
+            confeiteiroResp.setEnderecos(Endereco_DAO.getEnderecos(ID));
+            confeiteiroResp.setEmails(Email_DAO.getEmails(ID));
+            confeiteiroResp.setContatos(Contato_DAO.getContatos(ID));
             //ate aqui
 
             declaracao.close();
