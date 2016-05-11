@@ -56,6 +56,22 @@ public class Endereco_DAO {
         }
     }
 
+    public static void modificarAtributosDeEndereco (String rua, int idEndereco, String cidade, String numero, String bairro, String cep, String estado, int confeiteiro) throws Exception {
+        try {
+            conexao = Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "UPDATE  Endereco SET  Rua  = '" + rua + "', Numero= '" + numero + "'," +
+                    "Bairro= '" + bairro + "', cidade= '" + cidade + "', Estado = '" + estado + "', Dono_Endereco = '" + confeiteiro + "', Cep = '" + cep + "' WHERE ID_Endereco = '" + idEndereco + "';";
+            declaracao.executeUpdate(strSql);
+            declaracao.close();
+            conexao.close();
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
     public static ArrayList<Endereco> getEnderecos(int idConfeiteiro)throws Exception {
 
         try {
