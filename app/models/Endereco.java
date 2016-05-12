@@ -79,7 +79,7 @@ public class Endereco {
 
     public String toString(){
         return String.format("%s/%s - Rua %s, %s. Bairro %s. %s",
-                getCidade(), getEstado(), getRua(), getNumero(), getBairro(), getCep());
+                getCidade().trim(), getEstado().trim(), getRua().trim(), getNumero().trim(), getBairro().trim(), getCep().trim());
     }
 
 }

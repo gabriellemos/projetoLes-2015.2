@@ -62,6 +62,6 @@ public class Contato {
     }
 
     public String toString(){
-        return String.format("+%s (%s) %s", getCodigoPais(), getCodigoEstado(), getCodigoOperadora() + getNumero());
+        return String.format("+%s (%s) %s", getCodigoPais().trim(), getCodigoEstado().trim(), getNumero().trim());
     }
 }

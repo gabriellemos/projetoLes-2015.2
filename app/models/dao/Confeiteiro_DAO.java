@@ -14,14 +14,14 @@ public class Confeiteiro_DAO {
     private static Statement declaracao = null;
     private static String strSql;
 
-    public static void insertConfeiteiro (String Nome, String ID_Facebook)  throws RequisicaoInvalidaBD {
+    public static void insertConfeiteiro (String Nome, String ID_Facebook, int ID_Confeiteiro)  throws RequisicaoInvalidaBD {
 
         try {
             conexao= models.dao.Connection.getConnection();
             declaracao= conexao.createStatement();
 
-            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook  )" +
-                    "VALUES('" + Nome + "','" + ID_Facebook + "')";
+            strSql = "INSERT INTO Confeiteiro (Nome_Confeiteiro,ID_Facebook,ID_Confeiteiro)" +
+                    "VALUES('" + Nome + "','" + ID_Facebook + "','" + ID_Confeiteiro + "')";
 
             declaracao.executeUpdate(strSql);
             declaracao.close();
@@ -34,8 +34,7 @@ public class Confeiteiro_DAO {
     }
 
     public static void insertConfeiteiro (Confeiteiro conf)  throws RequisicaoInvalidaBD {
-
-       insertConfeiteiro(conf.getNome(), conf.getIdFacebook());
+       insertConfeiteiro(conf.getNome(), conf.getIdFacebook(), conf.getId());
     }
 
     /*
@@ -123,6 +122,33 @@ public class Confeiteiro_DAO {
             declaracao.close();
             conexao.close();
             return confeiteiroResp;
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
+
+    public static int getNextAvailableID() throws RequisicaoInvalidaBD {
+        int resposta = 0;
+        try {
+            ResultSet resultado;
+            conexao = models.dao.Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT MIN(t1.ID_Confeiteiro + 1) AS nextID " +
+                    "FROM Confeiteiro t1 " +
+                    "LEFT JOIN Confeiteiro t2 " +
+                    "ON t1.ID_Confeiteiro + 1 = t2.ID_Confeiteiro " +
+                    "WHERE t2.ID_Confeiteiro IS NULL;";
+            resultado = declaracao.executeQuery(strSql);
+
+            resultado.next();
+            resposta = resultado.getInt("nextID");
+
+            declaracao.close();
+            conexao.close();
+
+            return resposta;
         } catch (Exception e) {
             RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
             exception.setStackTrace(e.getStackTrace());

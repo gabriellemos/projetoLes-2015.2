@@ -147,24 +147,47 @@ public class Application extends UserProfileController<FacebookProfile>{
         } else {
             Logger.info("Tentando registrar novo Confeiteiro no BD...");
 
+            String conf_name = filledForm.get("name");
+            String conf_faceId = filledForm.get("id");
+            String end_city = filledForm.get("city");
+            String end_state = filledForm.get("state");
+            String end_street = filledForm.get("street");
+            String end_number = filledForm.get("number");
+            String end_neighborhood = filledForm.get("neighborhood");
+            String end_cep = filledForm.get("cep");
+            String cont_countryCode = filledForm.get("countryCode");
+            String cont_stateCode = filledForm.get("stateCode");
+            String cont_phone = filledForm.get("phone");
+
+            int id_conf = -1;
+
+            try {
+                id_conf = Confeiteiro_DAO.getNextAvailableID();
+            } catch (Exception e){
+                Logger.error(e.getMessage());
+                return badRequest(e.getMessage());
+            }
+
             Confeiteiro conf = new Confeiteiro();
-            conf.setNome(filledForm.get("name"));
-            conf.setIdFacebook(filledForm.get("id"));
+
+            conf.setNome(conf_name);
+            conf.setIdFacebook(conf_faceId);
+            conf.setId(id_conf);
 
             Endereco end = new Endereco();
-            end.setCidade(filledForm.get("city"));
-            end.setEstado(filledForm.get("state"));
-            end.setRua(filledForm.get("rua"));
-            end.setNumero(filledForm.get("number"));
-            end.setBairro(filledForm.get("neighborhood"));
-            end.setCep(filledForm.get("cep"));
-            end.setConfeiteiro(conf.getId());
+            end.setCidade(end_city);
+            end.setEstado(end_state);
+            end.setRua(end_street);
+            end.setNumero(end_number);
+            end.setBairro(end_neighborhood);
+            end.setCep(end_cep);
+            end.setConfeiteiro(id_conf);
 
             Contato cont = new Contato();
-            cont.setCodigoPais(filledForm.get("countryCode"));
-            cont.setCodigoEstado(filledForm.get("stateCode"));
-            cont.setNumero(filledForm.get("phone"));
-            cont.setDonoContato(conf.getId());
+            cont.setCodigoPais(cont_countryCode);
+            cont.setCodigoEstado(cont_stateCode);
+            cont.setNumero(cont_phone);
+            cont.setDonoContato(id_conf);
 
             try {
                 Confeiteiro_DAO.insertConfeiteiro(conf);
