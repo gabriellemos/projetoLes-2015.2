@@ -1,5 +1,8 @@
 {
     "card": {
+        "edit": "Editar",
+        "hide": "Ocultar",
+        "delete": "Excluir",
         "contact": "Contatos",
         "contacts": "Contatos: ",
         "address": "Endereços: ",

@@ -51,7 +51,7 @@ feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
     });
 });
 
-feedApp.controller('AdsControllerConf', function($scope, $timeout, HTTP, JSONs) {
+feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
     // Load Toolbar with new Title
     $scope.setStateTitle();
 

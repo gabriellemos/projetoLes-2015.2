@@ -1,6 +1,14 @@
 <div class="mdl-card mdl-shadow--2dp">
 	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
-		<i class="mdi mdi-plus mdl-color-text--white" role="presentation"></i>
+		<i class="mdi mdi-border-color mdl-color-text--white" role="presentation"></i>
+		<span class="visuallyhidden">add</span>
+	</button>
+	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
+		<i class="mdi mdi-block-helper mdl-color-text--white" role="presentation"></i>
+		<span class="visuallyhidden">add</span>
+	</button>
+	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
+		<i class="mdi mdi-delete mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden">add</span>
 	</button>
 	<div class="mdl-card__media">
