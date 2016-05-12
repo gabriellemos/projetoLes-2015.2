@@ -1,15 +1,15 @@
 <div class="mdl-card mdl-shadow--2dp">
 	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
 		<i class="mdi mdi-border-color mdl-color-text--white" role="presentation"></i>
-		<span class="visuallyhidden">add</span>
+		<span class="visuallyhidden" ng-bind="labels.edit"></span>
 	</button>
 	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
 		<i class="mdi mdi-block-helper mdl-color-text--white" role="presentation"></i>
-		<span class="visuallyhidden">add</span>
+		<span class="visuallyhidden" ng-bind="labels.hide"></span>
 	</button>
 	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
 		<i class="mdi mdi-delete mdl-color-text--white" role="presentation"></i>
-		<span class="visuallyhidden">add</span>
+		<span class="visuallyhidden" ng-bind="labels.delete"></span>
 	</button>
 	<div class="mdl-card__media">
 		<img ng-src="{{item.imglink}}" class="img-responsive">
