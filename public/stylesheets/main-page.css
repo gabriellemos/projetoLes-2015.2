@@ -110,6 +110,25 @@
     color: #00BCD4;
     text-decoration: none;
 }
+.site-cards-fabs {
+  overflow: visible;
+  z-index: 10;
+}
+.fab {
+  top: 9%;
+  position: absolute;
+  -webkit-transform: translate(0px, -28px);
+  transform: translate(0px, -28px);
+}
+.fab.fab-edit {
+    right: 56%
+}
+.fab.fab-hide {
+    right: 30%;
+}
+.fab.fab-delete {
+    right: 3%;
+}
 /************************************************************************************
  * Modal
  ************************************************************************************/

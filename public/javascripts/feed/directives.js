@@ -77,7 +77,7 @@ feedApp.directive('adCard', function() {
             item: '=item',
             labels: '=labels',
             index: '=index',
-            readOnly: '=readOnly'
+            mutable: '=mutable'
         },
         link: function(scope, element, attr){
             componentHandler.upgradeDom();

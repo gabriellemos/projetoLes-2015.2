@@ -49,6 +49,8 @@ feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
             Modal.init();
         }, 2000);
     });
+
+    $scope.cardEdit = false;
 });
 
 feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
@@ -68,4 +70,6 @@ feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
             Modal.init();
         }, 2000);
     });
+
+    $scope.cardEdit = true;
 });

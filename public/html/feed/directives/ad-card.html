@@ -1,13 +1,13 @@
-<div class="mdl-card mdl-shadow--2dp">
-	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
+<div class="mdl-card mdl-shadow--2dp" ng-class="{'site-card-fabs' : mutable}">
+	<button ng-if="mutable" class="fab fab-edit mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-border-color mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.edit"></span>
 	</button>
-	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
+	<button ng-if="mutable" class="fab fab-hide mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-block-helper mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.hide"></span>
 	</button>
-	<button ng-if="readOnly == false" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent">
+	<button ng-if="mutable" class="fab fab-delete mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-delete mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.delete"></span>
 	</button>
@@ -19,13 +19,13 @@
 	</div>
 	<div class="mdl-card__supporting-text">
 		<span ng-bind="item.chef"></span>
-		<span class="badge badge-lg badge-success">
-			<i class="mdi mdi-credit-card"></i>
-			<span class="p-l-10" ng-bind="item.price"></span>
-		</span>
 	</div>
 	<div class="mdl-card__actions">
 		<button class="modal__trigger mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-attr-data-modal="{{'#ad-card--' + index + '-modal'}}" ng-bind="labels.contact">
 		</button>
+		<span class="badge badge-lg badge-success v-m">
+			<i class="mdi mdi-credit-card"></i>
+			<span class="p-l-10" ng-bind="item.price"></span>
+		</span>
 	</div>
 </div>
