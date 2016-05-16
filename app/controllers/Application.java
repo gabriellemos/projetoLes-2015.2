@@ -2,7 +2,11 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Confeiteiro;
+import models.Contato;
+import models.Endereco;
 import models.dao.Confeiteiro_DAO;
+import models.dao.Contato_DAO;
+import models.dao.Endereco_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
 import org.pac4j.play.java.RequiresAuthentication;
 import org.pac4j.play.java.UserProfileController;
@@ -142,15 +146,56 @@ public class Application extends UserProfileController<FacebookProfile>{
             return badRequest("Erro ao receber os dados.");
         } else {
             Logger.info("Tentando registrar novo Confeiteiro no BD...");
-            Confeiteiro conf = new Confeiteiro();
-            conf.setNome(filledForm.get("name"));
-            conf.setIdFacebook(filledForm.get("id"));
+
+            String conf_name = filledForm.get("name");
+            String conf_faceId = filledForm.get("id");
+            String end_city = filledForm.get("city");
+            String end_state = filledForm.get("state");
+            String end_street = filledForm.get("street");
+            String end_number = filledForm.get("number");
+            String end_neighborhood = filledForm.get("neighborhood");
+            String end_cep = filledForm.get("cep");
+            String cont_countryCode = filledForm.get("countryCode");
+            String cont_stateCode = filledForm.get("stateCode");
+            String cont_phone = filledForm.get("phone");
+
+            int id_conf = -1;
+
             try {
-                Confeiteiro_DAO.insertConfeiteiro(conf);
+                id_conf = Confeiteiro_DAO.getNextAvailableID();
             } catch (Exception e){
                 Logger.error(e.getMessage());
-                throw e;
-                //return badRequest(e.getMessage());
+                return badRequest(e.getMessage());
+            }
+
+            Confeiteiro conf = new Confeiteiro();
+
+            conf.setNome(conf_name);
+            conf.setIdFacebook(conf_faceId);
+            conf.setId(id_conf);
+
+            Endereco end = new Endereco();
+            end.setCidade(end_city);
+            end.setEstado(end_state);
+            end.setRua(end_street);
+            end.setNumero(end_number);
+            end.setBairro(end_neighborhood);
+            end.setCep(end_cep);
+            end.setConfeiteiro(id_conf);
+
+            Contato cont = new Contato();
+            cont.setCodigoPais(cont_countryCode);
+            cont.setCodigoEstado(cont_stateCode);
+            cont.setNumero(cont_phone);
+            cont.setDonoContato(id_conf);
+
+            try {
+                Confeiteiro_DAO.insertConfeiteiro(conf);
+                Endereco_DAO.insertEndereco(end);
+                Contato_DAO.insertContato(cont);
+            } catch (Exception e){
+                Logger.error(e.getMessage());
+                return badRequest(e.getMessage());
             }
         }
 

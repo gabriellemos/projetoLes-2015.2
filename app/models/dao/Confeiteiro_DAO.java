@@ -85,6 +85,7 @@ public class Confeiteiro_DAO {
             declaracao = conexao.createStatement();
             strSql = "SELECT * FROM Confeiteiro;";
             resultadoQuery = declaracao.executeQuery(strSql);
+
             Confeiteiro confeiteiro;
             ArrayList listaRetorno = new ArrayList();
             // TODO: Verificar forma para converter a linha da tabela diretamente para Confeiteiro.
@@ -98,6 +99,7 @@ public class Confeiteiro_DAO {
                 confeiteiro.setContatos(Contato_DAO.getContatos(confeiteiro.getId()));
                 listaRetorno.add(confeiteiro);
             }
+
             declaracao.close();
             conexao.close();
             return listaRetorno;
@@ -165,4 +167,30 @@ public class Confeiteiro_DAO {
         }
     }
 
+    public static int getNextAvailableID() throws RequisicaoInvalidaBD {
+        int resposta = 0;
+        try {
+            ResultSet resultado;
+            conexao = models.dao.Connection.getConnection();
+            declaracao = conexao.createStatement();
+            strSql = "SELECT MIN(t1.ID_Confeiteiro + 1) AS nextID " +
+                    "FROM Confeiteiro t1 " +
+                    "LEFT JOIN Confeiteiro t2 " +
+                    "ON t1.ID_Confeiteiro + 1 = t2.ID_Confeiteiro " +
+                    "WHERE t2.ID_Confeiteiro IS NULL;";
+            resultado = declaracao.executeQuery(strSql);
+
+            resultado.next();
+            resposta = resultado.getInt("nextID");
+
+            declaracao.close();
+            conexao.close();
+
+            return resposta;
+        } catch (Exception e) {
+            RequisicaoInvalidaBD exception = new RequisicaoInvalidaBD(e.getMessage());
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
+        }
+    }
 }

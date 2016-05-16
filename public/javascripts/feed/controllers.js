@@ -10,10 +10,13 @@ feedApp.controller('FeedController', function($scope, $state, $http, $parse, $wi
     };
     $scope.toolbarText = {};
     HTTP.get('api/toolbar-user').success(function(response){
-        if(response.user)
+        if(response.user) {
             $scope.toolbarText.user = response.user;
-        else
+            $scope.categorySession = ['all', 'chef'];
+        } else {
             $scope.toolbarText.login = response.login;
+            $scope.categorySession = ['all'];
+        }
     });
     JSONs.get('ToolbarDefault.json').success(function(data){
         $scope.toolbarText.btns = data;
@@ -46,9 +49,11 @@ feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
             Modal.init();
         }, 2000);
     });
+
+    $scope.cardEdit = false;
 });
 
-feedApp.controller('AdsControllerConf', function($scope, $timeout, HTTP, JSONs) {
+feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
     // Load Toolbar with new Title
     $scope.setStateTitle();
 
@@ -65,4 +70,6 @@ feedApp.controller('AdsControllerConf', function($scope, $timeout, HTTP, JSONs) 
             Modal.init();
         }, 2000);
     });
+
+    $scope.cardEdit = true;
 });

@@ -23,6 +23,37 @@ public class Anuncio_DAO {
     /*
      * Cria um Anúncio no banco de dados. Um id é atribuido automaticamente no ato da criação.
      */
+
+    public static void main( String args[] ) throws SQLException {
+
+        Confeiteiro eu = Confeiteiro_DAO.getConfeiteiro("10204763705092751");
+
+        Anuncio ad1 = new Anuncio();
+        ad1.setCriador(eu);
+        ad1.setDataCriacao(Utils.getHoje());
+        ad1.setDataEdicao(Utils.getHoje());
+        ad1.setDescricao("Este bolo pode acabar com você.");
+        ad1.setDisponibilidade(true);
+        ad1.setPreco("" + 30);
+        ad1.setTipoAnuncio(TipoAnuncio.COMUM);
+        ad1.setTitulo("Bolo de Gorduras");
+
+        Anuncio ad2 = new Anuncio();
+        ad2.setCriador(eu);
+        ad2.setDataCriacao(Utils.getHoje());
+        ad2.setDataEdicao(Utils.getHoje());
+        ad2.setDescricao("Este bolo é benéfico a saúde de todos.");
+        ad2.setDisponibilidade(true);
+        ad2.setPreco("" + 30);
+        ad2.setTipoAnuncio(TipoAnuncio.COMUM);
+        ad2.setTitulo("Bolo de Coisas Boas");
+
+        Anuncio_DAO.insertAnuncio(ad1);
+        Anuncio_DAO.insertAnuncio(ad2);
+
+        System.out.println("BD configurado com sucesso");
+    }
+
     public static void insertAnuncio (String titulo, String descricao, GregorianCalendar dataEdicao,
                                       String preco, int criador, String tipo) throws RequisicaoInvalidaBD {
 

@@ -59,7 +59,7 @@ public class AnuncioDAOTest {
     @Test
     public void TesteCreate() {
         Anuncio anuncio = new Anuncio("Anuncio teste #01", confeiteiro, "Descrição macabra",
-                TipoAnuncio.COMUM, 5.0f);
+                TipoAnuncio.COMUM, "" + 5.0f);
         anuncio.setDataCriacao(Utils.getHoje());
         anuncio.setDataEdicao(Utils.getHoje());
 

@@ -121,7 +121,13 @@ public class Text {
         } else {
             throw new RuntimeException("Usuário não logado no Facebook");
         }
-		result.put("address", "");
+        result.put("state", "");
+        result.put("street", "");
+        result.put("number", "");
+        result.put("neighborhood", "");
+        result.put("cep", "");
+        result.put("countryCode", "");
+        result.put("stateCode", "");
         result.put("phone", "");
         result.put("news", "");
         return result;

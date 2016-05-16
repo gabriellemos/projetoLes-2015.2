@@ -23,10 +23,7 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
                     controller: 'AdsController'
                 }
             }
-        });
-
-    // States
-    $stateProvider
+        })
         .state('adsConfeiteiro', {
             url: '/',
             data: {
@@ -34,13 +31,13 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
             },
             views: {
                 'main': {
-                    templateUrl: '/assets/html/feed/sections/ads-main.html',
-                    controller: 'AdsControllerConf'
+                    templateUrl: '/assets/html/feed/sections/my-ads-main.html',
+                    controller: 'MyAdsController'
                 },
                 "modals": {
                     templateUrl: '/assets/html/feed/sections/ads-modals.html',
-                    controller: 'AdsControllerConf'
+                    controller: 'MyAdsController'
                 }
             }
-    });
+        });
 }]);

@@ -8,12 +8,14 @@
     {
       "name": "Anúncios",
       "icon": "cake",
-      "url": "ads"
+      "url": "ads",
+      "category": "all"
     },
     {
       "name": "Meus Anúncios",
-      "icon": "cake",
-      "url": "adsConfeiteiro"
+      "icon": "cake-layered",
+      "url": "adsConfeiteiro",
+      "category": "chef"
     }
   ]
 }

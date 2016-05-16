@@ -3,14 +3,9 @@ package unity;
 import models.Anuncio;
 import models.Confeiteiro;
 import models.TipoAnuncio;
-import models.Utils;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Teste de unidade para a classe de modelo Confeiteiro.
@@ -37,10 +32,10 @@ public class AnuncioTeste {
         anuncioComum = new Anuncio("Este é um anuncio comum", confeiteiroDefault);
         anuncioAniversario = new Anuncio("Este é um anuncio de aniversario",
                 confeiteiroSemAnuncios, "Anuncio de aniversario para testes",
-                TipoAnuncio.ANIVERSARIO, 5);
+                TipoAnuncio.ANIVERSARIO, "" + 5);
         anuncioCasamento = new Anuncio("Este é um anuncio de casamento",
                 confeiteiroSemAnuncios, "Anuncio de casamento para testes",
-                TipoAnuncio.CASAMENTO, 50);
+                TipoAnuncio.CASAMENTO, "" + 50);
 
     }
 
@@ -58,35 +53,30 @@ public class AnuncioTeste {
         Assert.assertNull(anuncioDefault.getDataCriacao());
         Assert.assertNull(anuncioDefault.getDataEdicao());
         Assert.assertNull(anuncioDefault.getTipoAnuncio());
-        Assert.assertTrue(anuncioDefault.getPreco() == 0.0);
+        Assert.assertTrue(anuncioDefault.getPreco().equals("" + 0.0));
     }
 
     @Test
     public void TestaConstrutorComTituloEConfeiteiro() {
-        Assert.assertNotNull(anuncioComum.getTitulo());
-        Assert.assertNotNull(anuncioComum.getCriador());
-        Assert.assertNotNull(anuncioComum.getDescricao());
-        Assert.assertNotNull(anuncioComum.getTipoAnuncio());
-        Assert.assertNotNull(anuncioComum.getDataCriacao());
-
-        Assert.assertNull(anuncioComum.getDataEdicao());
-
-        Assert.assertTrue(anuncioComum.getPreco() == 0.0);
-
+        testaAnuncio(anuncioComum);
     }
 
     @Test
     public void TestaConstrutorComTodosParametros() {
-        Assert.assertNotNull(anuncioAniversario.getTitulo());
-        Assert.assertNotNull(anuncioAniversario.getCriador());
-        Assert.assertNotNull(anuncioAniversario.getDescricao());
-        Assert.assertNotNull(anuncioAniversario.getTipoAnuncio());
-        Assert.assertNotNull(anuncioAniversario.getDataCriacao());
+        testaAnuncio(anuncioAniversario);
 
-        Assert.assertNull(anuncioAniversario.getDataEdicao());
+    }
 
-        Assert.assertTrue(anuncioAniversario.getPreco() != 0.0);
+    private void testaAnuncio(Anuncio a){
+        Assert.assertNotNull(a.getTitulo());
+        Assert.assertNotNull(a.getCriador());
+        Assert.assertNotNull(a.getDescricao());
+        Assert.assertNotNull(a.getTipoAnuncio());
+        Assert.assertNotNull(a.getDataCriacao());
 
+        Assert.assertNull(a.getDataEdicao());
+
+        Assert.assertTrue(a.getPreco().equals("" + 0.0));
     }
 
     @Test
@@ -165,17 +155,17 @@ public class AnuncioTeste {
 
     @Test
     public void TestaGetSetPreco() {
-        Assert.assertTrue(anuncioDefault2.getPreco() == 0.0);
-        anuncioDefault2.setPreco(7);
-        Assert.assertTrue(anuncioDefault2.getPreco() == 7.0);
+        Assert.assertTrue(anuncioDefault2.getPreco().equals("" + 0.0));
+        anuncioDefault2.setPreco("" + 7);
+        Assert.assertTrue(anuncioDefault2.getPreco().equals("" + 7.0));
 
-        Assert.assertTrue(anuncioComum.getPreco() == 0.0);
-        anuncioComum.setPreco(100);
-        Assert.assertTrue(anuncioComum.getPreco() == 100);
+        Assert.assertTrue(anuncioComum.getPreco().equals("" + 0.0));
+        anuncioComum.setPreco("" + 100);
+        Assert.assertTrue(anuncioComum.getPreco().equals("" + 100));
 
-        Assert.assertTrue(anuncioAniversario.getPreco() == 5);
-        anuncioAniversario.setPreco(1000);
-        Assert.assertTrue(anuncioAniversario.getPreco() == 1000);
+        Assert.assertTrue(anuncioAniversario.getPreco().equals("" + 5));
+        anuncioAniversario.setPreco("" + 1000);
+        Assert.assertTrue(anuncioAniversario.getPreco().equals("" + 1000));
     }
 
     @Test
@@ -183,7 +173,7 @@ public class AnuncioTeste {
         float precoInvalido = -1;
 
         try {
-            anuncioCasamento.setPreco(precoInvalido);
+            anuncioCasamento.setPreco("" + precoInvalido);
             Assert.fail("Foi possível setar o preco do anuncio para: "
                     + precoInvalido);
         } catch (IllegalArgumentException exception) {
@@ -193,13 +183,13 @@ public class AnuncioTeste {
                     "Argumento 'Preço' recebendo valores inválidos");
         }
 
-        Assert.assertTrue(anuncioCasamento.getPreco() == 50.0);
+        Assert.assertTrue(anuncioCasamento.getPreco().equals("" + 50.0));
     }
 
     @Test
     public void TestaGetSetCriador() {
         Assert.assertNull(anuncioDefault2.getCriador());
-        anuncioDefault2.setCriador(confeiteiroSemAnuncios);;
+        anuncioDefault2.setCriador(confeiteiroSemAnuncios);
         Assert.assertEquals(anuncioDefault2.getCriador(), confeiteiroSemAnuncios);
         Assert.assertNotEquals(anuncioDefault2.getCriador(), confeiteiroDefault);
 
@@ -215,12 +205,11 @@ public class AnuncioTeste {
 
     @Test
     public void TestaSetCriadorInvalida() {
-        Confeiteiro confeiteiroNull = null;
 
         try {
-            anuncioCasamento.setCriador(confeiteiroNull);
+            anuncioCasamento.setCriador(null);
             Assert.fail("Foi possível setar o criador do anuncio para: "
-                    + confeiteiroNull);
+                    + null);
         } catch (IllegalArgumentException exception) {
             Assert.assertEquals(IllegalArgumentException.class,
                     exception.getClass());
@@ -234,7 +223,7 @@ public class AnuncioTeste {
     @Test
     public void TestaGetSetTipoAnuncio() {
         Assert.assertEquals(anuncioComum.getTipoAnuncio(), TipoAnuncio.COMUM);
-        anuncioComum.setTipoAnuncio(TipoAnuncio.ANIVERSARIO);;
+        anuncioComum.setTipoAnuncio(TipoAnuncio.ANIVERSARIO);
         Assert.assertEquals(anuncioComum.getTipoAnuncio(), TipoAnuncio.ANIVERSARIO);
         Assert.assertNotEquals(anuncioComum.getTipoAnuncio(), TipoAnuncio.COMUM);
 
@@ -254,12 +243,11 @@ public class AnuncioTeste {
 
     @Test
     public void TestaSetTipoAnuncioInvalida() {
-        TipoAnuncio tipoAnuncioInvalido = null;
 
         try {
-            anuncioAniversario.setTipoAnuncio(tipoAnuncioInvalido);
+            anuncioAniversario.setTipoAnuncio(null);
             Assert.fail("Foi possível setar o tipo de anuncio do anuncio para: "
-                    + tipoAnuncioInvalido);
+                    + null);
         } catch (IllegalArgumentException exception) {
             Assert.assertEquals(IllegalArgumentException.class,
                     exception.getClass());

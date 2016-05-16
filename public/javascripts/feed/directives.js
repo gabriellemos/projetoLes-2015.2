@@ -3,10 +3,23 @@ feedApp.directive('navBar', function() {
     return {
         restrict: 'A',
         scope: {
-            item: '=item'
+            item: '=item',
+            category: '=category'
         },
         link: function(scope, element, attr){
             element.addClass('site-drawer mdl-layout__drawer mdl-color--brown-900 mdl-color-text-brown-50');
+
+            scope.shouldAppear = function(name) {
+                var answer = false;
+                angular.forEach(scope.category, function(value, key){
+                    if (value == name){
+                        answer = true;
+                    }
+                });
+
+                return answer;
+            };
+
             componentHandler.upgradeDom();
         },
         templateUrl: '/assets/html/feed/directives/nav-bar.html'
@@ -64,7 +77,7 @@ feedApp.directive('adCard', function() {
             item: '=item',
             labels: '=labels',
             index: '=index',
-            readOnly: '=readOnly'
+            mutable: '=mutable'
         },
         link: function(scope, element, attr){
             componentHandler.upgradeDom();

@@ -17,7 +17,7 @@ public class ConfigureBD {
         declaracao = conexao.createStatement();
 
         // Drop tables
-        //dropTables();
+        dropTables();
 
         // Create tables
         createTables();
