@@ -1,0 +1,40 @@
+<div class="modal__dialog">
+    <div class="modal__header">
+        <div class="mdl-card__title">
+            <h1 class="mdl-card__title-text" ng-bind="(data.edit) ? item.titleEdit : item.titleCreate"></h1>
+        </div>
+    </div>
+    <div class="modal__content">
+        <form ng-submit="item.submit()">
+            <br>
+            <h4 ng-bind="(data.edit) ? item.textEdit : item.textCreate"></h4>
+            <br>
+            <div class="mdl-grid mdl-grid-mask">
+                <div class="mdl-cell-mask mdl-cell--7-col-desktop mdl-cell--7-col-tablet mdl-cell--7-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : data.title}">
+                        <input class="mdl-textfield__input" type="text" name="title" id="title" ng-attr-value="data.title" ng-model="data.title" ng-pattern="item.titlePtn" required />
+                        <label class="mdl-textfield__label" for="title" ng-bind="item.titleLbl"></label>
+                    </div>
+                </div>
+                <div class="mdl-cell-mask mdl-cell--4-col-desktop mdl-cell--1-offset-desktop mdl-cell--4-col-tablet mdl-cell--1-offset-tablet mdl-cell--4-col-phone mdl-cell--1-offset-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : data.price}">
+                        <input class="mdl-textfield__input" type="text" name="price" id="price" ng-attr-value="data.price" ng-model="data.price" ng-pattern="item.pricePtn" required />
+                        <label class="mdl-textfield__label" for="price" ng-bind="item.priceLbl"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-grid mdl-grid-mask">
+                <div class="mdl-cell-mask mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" ng-class="{'is-dirty' : data.description}">
+                        <textarea class="mdl-textfield__input" type="text" rows="3" name="description" id="description" ng-attr-value="data.description" ng-model="data.description" ng-pattern="item.descriptionPtn" required />
+                        <label class="mdl-textfield__label" for="description" ng-bind="item.descriptionLbl"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions">
+                <button class="modal__close mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green" type="submit" ng-bind="item.nextLbl"></button>
+                <button class="modal__close mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-bind="item.closeLbl"></button>
+            </div>
+        </form>
+    </div>
+</div>
