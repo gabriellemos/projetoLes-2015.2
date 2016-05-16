@@ -563,6 +563,11 @@ a.mdl-navigation__link:hover {
   text-decoration: none;
 }
 
+button.mdl-button--mini-fab:focus,
+button.mdl-button--mini-fab:hover {
+  outline: none;
+}
+
 .mdl-grid-mask {
 	padding: 0px;
 }

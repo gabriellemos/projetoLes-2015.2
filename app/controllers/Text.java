@@ -74,6 +74,7 @@ public class Text {
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", ad.getPreco());
+            item.put("id", ad.getId());
 
             ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
             ad.getCriador().getContatos()
