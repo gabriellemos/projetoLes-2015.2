@@ -38,7 +38,7 @@ feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
 
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
-    }); // Title
+    }); // Card Labels
 
     $scope.adsList = [];
 
@@ -53,13 +53,14 @@ feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
     $scope.cardEdit = false;
 });
 
+// controller that works on My Ads
 feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
     // Load Toolbar with new Title
     $scope.setStateTitle();
 
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
-    }); // Title
+    }); // Edition Modal labels
 
     $scope.adsList = [];
 

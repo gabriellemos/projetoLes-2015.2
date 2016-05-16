@@ -108,7 +108,7 @@ feedApp.directive('editModal', function() {
     return {
         restrict: 'A',
         scope: {
-            item: '=item',
+            labels: '=labels',
             data: '=data'
         },
         link: function(scope, element, attr){
