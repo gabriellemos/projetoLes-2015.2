@@ -102,3 +102,19 @@ feedApp.directive('adModal', function() {
         templateUrl: '/assets/html/feed/directives/ad-modal.html'
     };
 });
+
+/* Directive declaring a Ad Modal, showing more information of a cake announced */
+feedApp.directive('editModal', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            item: '=item',
+            data: '=data'
+        },
+        link: function(scope, element, attr){
+            element.addClass('modal modal__bg');
+            componentHandler.upgradeDom();
+        },
+        templateUrl: '/assets/html/feed/directives/edit-modal.html'
+    };
+});
