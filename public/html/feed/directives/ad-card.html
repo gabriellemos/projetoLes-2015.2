@@ -25,9 +25,9 @@
 	</div>
 	<br>
 	<div class="mdl-card__actions">
-		<button ng-if="mutable == false" class="modal__trigger mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-attr-data-modal="{{'#ad-card--' + index + '-modal'}}" ng-bind="labels.contact">
+		<button ng-if="mutable == false" class="modal__trigger mdl-button mdl-js-button--raised mdl-button-accent pos-b-6" type="button" ng-attr-data-modal="{{'#ad-card--' + index + '-modal'}}" ng-bind="labels.contact">
 		</button>
-		<span class="badge badge-lg badge-success v-m">
+		<span class="f-right p-l-15 p-r-15 v-m" ng-class="{'p-t-10 p-b-10' : mutable}">
 			<i class="mdi mdi-credit-card"></i>
 			<span class="p-l-10" ng-bind="item.price"></span>
 		</span>
