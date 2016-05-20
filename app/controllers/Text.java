@@ -50,6 +50,9 @@ public class Text {
             ad.getCriador().getEnderecos()
                     .forEach(e -> address.add(e.toString()));
             item.set("address", address);
+
+            item.put("isDeleted", "false");
+            item.put("isHided", "" + ad.getDisponibilidade());
             result.add(item);
         }
 
@@ -102,6 +105,10 @@ public class Text {
             ad.getCriador().getEnderecos()
                     .forEach(e -> address.add(e.toString()));
             item.set("address", address);
+
+            item.put("isDeleted", "false");
+            item.put("isHided", "" + ad.getDisponibilidade());
+
             result.add(item);
 
         }

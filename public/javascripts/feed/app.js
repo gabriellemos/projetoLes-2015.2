@@ -35,7 +35,7 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
                     controller: 'MyAdsController'
                 },
                 "modals": {
-                    templateUrl: '/assets/html/feed/sections/my-ads-modals.html',
+                    templateUrl: '/assets/html/feed/sections/my-ads-modal.html',
                     controller: 'MyAdsController'
                 }
             }
