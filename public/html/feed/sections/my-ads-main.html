@@ -1,5 +1,5 @@
 <div class="site-cards mdl-grid">
-	<div ad-card ng-show="ad.isDeleted" class="mdl-cell mdl-cell--4-col" ng-class="{'hide-cell' : ad.isHided}" 
+	<div ad-card ng-show="ad.isDeleted" class="mdl-cell mdl-cell--4-col" ng-class="{'hide-cell' : ad.isHided == 'true'}" 
 	item="ad" index="$index" labels="labels.card" mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
 	</div>
 </div>

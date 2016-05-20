@@ -1,30 +1,30 @@
 <div class="mdl-card mdl-shadow--2dp" ng-class="{'site-card-fabs' : mutable}">
 	<button ng-if="mutable" ng-click="operations.edit(item.id, item)" data-modal="#ad-edit-modal"
-	class="fab fab-edit mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
+	class="cant-hide fab fab-edit mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-border-color mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.edit"></span>
 	</button>
-	<button ng-if="mutable" ng-click="operations.hide(item.id, item)"
-	class="fab fab-hide mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
+	<button ng-if="mutable" ng-click="operations.hide(item.id, item); item.isHided = !item.isHided"
+	class="cant-hide fab fab-hide mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-block-helper mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.hide"></span>
 	</button>
-	<button ng-if="mutable" ng-click="operations.delete(item.id, item)"
-	class="fab fab-delete mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
+	<button ng-if="mutable" ng-click="operations.delete(item.id, item); item.isDeleted = true"
+	class="cant-hide fab fab-delete mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-delete mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.delete"></span>
 	</button>
-	<div class="mdl-card__media">
+	<div class="can-hide mdl-card__media">
 		<img ng-src="{{item.imglink}}" class="img-responsive">
 	</div>
 	<div class="mdl-card__title">
 		<h2 class="mdl-card__title-text" ng-bind="item.title"></h2>
 	</div>
-	<div class="mdl-card__supporting-text">
+	<div class="can-hide mdl-card__supporting-text">
 		<span ng-bind="item.chef"></span>
 	</div>
 	<br>
-	<div class="mdl-card__actions">
+	<div class="can-hide mdl-card__actions">
 		<button ng-if="mutable == false" class="modal__trigger mdl-button mdl-js-button--raised mdl-button-accent pos-b-6" type="button" ng-attr-data-modal="{{'#ad-card--' + index + '-modal'}}" ng-bind="labels.contact">
 		</button>
 		<span class="f-right p-l-15 p-r-15 v-m" ng-class="{'p-t-10 p-b-10' : mutable}">

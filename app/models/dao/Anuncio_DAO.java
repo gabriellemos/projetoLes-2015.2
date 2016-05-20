@@ -247,12 +247,15 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "' AND Disponibilidade_Anuncio = TRUE;";
+            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "';";
             resultadoQuery = declaracao.executeQuery(strSql);
 
             Anuncio anuncio;
-            resultadoQuery.next();
-            anuncio = getAnuncio(resultadoQuery);
+            if(resultadoQuery.next()){
+                anuncio = getAnuncio(resultadoQuery);
+            } else {
+                throw new Exception("Anuncio com id=" + ID + " nao foi encontrado.");
+            }
 
             declaracao.close();
             conexao.close();

@@ -74,14 +74,10 @@ feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
                 });
             },
             "hide" : function (id, ad) {
-                HTTP.post('/hide/ads?id=' + id).success(function(response) {
-                    ad.isHided = !ad.isHided;
-                });
+                HTTP.post('/hide/ads?id=' + id).success(function(response) { });
             },
             "delete" : function (id, ad) {
-                HTTP.post('/del/ads?id=' + id).success(function(response) {
-                    ad.isDeleted = true;
-                });
+                HTTP.post('/del/ads?id=' + id).success(function(response) { });
             }
         }
 

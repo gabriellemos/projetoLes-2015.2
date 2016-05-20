@@ -593,3 +593,11 @@ button.mdl-button--mini-fab:hover {
 .mdl-cell-mask {
 	margin: 0px;
 }
+
+.hide-cell .can-hide{
+  -webkit-filter: blur(10px) grayscale(100%);
+}
+
+.hide-cell .cant-hide{
+  -webkit-filter: none !important;
+}
