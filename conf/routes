@@ -21,7 +21,7 @@ POST       /reg/user                @controllers.Application.registerUser
 POST       /hide/ads                @controllers.Application.hideAd(id)
 
 # Delete data
-POST       /delete/ads              @controllers.Application.deleteAd(id)
+POST       /del/ads              @controllers.Application.deleteAd(id)
 
 # Api (JSON Requests)
 GET        /api/ad                  @controllers.Application.getAd(id)

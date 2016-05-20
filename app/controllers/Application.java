@@ -99,6 +99,8 @@ public class Application extends UserProfileController<FacebookProfile>{
             result.set("adsConfeiteiro", Text.getAdsConfeiteiro(1));
         }
 
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getAd())");
+
         return ok(result);
     }
 
