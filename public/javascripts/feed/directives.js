@@ -81,17 +81,6 @@ feedApp.directive('adCard', function() {
             operations: '=operations'
         },
         link: function(scope, element, attr){
-            editAd = function() {
-                scope.operations.edit(scope.item.id, scope.item);
-            };
-            hideAd = function(id) {
-                scope.operations.hide(scope.item.id, scope.item);
-            };
-            deleteAd = function(id) {
-                scope.operations.delete(scope.item.id, scope.item);
-            };
-
-
             componentHandler.upgradeDom();
         },
         templateUrl: '/assets/html/feed/directives/ad-card.html'

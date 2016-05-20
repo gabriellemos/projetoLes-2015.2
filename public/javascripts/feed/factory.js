@@ -23,6 +23,14 @@ feedApp.factory('HTTP', function($rootScope, $http){
                exec[url] = $http.get(url);
 
            return exec[url];
+       },
+       post: function(url) {
+           if (exec[url])
+               return exec[url];
+           else
+               exec[url] = $http.post(url);
+
+           return exec[url];
        }
    }
 });

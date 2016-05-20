@@ -69,17 +69,17 @@ feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
 
         $scope.adsOperation = {
             "edit" : function (id, ad) {
-                HTTP.get('/api/ads/?id=' + id).success(function(response) {
+                HTTP.get('/api/ads?id=' + id).success(function(response) {
                     $scope.formData = response.adData;
                 });
             },
             "hide" : function (id, ad) {
-                HTTP.post('/hide/ads/?id=' + id).success(function(response) {
+                HTTP.post('/hide/ads?id=' + id).success(function(response) {
                     ad.isHided = !ad.isHided;
                 });
             },
             "delete" : function (id, ad) {
-                HTTP.post('/del/ads/?id=' + id).success(function(response) {
+                HTTP.post('/del/ads?id=' + id).success(function(response) {
                     ad.isDeleted = true;
                 });
             }

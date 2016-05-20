@@ -1,15 +1,15 @@
 <div class="mdl-card mdl-shadow--2dp" ng-class="{'site-card-fabs' : mutable}">
-	<button ng-if="mutable" ng-click="editAd()" data-modal="#ad-edit-modal"
+	<button ng-if="mutable" ng-click="operations.edit(item.id, item)" data-modal="#ad-edit-modal"
 	class="fab fab-edit mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-border-color mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.edit"></span>
 	</button>
-	<button ng-if="mutable" ng-click="hideAd()"
+	<button ng-if="mutable" ng-click="operations.hide(item.id, item)"
 	class="fab fab-hide mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-block-helper mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.hide"></span>
 	</button>
-	<button ng-if="mutable" ng-click="deleteAd()"
+	<button ng-if="mutable" ng-click="operations.delete(item.id, item)"
 	class="fab fab-delete mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-delete mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.delete"></span>
