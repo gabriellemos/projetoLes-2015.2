@@ -24,8 +24,8 @@ POST       /hide/ads                @controllers.Application.hideAd(id)
 POST       /delete/ads              @controllers.Application.deleteAd(id)
 
 # Api (JSON Requests)
+GET        /api/ad                  @controllers.Application.getAd(id)
 GET        /api/ads                 @controllers.Application.getFeedAds
-GET        /api/ads                 @controllers.Application.getAd(id)
 GET        /api/adsConfeiteiro      @controllers.Application.getFeedAdsConfeiteiro
 GET        /api/toolbar-user        @controllers.Application.getToolbarUserInfo
 GET        /api/facebook-info       @controllers.Application.getFacebookInfo

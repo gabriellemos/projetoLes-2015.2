@@ -69,7 +69,7 @@ feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
 
         $scope.adsOperation = {
             "edit" : function (id, ad) {
-                HTTP.get('/api/ads?id=' + id).success(function(response) {
+                HTTP.get('/api/ad?id=' + id).success(function(response) {
                     $scope.formData = response.adData;
                 });
             },
