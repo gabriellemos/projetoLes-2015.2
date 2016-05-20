@@ -17,12 +17,18 @@ GET        /logout                  @org.pac4j.play.ApplicationLogoutController.
 # Register data
 POST       /reg/user                @controllers.Application.registerUser
 
+# Hide data
+POST       /hide/ads                @controllers.Application.hideAd(id)
+
+# Delete data
+POST       /delete/ads              @controllers.Application.deleteAd(id)
+
 # Api (JSON Requests)
 GET        /api/ads                 @controllers.Application.getFeedAds
+GET        /api/ads                 @controllers.Application.getAd(id)
 GET        /api/adsConfeiteiro      @controllers.Application.getFeedAdsConfeiteiro
 GET        /api/toolbar-user        @controllers.Application.getToolbarUserInfo
 GET        /api/facebook-info       @controllers.Application.getFacebookInfo
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file           controllers.Assets.at(path="/public", file)
-

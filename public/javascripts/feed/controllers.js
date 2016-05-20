@@ -67,6 +67,24 @@ feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
     HTTP.get('/api/adsConfeiteiro').success(function(response){
         $scope.adsList = response.adsConfeiteiro;
 
+        $scope.adsOperation = {
+            "edit" : function (id, ad) {
+                HTTP.get('/api/ads/?id=' + id).success(function(response) {
+                    $scope.formData = response.adData;
+                });
+            },
+            "hide" : function (id, ad) {
+                HTTP.post('/hide/ads/?id=' + id).success(function(response) {
+                    ad.isHided = !ad.isHided;
+                });
+            },
+            "delete" : function (id, ad) {
+                HTTP.post('/del/ads/?id=' + id).success(function(response) {
+                    ad.isDeleted = true;
+                });
+            }
+        }
+
         $timeout(function() {
             Modal.init();
         }, 2000);

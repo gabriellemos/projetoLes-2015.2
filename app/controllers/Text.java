@@ -56,6 +56,23 @@ public class Text {
         return result;
     }
 
+    /**
+     * Return JSON containing an ad from system.
+     * @return JSON with an ad in system.
+     */
+    public static JsonNode getAd(String id){
+        Anuncio ad;
+        ad = Anuncio_DAO.getAnuncio(Integer.parseInt(id));
+
+        ObjectNode item = Json.newObject();
+        item.put("title", ad.getTitulo());
+        item.put("price", ad.getPreco());
+        item.put("description", ad.getDescricao());
+        item.put("edit", "true");
+
+        return item;
+    }
+
     public static JsonNode getAdsConfeiteiro(int IdConfeiteiro) {
         ArrayNode result = new ArrayNode(JsonNodeFactory.instance);
         List<Anuncio> list;

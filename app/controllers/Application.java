@@ -2,9 +2,11 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Confeiteiro;
+import models.Anuncio;
 import models.Contato;
 import models.Endereco;
 import models.dao.Confeiteiro_DAO;
+import models.dao.Anuncio_DAO;
 import models.dao.Contato_DAO;
 import models.dao.Endereco_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
@@ -64,6 +66,21 @@ public class Application extends UserProfileController<FacebookProfile>{
         Logger.info(">>> [GET]: Requisitando dados do BD (Application.getFeedAds())");
 
         result.set("ads", Text.getAds());
+        return ok(result);
+    }
+
+    /**
+     * Retorna um JSON contendo dados de um Anúncio do Feed
+     * @param id Id do anúncio
+     * @return texto do Anúncio
+     */
+    @Transactional
+    public Result getAd(String id) {
+        ObjectNode result = Json.newObject();
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getAd())");
+
+        result.set("adData", Text.getAd(id));
         return ok(result);
     }
 
@@ -200,6 +217,28 @@ public class Application extends UserProfileController<FacebookProfile>{
         }
 
         return ok("Novo usuário registrado com sucesso!");
+    }
+
+    /**
+     * Esconde um anúncio
+     */
+    @Transactional
+    public Result hideAd(String id){
+        Anuncio ad = Anuncio_DAO.getAnuncio(Integer.parseInt(id));
+        Anuncio_DAO.ModificarVisibilidadeAnuncio(!ad.getDisponibilidade(), ad);
+
+        return ok("Visibilidade do anúncio modificada com sucesso!");
+    }
+
+    /**
+     * Esconde um anúncio
+     */
+    @Transactional
+    public Result deleteAd(String id){
+        Anuncio ad = Anuncio_DAO.getAnuncio(Integer.parseInt(id));
+        Anuncio_DAO.removeAnuncio(ad);
+
+        return ok("Anúncio removido com sucesso!");
     }
 
 }
