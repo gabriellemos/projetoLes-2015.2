@@ -32,52 +32,60 @@ feedApp.controller('FeedController', function($scope, $state, $http, $parse, $wi
 });
 
 // Controller that works only on All Ads section
-feedApp.controller('AdsController', function($scope, $timeout, HTTP, JSONs) {
+feedApp.controller('AdsController', function($scope, $rootScope, $timeout,
+  $http, HTTP, JSONs, AdUpdateManager) {
     // Load Toolbar with new Title
     $scope.setStateTitle();
+    $scope.cardEdit = false;
+    $scope.adsList = [];
 
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
     }); // Card Labels
 
-    $scope.adsList = [];
-
     HTTP.get('/api/ads').success(function(response){
         $scope.adsList = response.ads;
+
+        AdUpdateManager.updateAds($scope.adsList);
 
         $timeout(function() {
             Modal.init();
         }, 2000);
     });
-
-    $scope.cardEdit = false;
 });
 
 // controller that works on My Ads
-feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
+feedApp.controller('MyAdsController', function($scope, $timeout, $http,
+  HTTP, JSONs, AdUpdateManager, WAIT) {
     // Load Toolbar with new Title
     $scope.setStateTitle();
+    $scope.adsList = [];
+    $scope.cardEdit = true;
 
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
     }); // Edition Modal labels
 
-    $scope.adsList = [];
-
     HTTP.get('/api/adsConfeiteiro').success(function(response){
         $scope.adsList = response.adsConfeiteiro;
 
+        AdUpdateManager.setAds($scope.adsList);
+
         $scope.adsOperation = {
             "edit" : function (id, ad) {
-                HTTP.get('/api/ad?id=' + id).success(function(response) {
+                WAIT.get('/api/ad?id=' + id).success(function(response) {
                     $scope.formData = response.adData;
                 });
             },
             "hide" : function (id, ad) {
-                HTTP.post('/hide/ads?id=' + id).success(function(response) { });
+                WAIT.post('/hide/ads?id=' + id).success(function(response) {
+                    AdUpdateManager.hideAd(id, ad.isHided);
+                });
             },
             "delete" : function (id, ad) {
-                HTTP.post('/del/ads?id=' + id).success(function(response) { });
+                WAIT.post('/del/ads?id=' + id).success(function(response) {
+                    AdUpdateManager.deleteAd(id);
+                });
             }
         }
 
@@ -85,6 +93,4 @@ feedApp.controller('MyAdsController', function($scope, $timeout, HTTP, JSONs) {
             Modal.init();
         }, 2000);
     });
-
-    $scope.cardEdit = true;
 });

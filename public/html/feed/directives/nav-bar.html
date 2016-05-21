@@ -3,7 +3,8 @@
     <a class="site-logotype" ui-sref="{{item.logo.url}}" ng-bind="item.logo.text"></a>
 </header>
 <nav class="site-navigation mdl-navigation mdl-color--brown-800">
-    <a ng-if="shouldAppear(section.category)" class="mdl-navigation__link" ui-sref="{{section.url}}" ng-repeat="section in item.sections">
+    <a ng-attr-id="{{'section-btn--' + $index }}" ng-if="shouldAppear(section.category)" 
+    class="mdl-navigation__link" ui-sref="{{section.url}}" ng-repeat="section in item.sections">
         <i class="mdi mdi-{{section.icon}} mdl-color-text--brown-50" role="presentation"></i>
         <span class="mdl-color-text--brown-50 p-l-10" ng-bind="section.name"></span>
     </a>

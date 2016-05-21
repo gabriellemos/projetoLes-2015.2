@@ -193,7 +193,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE ORDER BY Edicao_Anuncio ASC;";
+            strSql = "SELECT * FROM Anuncio ORDER BY Edicao_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();
 

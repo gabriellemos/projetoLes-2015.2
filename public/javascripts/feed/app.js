@@ -41,3 +41,12 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
             }
         });
 }]);
+
+feedApp.run(function($rootScope, WAIT) {
+    $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+        if(WAIT.busy())
+            event.preventDefault();
+        else
+            WAIT.release();
+    });
+});

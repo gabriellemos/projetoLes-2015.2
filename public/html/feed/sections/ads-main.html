@@ -1,4 +1,6 @@
 <div class="site-cards mdl-grid">
-	<div ad-card class="mdl-cell mdl-cell--4-col" item="ad" index="$index" labels="labels.card" mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
+	<div ad-card ng-hide="ad.isDeleted || ad.isHided"
+	class="mdl-cell mdl-cell--4-col" item="ad" index="$index" labels="labels.card"
+	mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
 	</div>
 </div>

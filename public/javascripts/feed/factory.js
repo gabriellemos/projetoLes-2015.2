@@ -34,3 +34,101 @@ feedApp.factory('HTTP', function($rootScope, $http){
        }
    }
 });
+
+feedApp.factory('WAIT', function($rootScope, $http){
+   var status = {};
+
+   return {
+       busy: function(){
+            for (var key in status) {
+                if (status[key] > 0)
+                    return true;
+            }
+            return false;
+       },
+       release: function(){
+            status = {};
+       },
+       get: function(url) {
+           var promise = $http.get(url);
+           if(status[url]){
+              status[url] = 1 + status[url];
+           } else {
+              status[url] = 1;
+           }
+           promise.success(function(response){
+              status[url] = status[url] - 1;
+           });
+           return promise;
+       },
+       post: function(url) {
+           var promise = $http.post(url);
+           if(status[url]){
+              status[url] = 1 + status[url];
+           } else {
+              status[url] = 1;
+           }
+           promise.success(function(response){
+              status[url] = status[url] - 1;
+           });
+           return promise;
+       }
+   }
+});
+
+
+feedApp.factory('AdUpdateManager', function($rootScope){
+   var adsConf = [];
+   var index = {};
+
+   return {
+       setAds: function(ads) {
+           index = {};
+           adsConf = ads;
+           for(i = 0; i < adsConf.length; i++){
+              index[adsConf[i].id] = i;
+           }
+       },
+       updateAds: function(ads) {
+            if(adsConf){
+                for(i = 0; i < ads.length; i++){
+                    if(ads[i].id in index){
+                        ads[i].title = adsConf[index[ads[i].id]].title;
+                        ads[i].chef = adsConf[index[ads[i].id]].chef;
+                        ads[i].imglink = adsConf[index[ads[i].id]].imglink;
+                        ads[i].price = adsConf[index[ads[i].id]].price;
+                        ads[i].contacts = adsConf[index[ads[i].id]].contacts;
+                        ads[i].address = adsConf[index[ads[i].id]].address;
+                        ads[i].isDeleted = adsConf[index[ads[i].id]].isDeleted;
+                        ads[i].isHided = adsConf[index[ads[i].id]].isHided;
+                    }
+                }
+            }
+       },
+       isEmpty: function(){
+          return adsConf.length > 0;
+       },
+       hideAd: function(id, value){
+            if(id in index){
+                adsConf[index[id]].isHided = value;
+            }
+       },
+       deleteAd: function(id){
+            if(id in index){
+                adsConf[index[id]].isDeleted = true;
+            }
+       },
+       editAd: function(id, ad){
+            if(id in index){
+                adsConf[index[id]].title = ad.title;
+                adsConf[index[id]].chef = ad.chef;
+                adsConf[index[id]].imglink = ad.imglink;
+                adsConf[index[id]].price = ad.price;
+                adsConf[index[id]].contacts = ad.contacts;
+                adsConf[index[id]].address = ad.address;
+                adsConf[index[id]].isDeleted = ad.isDeleted;
+                adsConf[index[id]].isHided = ad.isHided;
+            }
+       }
+   }
+});

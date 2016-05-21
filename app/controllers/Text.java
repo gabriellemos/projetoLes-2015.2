@@ -40,6 +40,7 @@ public class Text {
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", ad.getPreco());
+            item.put("id", ad.getId());
 
             ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
             ad.getCriador().getContatos()
@@ -51,8 +52,8 @@ public class Text {
                     .forEach(e -> address.add(e.toString()));
             item.set("address", address);
 
-            item.put("isDeleted", "false");
-            item.put("isHided", "" + !ad.getDisponibilidade());
+            item.put("isDeleted", false);
+            item.put("isHided", !ad.getDisponibilidade());
             result.add(item);
         }
 
@@ -106,8 +107,8 @@ public class Text {
                     .forEach(e -> address.add(e.toString()));
             item.set("address", address);
 
-            item.put("isDeleted", "false");
-            item.put("isHided", "" + !ad.getDisponibilidade());
+            item.put("isDeleted", false);
+            item.put("isHided", !ad.getDisponibilidade());
 
             result.add(item);
 
