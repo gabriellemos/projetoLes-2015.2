@@ -201,7 +201,7 @@
     z-index: 1100;
     cursor: pointer;
 }
-.modal__trigger {
+.modal__trigger :not(.fab, .fab > i, .fab > span){
     position: relative;
     display: inline-block;
     color: rgba(0,0,0,0.7);
@@ -212,14 +212,18 @@
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
-    -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+.modal__trigger {
+  -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .modal__trigger--active {
     z-index: 1000;
     background: #e5d3d6 !important;
 }
-.modal__trigger:hover {
+.modal__trigger:hover :not(.fab, .fab > i, .fab > span){
     background: #e5d3d6 !important;
 }
 
