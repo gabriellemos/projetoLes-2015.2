@@ -222,6 +222,34 @@ public class Application extends UserProfileController<FacebookProfile>{
     }
 
     /**
+     * Edita um anúncio
+     */
+    @Transactional
+    public Result editAd(String id){
+      DynamicForm filledForm = new DynamicForm().bindFromRequest();
+
+      if (filledForm.hasErrors()) {
+          return badRequest("Erro ao receber os dados.");
+      } else {
+          Logger.info("Tentando modificar um Anúncio no BD...");
+
+          String ad_title = filledForm.get("title");
+          String ad_price = filledForm.get("price");
+          String ad_description = filledForm.get("description");
+          String ad_id = filledForm.get("id");
+
+          try {
+              Anuncio_DAO.ModificarAtributosDeAnuncio(ad_title, ad_description, ad_price, "Normal", Integer.parseInt(ad_id));
+          } catch (Exception e){
+              Logger.error(e.getMessage());
+              return badRequest(e.getMessage());
+          }
+      }
+
+      return ok("Anúncio modificado com sucesso!");
+    }
+
+    /**
      * Esconde um anúncio
      */
     @Transactional
