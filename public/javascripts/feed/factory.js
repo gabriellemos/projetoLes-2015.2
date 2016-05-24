@@ -56,7 +56,7 @@ feedApp.factory('WAIT', function($rootScope, $http){
            } else {
               status[url] = 1;
            }
-           promise.success(function(response){
+           promise.finally(function(response){
               status[url] = status[url] - 1;
            });
            return promise;
@@ -68,7 +68,7 @@ feedApp.factory('WAIT', function($rootScope, $http){
            } else {
               status[url] = 1;
            }
-           promise.success(function(response){
+           promise.finally(function(response){
               status[url] = status[url] - 1;
            });
            return promise;
@@ -121,14 +121,23 @@ feedApp.factory('AdUpdateManager', function($rootScope){
        editAd: function(id, ad){
             if(id in index){
                 adsConf[index[id]].title = ad.title;
-                adsConf[index[id]].chef = ad.chef;
-                adsConf[index[id]].imglink = ad.imglink;
                 adsConf[index[id]].price = ad.price;
-                adsConf[index[id]].contacts = ad.contacts;
-                adsConf[index[id]].address = ad.address;
                 adsConf[index[id]].isDeleted = ad.isDeleted;
                 adsConf[index[id]].isHided = ad.isHided;
             }
        }
    }
+});
+
+feedApp.factory('FormService', function($rootScope, $http){
+    return {
+        modify : function(form){
+            return $http({
+                method  : 'POST',
+                url     : '/mod/' + form.type,
+                data    : form.data,
+                headers : {'Content-Type': 'application/json'}
+            });
+        }
+    }
 });

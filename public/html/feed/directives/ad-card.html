@@ -4,12 +4,12 @@
 		<i class="mdi mdi-border-color mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.edit"></span>
 	</button>
-	<button ng-if="mutable" ng-click="operations.hide(item.id, item); item.isHided = !item.isHided"
+	<button ng-if="mutable" ng-click="operations.hide(item.id, item)"
 	class="cant-hide fab fab-hide mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-block-helper mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.hide"></span>
 	</button>
-	<button ng-if="mutable" ng-click="operations.delete(item.id, item); item.isDeleted = true"
+	<button ng-if="mutable" ng-click="operations.delete(item.id, item)"
 	class="cant-hide fab fab-delete mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--accent">
 		<i class="mdi mdi-delete mdl-color-text--white" role="presentation"></i>
 		<span class="visuallyhidden" ng-bind="labels.delete"></span>

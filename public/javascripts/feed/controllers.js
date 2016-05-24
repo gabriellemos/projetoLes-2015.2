@@ -56,14 +56,24 @@ feedApp.controller('AdsController', function($scope, $rootScope, $timeout,
 
 // controller that works on My Ads
 feedApp.controller('MyAdsController', function($scope, $timeout, $http,
-  HTTP, JSONs, AdUpdateManager, WAIT) {
+  HTTP, JSONs, AdUpdateManager, FormService, WAIT) {
     // Load Toolbar with new Title
     $scope.setStateTitle();
     $scope.adsList = [];
     $scope.cardEdit = true;
+    $scope.formInfo = {};
+    $scope.labels = {};
 
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
+        $scope.labels.edit.submit = function() {
+            FormService.modify({
+                type: 'ad',
+                data: $scope.formInfo
+            }).success(function(response){
+                AdUpdateManager.editAd($scope.formInfo.id, $scope.formInfo);
+            });
+        }
     }); // Edition Modal labels
 
     HTTP.get('/api/adsConfeiteiro').success(function(response){
@@ -74,16 +84,32 @@ feedApp.controller('MyAdsController', function($scope, $timeout, $http,
         $scope.adsOperation = {
             "edit" : function (id, ad) {
                 WAIT.get('/api/ad?id=' + id).success(function(response) {
-                    $scope.formData = response.adData;
+                    $scope.formInfo = response.adData;
+                    $scope.formInfo.id = response.adData.id;
+                    $('#edit-modal-content').text($scope.labels.edit.textEdit);
+                    $('.inp-text').addClass('is-dirty').removeClass('is-invalid');
+                    $('#title').val($scope.formInfo.title)
+                    .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
+                    .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
+                    $('.inp-price').addClass('is-dirty').removeClass('is-invalid');
+                    $('#price').val($scope.formInfo.price)
+                    .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
+                    .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
+                    $('.inp-description').addClass('is-dirty').removeClass('is-invalid');
+                    $('#description').val($scope.formInfo.description)
+                    .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
+                    .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
                 });
             },
             "hide" : function (id, ad) {
                 WAIT.post('/hide/ads?id=' + id).success(function(response) {
+                    ad.isHided = !ad.isHided;
                     AdUpdateManager.hideAd(id, ad.isHided);
                 });
             },
             "delete" : function (id, ad) {
                 WAIT.post('/del/ads?id=' + id).success(function(response) {
+                    ad.isDeleted = true;
                     AdUpdateManager.deleteAd(id);
                 });
             }
