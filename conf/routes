@@ -16,12 +16,16 @@ GET        /logout                  @org.pac4j.play.ApplicationLogoutController.
 
 # Register data
 POST       /reg/user                @controllers.Application.registerUser
+POST       /reg/ad                  @controllers.Application.registerAd
+
+# Edit data
+POST       /mod/ad                  @controllers.Application.editAd
 
 # Hide data
 POST       /hide/ads                @controllers.Application.hideAd(id)
 
 # Delete data
-POST       /del/ads              @controllers.Application.deleteAd(id)
+POST       /del/ads                 @controllers.Application.deleteAd(id)
 
 # Api (JSON Requests)
 GET        /api/ad                  @controllers.Application.getAd(id)

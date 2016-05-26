@@ -61,19 +61,11 @@ feedApp.controller('MyAdsController', function($scope, $timeout, $http,
     $scope.setStateTitle();
     $scope.adsList = [];
     $scope.cardEdit = true;
-    $scope.formInfo = {};
     $scope.labels = {};
+    $scope.adEdit = true;
 
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
-        $scope.labels.edit.submit = function() {
-            FormService.modify({
-                type: 'ad',
-                data: $scope.formInfo
-            }).success(function(response){
-                AdUpdateManager.editAd($scope.formInfo.id, $scope.formInfo);
-            });
-        }
     }); // Edition Modal labels
 
     HTTP.get('/api/adsConfeiteiro').success(function(response){
@@ -84,22 +76,32 @@ feedApp.controller('MyAdsController', function($scope, $timeout, $http,
         $scope.adsOperation = {
             "edit" : function (id, ad) {
                 WAIT.get('/api/ad?id=' + id).success(function(response) {
-                    $scope.formInfo = response.adData;
-                    $scope.formInfo.id = response.adData.id;
+                    $scope.adEdit = true;
+                    $('#adId').val(id);
                     $('#edit-modal-content').text($scope.labels.edit.textEdit);
                     $('.inp-text').addClass('is-dirty').removeClass('is-invalid');
-                    $('#title').val($scope.formInfo.title)
+                    $('#title').val(response.adData.title)
                     .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
                     .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
                     $('.inp-price').addClass('is-dirty').removeClass('is-invalid');
-                    $('#price').val($scope.formInfo.price)
+                    $('#price').val(response.adData.price)
                     .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
                     .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
                     $('.inp-description').addClass('is-dirty').removeClass('is-invalid');
-                    $('#description').val($scope.formInfo.description)
+                    $('#description').val(response.adData.description)
                     .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
                     .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
                 });
+            },
+            "create" : function () {
+                $('#adId').val("-1");
+                $('#edit-modal-content').text($scope.labels.edit.textCreate);
+                $('#title').val("");
+                $('.inp-price').addClass('is-dirty').removeClass('is-invalid');
+                $('#price').val("R$0,00")
+                .removeClass('ng-pristine ng-empty ng-invalid ng-invalid-required')
+                .addClass('ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required');
+                $('#description').val("");
             },
             "hide" : function (id, ad) {
                 WAIT.post('/hide/ads?id=' + id).success(function(response) {
@@ -113,7 +115,7 @@ feedApp.controller('MyAdsController', function($scope, $timeout, $http,
                     AdUpdateManager.deleteAd(id);
                 });
             }
-        }
+        };
 
         $timeout(function() {
             Modal.init();

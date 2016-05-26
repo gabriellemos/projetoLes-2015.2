@@ -105,15 +105,44 @@ feedApp.directive('adModal', function() {
 });
 
 /* Directive declaring a Ad Modal, showing more information of a cake announced */
-feedApp.directive('editModal', function() {
+feedApp.directive('editModal', function(FormService, AdUpdateManager, $compile, $window) {
     return {
         restrict: 'A',
         scope: {
             labels: '=labels',
-            data: '=data'
+            edit: '=edit'
         },
         link: function(scope, element, attr){
             element.addClass('modal modal__bg');
+
+            scope.data = {};
+
+            scope.loadData = function(){
+                scope.data.id = element.find('#adId').val();
+                scope.data.title = element.find('#title').val();
+                scope.data.description = element.find('#description').val();
+                scope.data.price = element.find('#price').val();
+            };
+
+            scope.submit = function() {
+                scope.loadData();
+
+                if(scope.data.id != '-1'){
+                    FormService.modify({
+                        type: 'ad',
+                        data: scope.data
+                    }).success(function(response){
+                        AdUpdateManager.editAd(scope.data.id, scope.data);
+                    });
+                } else {
+                    FormService.create({
+                        type: 'ad',
+                        data: scope.data
+                    }).success(function(response){
+                        $window.location.reload();
+                    });
+                }
+            };
             componentHandler.upgradeDom();
         },
         templateUrl: '/assets/html/feed/directives/edit-modal.html'

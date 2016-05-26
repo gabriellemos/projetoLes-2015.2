@@ -1,9 +1,10 @@
 <div class="edit-modal-behaviour modal__dialog">
     <div class="modal__content">
-        <form ng-submit="labels.submit()">
+        <form>
             <br>
             <h4 id="edit-modal-content"></h4>
             <br>
+            <div ng-hide="true"><span id="adId"></span></div>
             <div class="mdl-grid mdl-grid-mask">
                 <div class="mdl-cell-mask mdl-cell--7-col-desktop mdl-cell--7-col-tablet mdl-cell--7-col-phone">
                     <div class="inp-text mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
@@ -27,7 +28,7 @@
                 </div>
             </div>
             <div class="mdl-card__actions">
-                <button class="modal__close mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green" type="submit" ng-bind="labels.submitLbl"></button>
+                <button class="modal__close mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green" type="button" ng-click="submit()" ng-bind="labels.submitLbl"></button>
                 <button class="modal__close mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-bind="labels.closeLbl"></button>
             </div>
         </form>

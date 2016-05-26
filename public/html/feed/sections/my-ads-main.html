@@ -1,5 +1,13 @@
 <div class="site-cards mdl-grid">
-	<div ad-card ng-hide="ad.isDeleted" class="mdl-cell mdl-cell--4-col" ng-class="{'hide-cell' : ad.isHided }" 
-	item="ad" index="$index" labels="labels.card" mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
+	<div class="mdl-grid mdl-grid-mask">
+					<button ng-click="adsOperation.create()" data-modal="#ad-edit-modal"
+					class="modal__trigger cant-hide fab fab-create mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+							<i class="mdi mdi-plus mdl-color-text--white" role="presentation"></i>
+					</button>
+	</div>
+	<div class="mdl-grid mdl-grid-mask">
+			<div ad-card ng-hide="ad.isDeleted" class="mdl-cell mdl-cell--4-col" ng-class="{'hide-cell' : ad.isHided }"
+			item="ad" index="$index" labels="labels.card" mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
+			</div>
 	</div>
 </div>

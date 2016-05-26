@@ -138,6 +138,14 @@ feedApp.factory('FormService', function($rootScope, $http){
                 data    : form.data,
                 headers : {'Content-Type': 'application/json'}
             });
+        },
+        create : function(form){
+            return $http({
+                method  : 'POST',
+                url     : '/reg/' + form.type,
+                data    : form.data,
+                headers : {'Content-Type': 'application/json'}
+            });
         }
     }
 });
