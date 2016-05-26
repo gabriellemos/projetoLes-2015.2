@@ -64,7 +64,7 @@ feedApp.controller('AdsController', function($scope, $rootScope, $timeout,
 
         $timeout(function() {
             Modal.init();
-        }, 2000);
+        }, 4000);
     });
 });
 
