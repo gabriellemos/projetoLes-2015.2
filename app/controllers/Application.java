@@ -2,9 +2,13 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Confeiteiro;
+import models.Anuncio;
 import models.Contato;
 import models.Endereco;
+import models.TipoAnuncio;
+import models.Utils;
 import models.dao.Confeiteiro_DAO;
+import models.dao.Anuncio_DAO;
 import models.dao.Contato_DAO;
 import models.dao.Endereco_DAO;
 import org.pac4j.oauth.profile.facebook.FacebookProfile;
@@ -16,6 +20,7 @@ import play.db.jpa.Transactional;
 import play.libs.Json;
 import play.mvc.Result;
 
+import java.lang.*;
 import java.util.List;
 
 /**
@@ -68,6 +73,35 @@ public class Application extends UserProfileController<FacebookProfile>{
     }
 
     /**
+     * Retorna um JSON contendo texto dos Anúncios do Feed Procurados
+     * @return texto dos Anúncios do Feed
+     */
+    @Transactional
+    public Result getFeedAdsBy(String city, String date) {
+        ObjectNode result = Json.newObject();
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getFeedAds())");
+
+        result.set("ads", Text.getAds(city, date));
+        return ok(result);
+    }
+
+    /**
+     * Retorna um JSON contendo dados de um Anúncio do Feed
+     * @param id Id do anúncio
+     * @return texto do Anúncio
+     */
+    @Transactional
+    public Result getAd(String id) {
+        ObjectNode result = Json.newObject();
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getAd())");
+
+        result.set("adData", Text.getAd(id));
+        return ok(result);
+    }
+
+    /**
     * Retorna um JSON contendo texto dos Anúncios de um confeiteiro
     * @return Se existir algum confeiteiro logado, retorna seus anúncios. Caso contrário, retorna os anúncios do confeiteiro de id 1 no BD
     */
@@ -81,6 +115,8 @@ public class Application extends UserProfileController<FacebookProfile>{
         } else {
             result.set("adsConfeiteiro", Text.getAdsConfeiteiro(1));
         }
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getAd())");
 
         return ok(result);
     }
@@ -200,6 +236,94 @@ public class Application extends UserProfileController<FacebookProfile>{
         }
 
         return ok("Novo usuário registrado com sucesso!");
+    }
+
+    /**
+     * Registra um novo anúncio
+     */
+    @Transactional
+    public Result registerAd(){
+        DynamicForm filledForm = new DynamicForm().bindFromRequest();
+
+        if (filledForm.hasErrors()) {
+            return badRequest("Erro ao receber os dados.");
+        } else {
+            Logger.info("Tentando registrar novo Anúncio no BD...");
+
+            String ad_title = filledForm.get("title");
+            String ad_price = filledForm.get("price");
+            String ad_description = filledForm.get("description");
+
+            Anuncio ad = new Anuncio();
+            ad.setCriador(getConfeiteiro(getUserProfile()));
+            ad.setDataCriacao(Utils.getHoje());
+            ad.setDataEdicao(Utils.getHoje());
+            ad.setDescricao(ad_description);
+            ad.setDisponibilidade(true);
+            ad.setPreco(ad_price);
+            ad.setTipoAnuncio(TipoAnuncio.COMUM);
+            ad.setTitulo(ad_title);
+
+            try {
+                Anuncio_DAO.insertAnuncio(ad);
+            } catch (Exception e){
+                Logger.error(e.getMessage());
+                return badRequest(e.getMessage());
+            }
+        }
+
+        return ok("Novo anúncio registrado com sucesso!");
+    }
+
+
+    /**
+     * Edita um anúncio
+     */
+    @Transactional
+    public Result editAd(){
+      DynamicForm filledForm = new DynamicForm().bindFromRequest();
+
+      if (filledForm.hasErrors()) {
+          return badRequest("Erro ao receber os dados.");
+      } else {
+          Logger.info("Tentando modificar um Anúncio no BD...");
+
+          String ad_title = filledForm.get("title");
+          String ad_price = filledForm.get("price");
+          String ad_description = filledForm.get("description");
+          String ad_id = filledForm.get("id");
+
+          try {
+              Anuncio_DAO.ModificarAtributosDeAnuncio(ad_title, ad_description, ad_price, "" + TipoAnuncio.COMUM, Integer.parseInt(ad_id));
+          } catch (Exception e){
+              Logger.error(e.getMessage());
+              return badRequest(e.getMessage());
+          }
+      }
+
+      return ok("Anúncio modificado com sucesso!");
+    }
+
+    /**
+     * Esconde um anúncio
+     */
+    @Transactional
+    public Result hideAd(String id){
+        Anuncio ad = Anuncio_DAO.getAnuncio(Integer.parseInt(id));
+        Anuncio_DAO.ModificarVisibilidadeAnuncio(!ad.getDisponibilidade(), ad);
+
+        return ok("Visibilidade do anúncio modificada com sucesso!");
+    }
+
+    /**
+     * Esconde um anúncio
+     */
+    @Transactional
+    public Result deleteAd(String id){
+        Anuncio ad = Anuncio_DAO.getAnuncio(Integer.parseInt(id));
+        Anuncio_DAO.removeAnuncio(ad);
+
+        return ok("Anúncio removido com sucesso!");
     }
 
 }

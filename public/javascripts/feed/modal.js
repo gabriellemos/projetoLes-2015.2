@@ -149,14 +149,27 @@ var Modal = (function() {
              * remove the inline css from the trigger to move it back into its original position.
              */
 
-            for (var i = 0; i < len; i++) {
-                modals[i].classList.remove('modal--active');
-                content[i].classList.remove('modal__content--active');
-                trigger[i].style.transform = 'none';
-                trigger[i].style.webkitTransform = 'none';
-                trigger[i].classList.remove('modal__trigger--active');
-            }
+            reload();
 
+            if(len > 1){
+                for (var i = 0; i < len; i++) {
+                    if(modals[i])
+                        modals[i].classList.remove('modal--active');
+                    if(content[i])
+                        content[i].classList.remove('modal__content--active');
+                    if(trigger[i]){
+                        trigger[i].style.transform = "";
+                        trigger[i].style.webkitTransform = "";
+                        trigger[i].classList.remove('modal__trigger--active');
+                    }
+                }
+            } else {
+                modals.classList.remove('modal--active');
+                content.classList.remove('modal__content--active');
+                trigger.style.transform = "";
+                trigger.style.webkitTransform = "";
+                trigger.classList.remove('modal__trigger--active');
+            }
             // When the temporary div is opacity:1 again, we want to remove it from the dom
             div.addEventListener('transitionend', removeDiv, false);
 
@@ -178,9 +191,12 @@ var Modal = (function() {
 
     var bindActions = function() {
         for (var i = 0; i < len; i++) {
-            trigger[i].addEventListener('click', getId, false);
-            closers[i].addEventListener('click', close, false);
-            modalsbg[i].addEventListener('click', close, false);
+            if(trigger[i])
+                trigger[i].addEventListener('click', getId, false);
+            if(closers[i])
+                closers[i].addEventListener('click', close, false);
+            if(modalsbg[i])
+                modalsbg[i].addEventListener('click', close, false);
         }
     };
 

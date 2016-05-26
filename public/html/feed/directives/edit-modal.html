@@ -1,0 +1,36 @@
+<div class="edit-modal-behaviour modal__dialog">
+    <div class="modal__content">
+        <form>
+            <br>
+            <h4 id="edit-modal-content"></h4>
+            <br>
+            <div ng-hide="true"><span id="adId"></span></div>
+            <div class="mdl-grid mdl-grid-mask">
+                <div class="mdl-cell-mask mdl-cell--7-col-desktop mdl-cell--7-col-tablet mdl-cell--7-col-phone">
+                    <div class="inp-text mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                        <input class="mdl-textfield__input" type="text" name="title" id="title" ng-model="data.title" ng-pattern="labels.titlePtn" required />
+                        <label class="mdl-textfield__label" for="title" ng-bind="labels.titleLbl"></label>
+                    </div>
+                </div>
+                <div class="mdl-cell-mask mdl-cell--4-col-desktop mdl-cell--1-offset-desktop mdl-cell--4-col-tablet mdl-cell--1-offset-tablet mdl-cell--4-col-phone mdl-cell--1-offset-phone">
+                    <div class="inp-price mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                        <input class="mdl-textfield__input" type="text" name="price" id="price" ng-model="data.price" ng-pattern="labels.pricePtn" required />
+                        <label class="mdl-textfield__label" for="price" ng-bind="labels.priceLbl"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-grid mdl-grid-mask">
+                <div class="mdl-cell-mask mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                    <div class="inp-description mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                        <textarea class="mdl-textfield__input" type="text" rows="3" name="description" id="description" ng-model="data.description" required />
+                        <label class="mdl-textfield__label" for="description" ng-bind="labels.descriptionLbl"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-card__actions">
+                <button class="modal__close mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-green" type="button" ng-click="submit()" ng-bind="labels.submitLbl"></button>
+                <button class="modal__close mdl-button mdl-js-button--raised mdl-button-accent" type="button" ng-bind="labels.closeLbl"></button>
+            </div>
+        </form>
+    </div>
+</div>

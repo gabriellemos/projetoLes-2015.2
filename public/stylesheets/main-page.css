@@ -4,6 +4,8 @@
 @import url("https://code.getmdl.io/1.1.3/material.brown-red.min.css");
 /* Utility CSS */
 @import url("helpers.css");
+@import url("jquery-ui.min.css");
+@import url("datepicker.css");
 /* Dialog Polyfill */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.2/dialog-polyfill.min.css");
 /* Bootstrap 3 Cosmo */
@@ -77,6 +79,10 @@
  * Cards
  ************************************************************************************/
 /*noinspection ALL*/
+.site-bar {
+    min-height: 0px;
+}
+
 .site-cards {
     -ms-flex-align: start;
     -ms-grid-row-align: flex-start;
@@ -116,6 +122,7 @@
 }
 .fab {
   top: 9%;
+  z-index: 1000000;
   position: absolute;
   -webkit-transform: translate(0px, -28px);
   transform: translate(0px, -28px);
@@ -128,6 +135,10 @@
 }
 .fab.fab-delete {
     right: 3%;
+}
+.fab.fab-create {
+    top: 4%;
+    right: 7%;
 }
 /************************************************************************************
  * Modal
@@ -200,7 +211,7 @@
     z-index: 1100;
     cursor: pointer;
 }
-.modal__trigger {
+.modal__trigger :not(.fab, .fab > i, .fab > span){
     position: relative;
     display: inline-block;
     color: rgba(0,0,0,0.7);
@@ -211,14 +222,18 @@
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
-    -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+.modal__trigger {
+  -webkit-transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .modal__trigger--active {
     z-index: 1000;
     background: #e5d3d6 !important;
 }
-.modal__trigger:hover {
+.modal__trigger:hover :not(.fab, .fab > i, .fab > span){
     background: #e5d3d6 !important;
 }
 

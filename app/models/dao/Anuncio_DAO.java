@@ -193,7 +193,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE ORDER BY Edicao_Anuncio ASC;";
+            strSql = "SELECT * FROM Anuncio ORDER BY Edicao_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();
 
@@ -247,11 +247,15 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "' AND Disponibilidade_Anuncio = TRUE;";
+            strSql = "SELECT * FROM Anuncio a WHERE a.id_anuncio='" + ID + "';";
             resultadoQuery = declaracao.executeQuery(strSql);
 
             Anuncio anuncio;
-            anuncio = getAnuncio(resultadoQuery);
+            if(resultadoQuery.next()){
+                anuncio = getAnuncio(resultadoQuery);
+            } else {
+                throw new Exception("Anuncio com id=" + ID + " nao foi encontrado.");
+            }
 
             declaracao.close();
             conexao.close();
@@ -268,7 +272,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio= TRUE AND criador_anuncio ='"+IdConfeiteiro+"'" +
+            strSql = "SELECT * FROM Anuncio WHERE  criador_anuncio ='"+IdConfeiteiro+"'" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();
@@ -294,7 +298,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio = TRUE AND criador_anuncio ='"+ confeiteiro.getId()+"'" +
+            strSql = "SELECT * FROM Anuncio WHERE  criador_anuncio ='"+ confeiteiro.getId()+"'" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
 
@@ -317,7 +321,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio= TRUE AND criador_anuncio = (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+IdConfeiteiroFacebook+"')" +
+            strSql = "SELECT * FROM Anuncio WHERE  criador_anuncio = (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+IdConfeiteiroFacebook+"')" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();
@@ -343,7 +347,7 @@ public static  void removeAnuncio (int id){
             ResultSet resultadoQuery;
             conexao = Connection.getConnection();
             declaracao = conexao.createStatement();
-            strSql = "SELECT * FROM Anuncio WHERE  Disponibilidade_Anuncio= TRUE AND criador_anuncio = (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+confeiteiro.getIdFacebook()+"')" +
+            strSql = "SELECT * FROM Anuncio WHERE  criador_anuncio = (SELECT ID_Confeiteiro FROM  Confeiteiro  WHERE ID_Facebook  = '"+confeiteiro.getIdFacebook()+"')" +
                     " ORDER BY Titulo_Anuncio ASC;";
             resultadoQuery = declaracao.executeQuery(strSql);
             ArrayList<Anuncio> listaRetorno = new ArrayList();

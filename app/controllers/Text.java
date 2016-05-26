@@ -40,6 +40,7 @@ public class Text {
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", ad.getPreco());
+            item.put("id", ad.getId());
 
             ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
             ad.getCriador().getContatos()
@@ -50,10 +51,66 @@ public class Text {
             ad.getCriador().getEnderecos()
                     .forEach(e -> address.add(e.toString()));
             item.set("address", address);
+
+            item.put("isDeleted", false);
+            item.put("isHided", !ad.getDisponibilidade());
             result.add(item);
         }
 
         return result;
+    }
+
+    /**
+     * Return JSON containing all ads searched from system.
+     * @return JSON with all ads searched in system.
+     */
+    public static JsonNode getAds(String city, String date){
+        ArrayNode result = new ArrayNode(JsonNodeFactory.instance);
+        List<Anuncio> list;
+
+        list = Anuncio_DAO.getAnunciosPelaCidade(city);
+        for(Anuncio ad : list){
+
+            ObjectNode item = Json.newObject();
+            item.put("title", ad.getTitulo());
+            item.put("chef", ad.getCriador().getNome());
+            item.put("imglink", cakes[rand(0, cakes.length - 1)]);
+            item.put("price", ad.getPreco());
+            item.put("id", ad.getId());
+
+            ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getContatos()
+                    .forEach(c -> contacts.add(c.toString()));
+
+            item.set("contacts", contacts);
+            ArrayNode address = new ArrayNode(JsonNodeFactory.instance);
+            ad.getCriador().getEnderecos()
+                    .forEach(e -> address.add(e.toString()));
+            item.set("address", address);
+
+            item.put("isDeleted", false);
+            item.put("isHided", !ad.getDisponibilidade());
+            result.add(item);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return JSON containing an ad from system.
+     * @return JSON with an ad in system.
+     */
+    public static JsonNode getAd(String id){
+        Anuncio ad;
+        ad = Anuncio_DAO.getAnuncio(Integer.parseInt(id));
+
+        ObjectNode item = Json.newObject();
+        item.put("title", ad.getTitulo());
+        item.put("price", ad.getPreco());
+        item.put("description", ad.getDescricao());
+        item.put("edit", "true");
+
+        return item;
     }
 
     public static JsonNode getAdsConfeiteiro(int IdConfeiteiro) {
@@ -74,6 +131,7 @@ public class Text {
             item.put("chef", ad.getCriador().getNome());
             item.put("imglink", cakes[rand(0, cakes.length - 1)]);
             item.put("price", ad.getPreco());
+            item.put("id", ad.getId());
 
             ArrayNode contacts = new ArrayNode(JsonNodeFactory.instance);
             ad.getCriador().getContatos()
@@ -84,6 +142,10 @@ public class Text {
             ad.getCriador().getEnderecos()
                     .forEach(e -> address.add(e.toString()));
             item.set("address", address);
+
+            item.put("isDeleted", false);
+            item.put("isHided", !ad.getDisponibilidade());
+
             result.add(item);
 
         }

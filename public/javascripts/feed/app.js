@@ -35,9 +35,18 @@ feedApp.config(["$stateProvider", "$urlRouterProvider", function($stateProvider,
                     controller: 'MyAdsController'
                 },
                 "modals": {
-                    templateUrl: '/assets/html/feed/sections/ads-modals.html',
+                    templateUrl: '/assets/html/feed/sections/my-ads-modal.html',
                     controller: 'MyAdsController'
                 }
             }
         });
 }]);
+
+feedApp.run(function($rootScope, WAIT) {
+    $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+        if(WAIT.busy())
+            event.preventDefault();
+        else
+            WAIT.release();
+    });
+});
