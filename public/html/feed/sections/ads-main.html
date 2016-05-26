@@ -1,6 +1,52 @@
 <div class="site-cards mdl-grid">
-	<div ad-card ng-hide="ad.isDeleted || ad.isHided"
-	class="mdl-cell mdl-cell--4-col" item="ad" index="$index" labels="labels.card"
-	mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
-	</div>
+		<div class="mdl-grid mdl-grid-mask">
+				<div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone" item="ad" index="$index" labels="labels.card">
+						<div class="site-bar mdl-card mdl-shadow--2dp">
+								<div class="mdl-card__title">
+									Pesquise anúncios por localidade ou data de entrega.
+								</div>
+								<div class="mdl-card__actions mdl-card--border">
+											<div class="mdl-grid mdl-grid-mask">
+														<div class="mdl-cell mdl-cell--7-col-desktop mdl-cell--7-col-tablet mdl-cell--12-col-phone">
+																<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+																		<input class="mdl-textfield__input" type="text" id="city" ng-model="search.city">
+																		<label class="mdl-textfield__label" for="city">Cidade</label>
+																</div>
+														</div>
+														<div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--1-offset-desktop mdl-cell--2-col-tablet
+														mdl-cell--1-offset-tablet mdl-cell--6-col-phone">
+																<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+																		<input class="mdl-textfield__input" data-type="date" type="text" id="date" ng-model="search.date">
+																		<div id="material-header-holder" style="display:none">
+																		  	<div class="ui-datepicker-material-header">
+																			    	<div class="ui-datepicker-material-day">
+																			    	</div>
+																			    	<div class="ui-datepicker-material-date">
+																			      		<div class="ui-datepicker-material-month">
+																			      		</div>
+																			      		<div class="ui-datepicker-material-day-num">
+																			      		</div>
+																			      		<div class="ui-datepicker-material-year">
+																			      		</div>
+																			  		</div>
+																				</div>
+																		</div>
+																		<label class="mdl-textfield__label" for="date">Data para Entrega</label>
+																</div>
+														</div>
+														<div class="mdl-cell mdl-cell--1-col-desktop mdl-cell--1-offset-desktop mdl-cell--1-col-tablet
+														mdl-cell--1-offset-tablet mdl-cell--5-col-phone mdl-cell--1-offset-phone">
+																<button class="mdl-button mdl-js-button mdl-button--icon" ng-click="search.submit()">
+																		<i class="mdi mdi-magnify mdl-color-text--grey" role="presentation"></i>
+																</button>
+														</div>
+											</div>
+								</div>
+						</div>
+				</div>
+		<div class="mdl-grid mdl-grid-mask">
+				<div ad-card ng-hide="ad.isDeleted || ad.isHided"
+				class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone" item="ad" index="$index" labels="labels.card"
+				mutable="cardEdit" operations="adsOperation" ng-repeat="ad in adsList">
+		</div>
 </div>

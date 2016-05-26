@@ -39,6 +39,20 @@ feedApp.controller('AdsController', function($scope, $rootScope, $timeout,
     $scope.cardEdit = false;
     $scope.adsList = [];
 
+    $scope.search = {
+        city: '',
+        date: '',
+        submit: function(){
+            $scope.search.city = $('#city').val();
+            $scope.search.date = $('#date').val();
+
+            $http.get('/api/adsBy?city=' + $scope.search.city + '&date=' + $scope.search.date)
+            .success(function (response){
+                $scope.adsList = response.ads;
+            });
+        }
+    };
+
     JSONs.get('labels/AdsDefault.json').success(function(data){
         $scope.labels = data;
     }); // Card Labels

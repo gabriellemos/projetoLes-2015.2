@@ -73,6 +73,20 @@ public class Application extends UserProfileController<FacebookProfile>{
     }
 
     /**
+     * Retorna um JSON contendo texto dos Anúncios do Feed Procurados
+     * @return texto dos Anúncios do Feed
+     */
+    @Transactional
+    public Result getFeedAdsBy(String city, String date) {
+        ObjectNode result = Json.newObject();
+
+        Logger.info(">>> [GET]: Requisitando dados do BD (Application.getFeedAds())");
+
+        result.set("ads", Text.getAds(city, date));
+        return ok(result);
+    }
+
+    /**
      * Retorna um JSON contendo dados de um Anúncio do Feed
      * @param id Id do anúncio
      * @return texto do Anúncio

@@ -4,6 +4,8 @@
 @import url("https://code.getmdl.io/1.1.3/material.brown-red.min.css");
 /* Utility CSS */
 @import url("helpers.css");
+@import url("jquery-ui.min.css");
+@import url("datepicker.css");
 /* Dialog Polyfill */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.4.2/dialog-polyfill.min.css");
 /* Bootstrap 3 Cosmo */
@@ -77,6 +79,10 @@
  * Cards
  ************************************************************************************/
 /*noinspection ALL*/
+.site-bar {
+    min-height: 0px;
+}
+
 .site-cards {
     -ms-flex-align: start;
     -ms-grid-row-align: flex-start;

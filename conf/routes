@@ -30,6 +30,7 @@ POST       /del/ads                 @controllers.Application.deleteAd(id)
 # Api (JSON Requests)
 GET        /api/ad                  @controllers.Application.getAd(id)
 GET        /api/ads                 @controllers.Application.getFeedAds
+GET        /api/adsBy               @controllers.Application.getFeedAdsBy(city, date)
 GET        /api/adsConfeiteiro      @controllers.Application.getFeedAdsConfeiteiro
 GET        /api/toolbar-user        @controllers.Application.getToolbarUserInfo
 GET        /api/facebook-info       @controllers.Application.getFacebookInfo
